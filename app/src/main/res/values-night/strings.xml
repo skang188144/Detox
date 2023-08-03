@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_home">Home</string>
+    <string name="label_lockdown">Lockdown</string>
+    <string name="label_settings">Settings</string>
+</resources>
