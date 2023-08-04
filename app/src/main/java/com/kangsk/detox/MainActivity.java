@@ -1,6 +1,5 @@
 package com.kangsk.detox;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
     // bottom navigation bar item selection listener
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         // home item selected
