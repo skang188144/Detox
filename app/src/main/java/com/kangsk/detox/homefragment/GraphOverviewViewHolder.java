@@ -1,9 +1,5 @@
 package com.kangsk.detox.homefragment;
 
-import android.annotation.SuppressLint;
-import android.app.usage.UsageStatsManager;
-import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,8 +34,8 @@ class GraphOverviewViewHolder extends RecyclerView.ViewHolder {
     }
 
     // method to bind the model data into the itemView.
-    @SuppressLint("SetTextI18n")
     public void bindModel() {
-        mScreenOnHoursText.setText(mScreenOnTimeManager.getScreenOnTimeOfToday(Calendar.MINUTE, mScreenOnHoursText.getContext()) + " minutes");
+        String text = mScreenOnTimeManager.getScreenOnTime(Calendar.getInstance().getTime(), Calendar.MINUTE, mScreenOnHoursText.getContext()) + " minutes";
+        mScreenOnHoursText.setText(text);
     }
 }
