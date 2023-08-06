@@ -1,4 +1,4 @@
-package com.kangsk.detox;
+package com.kangsk.detox.homefragment;
 
 import android.os.Bundle;
 
@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.kangsk.detox.R;
 
 public class HomeFragment extends Fragment {
 
@@ -29,7 +30,7 @@ public class HomeFragment extends Fragment {
 
         // methods for setting up and configuring the RecyclerView and its adapter.
         HomeFragmentAdapter adapter = new HomeFragmentAdapter();
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_fragment_home);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_fragment_home);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
     }

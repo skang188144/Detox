@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Detox</string>
     <string name="label_home">Home</string>
     <string name="label_lockdown">Lockdown</string>
     <string name="label_settings">Settings</string>
+    <string name="greeting_morning">Good Morning,</string>
+    <string name="greeting_afternoon">Good Afternoon,</string>
 </resources>

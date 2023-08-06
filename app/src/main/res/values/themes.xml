@@ -16,5 +16,6 @@
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
         <!-- Splash screen background color. -->
         <item name="android:windowSplashScreenBackground">#024B13</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

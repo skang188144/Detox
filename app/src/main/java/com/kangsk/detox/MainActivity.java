@@ -9,6 +9,9 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.kangsk.detox.homefragment.HomeFragment;
+import com.kangsk.detox.lockdownfragment.LockdownFragment;
+import com.kangsk.detox.settingsfragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
         // bottom navigation bar
-        mBottomNav = findViewById(R.id.bottom_nav);
+        mBottomNav = findViewById(R.id.navigation_bottom);
         mBottomNav.setOnItemSelectedListener(this);
 
         // attach home fragment to activity, plus some other fragment configuration changes

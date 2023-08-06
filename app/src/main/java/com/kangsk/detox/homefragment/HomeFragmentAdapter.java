@@ -1,18 +1,17 @@
-package com.kangsk.detox;
+package com.kangsk.detox.homefragment;
 
-import android.icu.util.Calendar;
-import android.icu.util.TimeZone;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kangsk.detox.R;
+
 public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    // CONSTANT: greeting item viewType
-    private static final int ITEM_TYPE_GREETING = 10;
+    // CONSTANTS
+    private static final int ITEM_TYPE_GREETING = 10;   // RecyclerView item viewType constants
+    private static final int ITEM_TYPE_GRAPH_OVERVIEW = 11;
 
     /*
      * after an instance of this adapter class is instantiated, this adapter will create a
@@ -34,7 +33,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             // the "Good Morning" or "Good Afternoon" at the top of the home fragment
             case ITEM_TYPE_GREETING:
                 return new GreetingViewHolder(inflater.inflate(R.layout.row_greeting_fragment_home, parent, false));
-
+            case ITEM_TYPE_GRAPH_OVERVIEW:
+                return new GraphOverviewViewHolder(inflater.inflate(R.layout.row_overview_graph_fragment_home, parent, false));
             default:
                 throw new RuntimeException();
         }
@@ -49,6 +49,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof GreetingViewHolder) {
             ((GreetingViewHolder) holder).bindModel();
+        } else if (holder instanceof GraphOverviewViewHolder) {
+            ((GraphOverviewViewHolder) holder).bindModel();
         }
     }
 
@@ -58,7 +60,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      */
     @Override
     public int getItemCount() {
-        return 1;
+        return 2;
     }
 
     /*
@@ -70,45 +72,11 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         switch (position) {
             case 0:
                 return ITEM_TYPE_GREETING;
-
+            case 1:
+                return ITEM_TYPE_GRAPH_OVERVIEW;
             default:
                 throw new RuntimeException();
         }
     }
 
-    /*
-     * a ViewHolder object responsible for integrating the model data into
-     * an individual RecyclerView item. This particular ViewHolder is for
-     * the "Good Morning" / "Good Afternoon" view at the very top of the
-     * home fragment.
-     */
-    public class GreetingViewHolder extends RecyclerView.ViewHolder {
-        // either "Good Morning" or "Good Afternoon"
-        private final TextView greetingText;
-
-        /*
-         * the constructor, with parameter itemView. This is the View that
-         * represents a RecyclerView item. This ViewHolder is responsible
-         * for integrating the appropriate model data into this itemView.
-         */
-        public GreetingViewHolder(View itemView) {
-            super(itemView);
-
-            // get a reference of the TextView widget
-            greetingText = itemView.findViewById(R.id.text_greeting);
-        }
-
-        // method to bind the model data into the itemView.
-        public void bindModel() {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeZone(TimeZone.getDefault());
-            int AM_PM = calendar.get(Calendar.AM_PM);
-
-            if (AM_PM == Calendar.AM) {
-                greetingText.setText("Good Morning,");
-            } else {
-                greetingText.setText("Good Afternoon,");
-            }
-        }
-    }
 }
