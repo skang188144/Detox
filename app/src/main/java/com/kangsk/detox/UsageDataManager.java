@@ -22,9 +22,10 @@ import java.util.Map;
  * TODO:
 
  * 1. implement two separate getBarData methods -- one for hour, one for today
- *
  * 2. create a new method for retrieving a list of AppUsageInfo objects, with the package
  *    name, app name, launch count, and screen on time fields populated.
+ * 3. extract repeated codes in both getScreenOnTime() methods to a new method
+ * 4. generally clean up the getScreenOnTime() methods
  */
 
 public class UsageDataManager {
@@ -131,10 +132,24 @@ public class UsageDataManager {
 
                 appUsageInfoMap.get(resumeEvent.getPackageName()).screenOnTime += (eventPausedTimeStamp - eventResumedTimeStamp);
             }
+
+            if (appUsageEventsList.get(0).getEventType() == UsageEvents.Event.ACTIVITY_PAUSED) {
+                long resumeTimeStamp = getFirstMilliOfHour(date, hour);
+                long pauseTimeStamp = appUsageEventsList.get(0).getTimeStamp();
+                appUsageInfoMap.get(appUsageEventsList.get(0).getPackageName()).screenOnTime += (pauseTimeStamp - resumeTimeStamp);
+                Log.d("UsageDataManager", "APP'S FIRST RESUME WAS MIDNIGHT " + appUsageEventsList.get(0).getPackageName());
+            }
         }
 
+        // add up each app's total screen time, for an overall total screen time
         for (Map.Entry<String, AppUsageInfo> appUsageInfoEntry : appUsageInfoMap.entrySet()) {
             totalScreenOnTime += appUsageInfoEntry.getValue().screenOnTime;
+        }
+
+        // round down if the total screen on time is more than an hour
+        if (convertMillisTo(totalScreenOnTime, Calendar.MINUTE) > 60) {
+            // 3600000 milliseconds == 1 hour
+            totalScreenOnTime = 3600000;
         }
 
         return roundToNearestTenth(convertMillisTo(totalScreenOnTime, convertToTimeUnit));
@@ -242,10 +257,31 @@ public class UsageDataManager {
 
                 appUsageInfoMap.get(resumeEvent.getPackageName()).screenOnTime += (eventPausedTimeStamp - eventResumedTimeStamp);
             }
+
+            /*
+             * correcting for the situation where an activity was resumed before the starting
+             * time range of the method, This method calculates the total screen time of that
+             * session (only counting the time within the method's time range), and adds it
+             * back to the total screen time.
+             */
+            if (appUsageEventsList.get(0).getEventType() == UsageEvents.Event.ACTIVITY_PAUSED) {
+                long resumeTimeStamp = getFirstMilliOfDay(date);
+                long pauseTimeStamp = appUsageEventsList.get(0).getTimeStamp();
+                appUsageInfoMap.get(appUsageEventsList.get(0).getPackageName()).screenOnTime += (pauseTimeStamp - resumeTimeStamp);
+                Log.d("UsageDataManager", "APP'S FIRST RESUME WAS MIDNIGHT " + appUsageEventsList.get(0).getPackageName());
+            }
         }
 
+        // add up each app's total screen time, for an overall total screen time
         for (Map.Entry<String, AppUsageInfo> appUsageInfoEntry : appUsageInfoMap.entrySet()) {
             totalScreenOnTime += appUsageInfoEntry.getValue().screenOnTime;
+            Log.d("UsageDataManager", roundToNearestTenth(convertMillisTo(appUsageInfoEntry.getValue().screenOnTime, Calendar.MINUTE)) + " " + appUsageInfoEntry.getValue().packageName);
+        }
+
+        // round down if the total usage hours is more than a day (1440 hours)
+        if (convertMillisTo(totalScreenOnTime, Calendar.MINUTE) > 1440) {
+            // 86400000 milliseconds == 1 day
+            totalScreenOnTime = 86400000;
         }
 
         return roundToNearestTenth(convertMillisTo(totalScreenOnTime, convertToTimeUnit));
