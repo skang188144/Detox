@@ -34,7 +34,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case ITEM_TYPE_GREETING:
                 return new GreetingViewHolder(inflater.inflate(R.layout.row_greeting_fragment_home, parent, false));
             case ITEM_TYPE_GRAPH_OVERVIEW:
-                return new GraphOverviewViewHolder(inflater.inflate(R.layout.row_overview_graph_fragment_home, parent, false));
+                return new GraphViewHolder(inflater.inflate(R.layout.row_graph_fragment_home, parent, false));
             default:
                 throw new RuntimeException();
         }
@@ -49,8 +49,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof GreetingViewHolder) {
             ((GreetingViewHolder) holder).bindModel();
-        } else if (holder instanceof GraphOverviewViewHolder) {
-            ((GraphOverviewViewHolder) holder).bindModel();
+        } else if (holder instanceof GraphViewHolder) {
+            ((GraphViewHolder) holder).bindModel();
         }
     }
 

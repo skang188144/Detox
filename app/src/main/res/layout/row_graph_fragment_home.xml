@@ -15,23 +15,23 @@
         android:paddingBottom="@dimen/padding_card_top_bottom">
 
         <TextView
-            android:id="@+id/text_usage_hours_today"
+            android:id="@+id/text_screen_hours_today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/basic_sans_thin"
             android:textSize="@dimen/font_size_heading_2"
-            app:layout_constraintBottom_toTopOf="@+id/barchart_usage_hours_today"
+            app:layout_constraintBottom_toTopOf="@+id/barchart_screen_hours_today"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@id/barchart_usage_hours_today"
+            android:id="@id/barchart_screen_hours_today"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_usage_hours_today" />
+            app:layout_constraintTop_toBottomOf="@id/text_screen_hours_today" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

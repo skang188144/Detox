@@ -6,6 +6,11 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
+import android.util.Log;
+
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,19 +27,19 @@ import java.util.Map;
  *    name, app name, launch count, and screen on time fields populated.
  */
 
-public class ScreenOnTimeManager {
+public class UsageDataManager {
 
     /*
      * get the total screen-on time for every app in the specified hour
      */
-    public float getScreenOnTime(int hour, int convertToTimeUnit, Context context) {
+    public float getScreenOnTime(Date date, int hour, int convertToTimeUnit, Context context) {
         long totalScreenOnTime = 0L;
 
         // instantiate a UsageStatsManager object
         UsageStatsManager mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
         // query UsageStatsManager to get a UsageEvents object, which holds all usage data in the specified range
-        UsageEvents usageEventsCollection = mUsageStatsManager.queryEvents(getFirstMilliOfHour(hour), getLastMilliOfHour(hour));
+        UsageEvents usageEventsCollection = mUsageStatsManager.queryEvents(getFirstMilliOfHour(date, hour), getLastMilliOfHour(date, hour));
 
         // custom data type, used to classify total screen on time for a single app
         HashMap<String, AppUsageInfo> appUsageInfoMap = new HashMap<>();
@@ -247,12 +252,42 @@ public class ScreenOnTimeManager {
     }
 
     /*
+     * get the screen on time for the 24 hours in a specified date, and encapsulate
+     * that data in a BarData object.
+     */
+    public BarData getBarDataForDay(Date date, Context context) {
+        // create an ArrayList of barEntries, and populate positions (hours) 0 - 23 with the screen-on time
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        int hour = 0;
+
+        for (int i = 0; i < 24; i++) {
+            BarEntry barEntry;
+            float screenOnTime = getScreenOnTime(date, i, Calendar.HOUR, context);
+
+            // if the screen on time is imprecise and greater than an hour, round down to 1.0 hours of usage
+            if (screenOnTime > 1.0f) {
+                screenOnTime = 1.0f;
+            }
+
+            barEntry = new BarEntry((float) (i), screenOnTime);
+            barEntries.add(i, barEntry);
+        }
+
+        // use barEntries to instantiate barDataSet, and use barDataSet to instantiate barData
+        BarDataSet barDataSet = new BarDataSet(barEntries, null);
+        barDataSet.setDrawValues(false);
+        barDataSet.setColor(context.getResources().getColor(R.color.green, context.getTheme()));
+        return new BarData(barDataSet);
+    }
+
+    /*
      * getFirstMilliOfHour: calculates the first millisecond of a specific hour
      * in Unix time
      */
-    private long getFirstMilliOfHour(int hour) {
+    private long getFirstMilliOfHour(Date date, int hour) {
         // get calendar instance
         Calendar calendar = getCalendar();
+        calendar.setTime(date);
 
         // hour argument exceeds 24 hours
         if (hour > 23) {
@@ -267,9 +302,10 @@ public class ScreenOnTimeManager {
      * getLastMilliOfHour: calculates the last millisecond of a specific hour
      * in Unix time
      */
-    private long getLastMilliOfHour(int hour) {
+    private long getLastMilliOfHour(Date date, int hour) {
         // get calendar instance
         Calendar calendar = getCalendar();
+        calendar.setTime(date);
 
         // hour argument exceeds 24 hours
         if (hour > 23) {
