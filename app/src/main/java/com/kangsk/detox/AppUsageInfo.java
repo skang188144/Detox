@@ -3,9 +3,13 @@ package com.kangsk.detox;
 import android.graphics.drawable.Drawable;
 
 public class AppUsageInfo {
-    Drawable appIcon;
-    String appName, packageName;
-    long appUsageTime = 0;
+    /**
+     * TODO:
+     * - Properly encapsulate fields and implement getters/setters
+     */
+    public Drawable appIcon;
+    public String appName, packageName;
+    public long appUsageTime = 0;
     int launchCount;
 
     AppUsageInfo(String packageName) {

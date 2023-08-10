@@ -1,12 +1,13 @@
 package com.kangsk.detox;
 
 import android.app.usage.UsageEvents;
-import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
-import android.util.Log;
 
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -25,9 +26,9 @@ import java.util.Map;
 
 public class UsageDataManager {
     /*
-     * getUsageTime: get the total device usage time for every app in the specified day
+     * getDailyUsageTime: get the total device usage time for every app in the specified day
      */
-    public float getUsageTime(Date date, int convertToTimeUnit, Context context) {
+    public float getDailyUsageTime(Date date, int convertToTimeUnit, Context context) {
         // instantiate a UsageStatsManager object from our Context object
         UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
@@ -39,21 +40,21 @@ public class UsageDataManager {
 
         // grabbing our individual collections
         HashMap<String, List<UsageEvents.Event>> usageEvents = new HashMap<>();
-        HashMap<String, AppUsageInfo> appUsageInfo = new HashMap<>();
+        HashMap<String, AppUsageInfo> appsUsageInfo = new HashMap<>();
 
         // sort UsageEvents data into our new collections
-        sortUsageEventsCollection(usageEventsCollection, usageEvents, appUsageInfo);
+        sortUsageEventsCollection(usageEventsCollection, usageEvents, appsUsageInfo, context);
 
         // calculate the total usage time
-        long totalUsageTime = calculateTotalUsageTime(usageEvents, appUsageInfo, date);
+        long totalUsageTime = calculateDailyUsageData(usageEvents, appsUsageInfo, date);
 
         return roundToNearestTenth(convertMillisTo(totalUsageTime, convertToTimeUnit));
     }
 
     /*
-     * getUsageTime: get the total device usage time for every app in the specified hour
+     * getDailyUsageTime: get the total device usage time for every app in the specified hour
      */
-    public float getUsageTime(Date date, int hour, int convertToTimeUnit, Context context) {
+    public float getHourlyUsageTime(Date date, int hour, int convertToTimeUnit, Context context) {
         // instantiate a UsageStatsManager object from our Context object
         UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
@@ -65,15 +66,67 @@ public class UsageDataManager {
 
         // grabbing our individual collections
         HashMap<String, List<UsageEvents.Event>> usageEvents = new HashMap<>();
-        HashMap<String, AppUsageInfo> appUsageInfo = new HashMap<>();
+        HashMap<String, AppUsageInfo> appsUsageInfo = new HashMap<>();
 
         // sort UsageEvents data into our new collections
-        sortUsageEventsCollection(usageEventsCollection, usageEvents, appUsageInfo);
+        sortUsageEventsCollection(usageEventsCollection, usageEvents, appsUsageInfo, context);
 
         // calculate the total usage time
-        long totalUsageTime = calculateTotalUsageTime(usageEvents, appUsageInfo, date, hour);
+        long totalUsageTime = calculateHourlyUsageData(usageEvents, appsUsageInfo, date, hour);
 
         return roundToNearestTenth(convertMillisTo(totalUsageTime, convertToTimeUnit));
+    }
+
+    /*
+     * getHourlyUsageBarData: get the screen on time for the 24 hours in a specified date, and
+     * encapsulate that data in a BarData object.
+     */
+    public BarData getHourlyUsageBarData(Date date, Context context) {
+        // create an ArrayList of barEntries, and populate positions (hours) 0 - 23 with the screen-on time
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        int hour = 0;
+
+        for (int i = 0; i < 24; i++) {
+            float screenOnTime = getHourlyUsageTime(date, i, Calendar.HOUR, context);
+            BarEntry barEntry = new BarEntry((float) (i), screenOnTime);
+            barEntries.add(i, barEntry);
+        }
+
+        // use barEntries to instantiate barDataSet, and use barDataSet to instantiate barData
+        BarDataSet barDataSet = new BarDataSet(barEntries, null);
+
+        // barDataSet configuration
+        barDataSet.setDrawValues(false);
+        barDataSet.setColor(context.getResources().getColor(R.color.dark_green, context.getTheme()));
+
+        return new BarData(barDataSet);
+    }
+
+    /*
+     * getDailyAppsUsageInfo:
+     */
+    public HashMap<String, AppUsageInfo> getDailyAppsUsageInfo(Date date, int convertToTimeUnit, Context context) {
+
+        // instantiate a UsageStatsManager object from our Context object
+        UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+
+        long startRange = getFirstMilliOfDay(date);
+        long endRange = getLastMilliOfDay(date);
+
+        // instantiate a UsageEvents collection by querying our UsageStatsManager
+        UsageEvents usageEventsCollection = usageStatsManager.queryEvents(startRange, endRange);
+
+        // grabbing our individual collections
+        HashMap<String, List<UsageEvents.Event>> usageEvents = new HashMap<>();
+        HashMap<String, AppUsageInfo> appsUsageInfo = new HashMap<>();
+
+        // sort UsageEvents data into our new collections
+        sortUsageEventsCollection(usageEventsCollection, usageEvents, appsUsageInfo, context);
+
+        // calculate the total usage time
+        calculateDailyUsageData(usageEvents, appsUsageInfo, date);
+
+        return appsUsageInfo;
     }
 
     /*
@@ -81,7 +134,7 @@ public class UsageDataManager {
      * one containing another list of UsageEvents.Event objects, and another containing AppUsageInfo
      * objects
      */
-    private static void sortUsageEventsCollection(UsageEvents sourceCollection, HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appUsageInfo) {
+    private static void sortUsageEventsCollection(UsageEvents sourceCollection, HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appsUsageInfo, Context context) {
         UsageEvents.Event currentEvent;
 
         int currentEventType = 0;
@@ -101,10 +154,12 @@ public class UsageDataManager {
             }
 
             // if there isn't a Map.Entry<> with this app's name (key), then add a new Map.Entry<>
-            if (appUsageInfo.get(currentEventPackage) == null) {
-                appUsageInfo.put(currentEventPackage, new AppUsageInfo(currentEventPackage));
-                usageEvents.put(currentEventPackage, new ArrayList<UsageEvents.Event>());
+            if (appsUsageInfo.get(currentEventPackage) == null) {
+                appsUsageInfo.put(currentEventPackage, new AppUsageInfo(currentEventPackage));
+                appsUsageInfo.get(currentEventPackage).appName = getAppName(currentEventPackage, context);
+                appsUsageInfo.get(currentEventPackage).appIcon = getAppIcon(currentEventPackage, context);
 
+                usageEvents.put(currentEventPackage, new ArrayList<UsageEvents.Event>());
                 usageEvents.get(currentEventPackage).add(currentEvent);
 
             // if there is a Map.Entry<> with this app's name (key), put the value in the existing Map.Entry<>
@@ -115,10 +170,10 @@ public class UsageDataManager {
     }
 
     /*
-     * calculateTotalUsageTime: calculate the total usage time in a day using the hashmaps with
+     * calculateDailyUsageData: calculate the total usage time in a day using the hashmaps with
      * the sorted events data
      */
-    private long calculateTotalUsageTime(HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appUsageInfo, Date date) {
+    private long calculateDailyUsageData(HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appsUsageInfo, Date date) {
         List<UsageEvents.Event> appUsageEvents;
         int appUsageEventsSize;
 
@@ -193,7 +248,7 @@ public class UsageDataManager {
                 //
                 sessionUsageTime = pausedEventTimeStamp - resumedEventTimeStamp;
                 totalUsageTime += sessionUsageTime;
-                appUsageInfo.get(currentEventPackage).appUsageTime += sessionUsageTime;
+                appsUsageInfo.get(currentEventPackage).appUsageTime += sessionUsageTime;
             }
         }
 
@@ -206,10 +261,10 @@ public class UsageDataManager {
     }
 
     /*
-     * calculateTotalUsageTime: calculate the total usage time in an hour using the hashmaps with
+     * calculateHourlyUsageData: calculate the total usage time in an hour using the hashmaps with
      * the sorted events data
      */
-    private long calculateTotalUsageTime(HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appUsageInfo, Date date, int hour) {
+    private long calculateHourlyUsageData(HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appsUsageInfo, Date date, int hour) {
         List<UsageEvents.Event> appUsageEvents;
         int appUsageEventsSize;
 
@@ -283,7 +338,7 @@ public class UsageDataManager {
                 //
                 sessionUsageTime = pausedEventTimeStamp - resumedEventTimeStamp;
                 totalUsageTime += sessionUsageTime;
-                appUsageInfo.get(currentEventPackage).appUsageTime += sessionUsageTime;
+                appsUsageInfo.get(currentEventPackage).appUsageTime += sessionUsageTime;
             }
         }
 
@@ -293,31 +348,6 @@ public class UsageDataManager {
         }
 
         return totalUsageTime;
-    }
-
-    /*
-     * getScreenOnBarData: get the screen on time for the 24 hours in a specified date, and
-     * encapsulate that data in a BarData object.
-     */
-    public BarData getUsageBarData(Date date, Context context) {
-        // create an ArrayList of barEntries, and populate positions (hours) 0 - 23 with the screen-on time
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        int hour = 0;
-
-        for (int i = 0; i < 24; i++) {
-            float screenOnTime = getUsageTime(date, i, Calendar.HOUR, context);
-            BarEntry barEntry = new BarEntry((float) (i), screenOnTime);
-            barEntries.add(i, barEntry);
-        }
-
-        // use barEntries to instantiate barDataSet, and use barDataSet to instantiate barData
-        BarDataSet barDataSet = new BarDataSet(barEntries, null);
-
-        // barDataSet configuration
-        barDataSet.setDrawValues(false);
-        barDataSet.setColor(context.getResources().getColor(R.color.green, context.getTheme()));
-
-        return new BarData(barDataSet);
     }
 
     /*
@@ -418,4 +448,29 @@ public class UsageDataManager {
         }
     }
 
+    private static String getAppName(String packageName, Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        ApplicationInfo applicationInfo;
+
+        try {
+            applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.CERT_INPUT_RAW_X509);
+            return packageManager.getApplicationLabel(applicationInfo).toString();
+        } catch (Exception exception) {
+            return null;
+        }
+
+    }
+
+    private static Drawable getAppIcon(String packageName, Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        Drawable icon;
+
+        try {
+            icon = packageManager.getApplicationIcon(packageName);
+            return icon;
+        }
+        catch (PackageManager.NameNotFoundException exception) {
+            return null;
+        }
+    }
 }

@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/radius_card_corner"
     android:layout_marginTop="@dimen/margin_card_top"
-    app:strokeWidth="0dp"
-    app:cardBackgroundColor="@color/white">
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,13 +14,13 @@
         android:paddingEnd="@dimen/padding_card_start_end"
         android:paddingTop="@dimen/padding_card_top_bottom"
         android:paddingBottom="@dimen/padding_card_top_bottom"
-        android:background="@color/white">
+        android:background="@color/middle_green">
 
         <TextView
             android:id="@+id/title_usage_hours_today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today's Usage"
+            android:text="@string/title_usage_hours_today"
             android:fontFamily="@font/acumin_pro_bold"
             android:textStyle="bold"
             android:textSize="26sp"
@@ -44,7 +43,7 @@
         <com.kangsk.detox.RoundedBarChart
             android:id="@id/barchart_usage_hours_today"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

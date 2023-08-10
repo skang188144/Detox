@@ -12,6 +12,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // CONSTANTS
     private static final int ITEM_TYPE_GREETING = 10;   // RecyclerView item viewType constants
     private static final int ITEM_TYPE_GRAPH_OVERVIEW = 11;
+    private static final int ITEM_TYPE_APPS = 12;
 
     /*
      * after an instance of this adapter class is instantiated, this adapter will create a
@@ -35,6 +36,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 return new GreetingViewHolder(inflater.inflate(R.layout.row_greeting_fragment_home, parent, false));
             case ITEM_TYPE_GRAPH_OVERVIEW:
                 return new GraphViewHolder(inflater.inflate(R.layout.row_graph_fragment_home, parent, false));
+            case ITEM_TYPE_APPS:
+                return new AppsViewHolder(inflater.inflate(R.layout.row_apps_fragment_home, parent, false));
             default:
                 throw new RuntimeException();
         }
@@ -51,6 +54,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((GreetingViewHolder) holder).bindModel();
         } else if (holder instanceof GraphViewHolder) {
             ((GraphViewHolder) holder).bindModel();
+        } else if (holder instanceof AppsViewHolder) {
+            ((AppsViewHolder) holder).bindModel();
         }
     }
 
@@ -60,7 +65,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      */
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 
     /*
@@ -74,6 +79,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 return ITEM_TYPE_GREETING;
             case 1:
                 return ITEM_TYPE_GRAPH_OVERVIEW;
+            case 2:
+                return ITEM_TYPE_APPS;
             default:
                 throw new RuntimeException();
         }

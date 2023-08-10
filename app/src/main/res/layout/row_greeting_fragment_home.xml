@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fontFamily="@font/acumin_pro_bold"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="@dimen/font_size_heading_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

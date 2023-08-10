@@ -48,23 +48,23 @@ class GraphViewHolder extends RecyclerView.ViewHolder {
     public void bindModel() {
         Calendar calendar = Calendar.getInstance();
 
-        String text = mUsageDataManager.getUsageTime(calendar.getTime(), Calendar.HOUR, mScreenOnHoursText.getContext()) + " hours";
+        String text = mUsageDataManager.getDailyUsageTime(calendar.getTime(), Calendar.HOUR, mScreenOnHoursText.getContext().getApplicationContext()) + " hours";
         mScreenOnHoursText.setText(text);
 
-        BarData data = mUsageDataManager.getUsageBarData(calendar.getTime(), mBarChart.getContext());
+        BarData data = mUsageDataManager.getHourlyUsageBarData(calendar.getTime(), mBarChart.getContext().getApplicationContext());
         mBarChart.setData(data);
 
         LimitLine limitLine = new LimitLine(0.5f);
         limitLine.setLineWidth(0.32f);
-        limitLine.setLineColor(mBarChart.getResources().getColor(R.color.gray, mBarChart.getContext().getTheme()));
+        limitLine.setLineColor(mBarChart.getResources().getColor(R.color.gray, mBarChart.getContext().getApplicationContext().getTheme()));
 
-        Typeface basicSans = ResourcesCompat.getFont(mBarChart.getContext(), R.font.basic_sans_thin);
+        Typeface basicSans = ResourcesCompat.getFont(mBarChart.getContext().getApplicationContext(), R.font.basic_sans_thin);
 
         mBarChart.setRadius(15);
         mBarChart.setDrawBorders(false);
         mBarChart.setDrawValueAboveBar(false);
         mBarChart.getDescription().setEnabled(false);
-        mBarChart.setBackgroundColor(mBarChart.getResources().getColor(R.color.white, mBarChart.getContext().getTheme()));
+        mBarChart.setBackgroundColor(mBarChart.getResources().getColor(R.color.white, mBarChart.getContext().getApplicationContext().getTheme()));
         mBarChart.getXAxis().setTypeface(basicSans);
         mBarChart.getAxisLeft().setTypeface(basicSans);
         mBarChart.getXAxis().setAxisMaximum(24.0f);
