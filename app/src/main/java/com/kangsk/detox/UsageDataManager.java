@@ -20,299 +20,303 @@ import java.util.Map;
 
 /**
  * TODO:
-
- * 1. implement two separate getBarData methods -- one for hour, one for today
- * 2. create a new method for retrieving a list of AppUsageInfo objects, with the package
- *    name, app name, launch count, and screen on time fields populated.
- * 3. extract repeated codes in both getScreenOnTime() methods to a new method
- * 4. generally clean up the getScreenOnTime() methods
+ * 1. Add comments everywhere that need comments
  */
 
 public class UsageDataManager {
-
     /*
-     * get the total screen-on time for every app in the specified hour
+     * getUsageTime: get the total device usage time for every app in the specified day
      */
-    public float getScreenOnTime(Date date, int hour, int convertToTimeUnit, Context context) {
-        long totalScreenOnTime = 0L;
+    public float getUsageTime(Date date, int convertToTimeUnit, Context context) {
+        // instantiate a UsageStatsManager object from our Context object
+        UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
-        // instantiate a UsageStatsManager object
-        UsageStatsManager mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+        long startRange = getFirstMilliOfDay(date);
+        long endRange = getLastMilliOfDay(date);
 
-        // query UsageStatsManager to get a UsageEvents object, which holds all usage data in the specified range
-        UsageEvents usageEventsCollection = mUsageStatsManager.queryEvents(getFirstMilliOfHour(date, hour), getLastMilliOfHour(date, hour));
+        // instantiate a UsageEvents collection by querying our UsageStatsManager
+        UsageEvents usageEventsCollection = usageStatsManager.queryEvents(startRange, endRange);
 
-        // custom data type, used to classify total screen on time for a single app
-        HashMap<String, AppUsageInfo> appUsageInfoMap = new HashMap<>();
+        // grabbing our individual collections
+        HashMap<String, List<UsageEvents.Event>> usageEvents = new HashMap<>();
+        HashMap<String, AppUsageInfo> appUsageInfo = new HashMap<>();
 
-        /*
-         * this HashMap will have a string key containing a single app's package name.
-         * The values will be a list of all UsageEvent.Event objects for that single app.
-         * Note that UsageEvents in Android works in a way where a single event can happen
-         * multiple times, so you need a List<> to hold all the events triggered by a single app.
-         * We will pull the data from our UsageEvents object, and make it easier to parse through
-         * by putting the data in a HashMap, instead of the custom UsageEvents object.
-         */
-        HashMap<String, List<UsageEvents.Event>> usageEventsMap = new HashMap<>();
+        // sort UsageEvents data into our new collections
+        sortUsageEventsCollection(usageEventsCollection, usageEvents, appUsageInfo);
 
-        /*
-         * current UsageEvents.Event that is being sorted from the collection UsageEvents,
-         * to the HashMap we will use for processing the actual event data.
-         */
-        UsageEvents.Event currentUsageEvent;
+        // calculate the total usage time
+        long totalUsageTime = calculateTotalUsageTime(usageEvents, appUsageInfo, date);
 
-        /*
-         * iterate through the custom collection UsageEvents and re-encapsulate them in
-         * the Map containing UsageEvents.Event's, as well a HashMap of our custom
-         * AppUsageInfo data type.
-         */
-        while (usageEventsCollection.hasNextEvent()) {
-            // get a reference of the current iteration of UsageEvents.Event
-            currentUsageEvent = new UsageEvents.Event();
-            usageEventsCollection.getNextEvent(currentUsageEvent);
-
-            // only put the data in the HashMap if it is a ACTIVITY_RESUMED or ACTIVITY_PAUSED event
-            if (currentUsageEvent.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED
-                    || currentUsageEvent.getEventType() == UsageEvents.Event.ACTIVITY_PAUSED) {
-                String appPackageName = currentUsageEvent.getPackageName();
-
-                if (appUsageInfoMap.get(appPackageName) == null) {
-                    // create new entries for app not previously logged
-                    appUsageInfoMap.put(appPackageName, new AppUsageInfo(appPackageName));
-                    usageEventsMap.put(appPackageName, new ArrayList<UsageEvents.Event>());
-
-                    // add the UsageEvents.Event entry
-                    usageEventsMap.get(appPackageName).add(currentUsageEvent);
-                } else {
-                    // add the UsageEvents.Event entry
-                    usageEventsMap.get(appPackageName).add(currentUsageEvent);
-                }
-            }
-        }
-
-        /*
-         * iterate through each app's events list, and add up the total screen-on time
-         */
-        for (Map.Entry<String, List<UsageEvents.Event>> usageEventMapEntry : usageEventsMap.entrySet()) {
-            List<UsageEvents.Event> appUsageEventsList = usageEventMapEntry.getValue();
-            // number of Events that a Map entry (app) has
-            int totalEvents = usageEventMapEntry.getValue().size();
-
-            /*
-             * in order to calculate the total screen time of an app, we need to have
-             * a ACTIVITY_RESUMED event first, and then a ACTIVITY_PAUSED event next.
-             * With those two events in that order, we can grab the timestamp of each
-             * event and calculate the difference to get the screen time. if there are
-             * 1 or less events, then we can't calculate screen time.
-             * (note that the appUsageEventsList is already sorted chronologically.)
-             */
-            if (totalEvents <= 1) {
-                continue;
-            }
-
-            for (int i = 0; i < totalEvents; i++) {
-                // if the first event is not ACTIVITY_RESUMED, skip to the next iteration
-                if (appUsageEventsList.get(i).getEventType() != UsageEvents.Event.ACTIVITY_RESUMED) {
-                    continue;
-                }
-
-                /*
-                 * check to see if our ACTIVITY_RESUMED event is our last event in the list. If so,
-                 * skip this iteration and end this loop because we do not have a ACTIVITY_PAUSED
-                 * event following if this is the last item in the list.
-                 */
-                if (i == totalEvents - 1) {
-                    continue;
-                }
-
-                UsageEvents.Event resumeEvent = appUsageEventsList.get(i);
-                UsageEvents.Event pauseEvent = appUsageEventsList.get(i + 1);
-                long eventResumedTimeStamp = resumeEvent.getTimeStamp();
-                long eventPausedTimeStamp = pauseEvent.getTimeStamp();
-
-                appUsageInfoMap.get(resumeEvent.getPackageName()).screenOnTime += (eventPausedTimeStamp - eventResumedTimeStamp);
-            }
-
-            if (appUsageEventsList.get(0).getEventType() == UsageEvents.Event.ACTIVITY_PAUSED) {
-                long resumeTimeStamp = getFirstMilliOfHour(date, hour);
-                long pauseTimeStamp = appUsageEventsList.get(0).getTimeStamp();
-                appUsageInfoMap.get(appUsageEventsList.get(0).getPackageName()).screenOnTime += (pauseTimeStamp - resumeTimeStamp);
-                Log.d("UsageDataManager", "APP'S FIRST RESUME WAS MIDNIGHT " + appUsageEventsList.get(0).getPackageName());
-            }
-        }
-
-        // add up each app's total screen time, for an overall total screen time
-        for (Map.Entry<String, AppUsageInfo> appUsageInfoEntry : appUsageInfoMap.entrySet()) {
-            totalScreenOnTime += appUsageInfoEntry.getValue().screenOnTime;
-        }
-
-        // round down if the total screen on time is more than an hour
-        if (convertMillisTo(totalScreenOnTime, Calendar.MINUTE) > 60) {
-            // 3600000 milliseconds == 1 hour
-            totalScreenOnTime = 3600000;
-        }
-
-        return roundToNearestTenth(convertMillisTo(totalScreenOnTime, convertToTimeUnit));
+        return roundToNearestTenth(convertMillisTo(totalUsageTime, convertToTimeUnit));
     }
 
     /*
-     * get the total screen-on time for every app in the specified day
+     * getUsageTime: get the total device usage time for every app in the specified hour
      */
-    public float getScreenOnTime(Date date, int convertToTimeUnit, Context context) {
-        long totalScreenOnTime = 0L;
+    public float getUsageTime(Date date, int hour, int convertToTimeUnit, Context context) {
+        // instantiate a UsageStatsManager object from our Context object
+        UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
 
-        // instantiate a UsageStatsManager object
-        UsageStatsManager mUsageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+        long startRange = getFirstMilliOfHour(date, hour);
+        long endRange = getLastMilliOfHour(date, hour);
 
-        // query UsageStatsManager to get a UsageEvents object, which holds all usage data in the specified range
-        UsageEvents usageEventsCollection = mUsageStatsManager.queryEvents(getFirstMilliOfDay(date), getLastMilliOfDay(date));
+        // instantiate a UsageEvents collection by querying our UsageStatsManager
+        UsageEvents usageEventsCollection = usageStatsManager.queryEvents(startRange, endRange);
 
-        // custom data type, used to classify total screen on time for a single app
-        HashMap<String, AppUsageInfo> appUsageInfoMap = new HashMap<>();
+        // grabbing our individual collections
+        HashMap<String, List<UsageEvents.Event>> usageEvents = new HashMap<>();
+        HashMap<String, AppUsageInfo> appUsageInfo = new HashMap<>();
 
-        /*
-         * this HashMap will have a string key containing a single app's package name.
-         * The values will be a list of all UsageEvent.Event objects for that single app.
-         * Note that UsageEvents in Android works in a way where a single event can happen
-         * multiple times, so you need a List<> to hold all the events triggered by a single app.
-         * We will pull the data from our UsageEvents object, and make it easier to parse through
-         * by putting the data in a HashMap, instead of the custom UsageEvents object.
-         */
-        HashMap<String, List<UsageEvents.Event>> usageEventsMap = new HashMap<>();
+        // sort UsageEvents data into our new collections
+        sortUsageEventsCollection(usageEventsCollection, usageEvents, appUsageInfo);
 
-        /*
-         * current UsageEvents.Event that is being sorted from the collection UsageEvents,
-         * to the HashMap we will use for processing the actual event data.
-         */
-        UsageEvents.Event currentUsageEvent;
+        // calculate the total usage time
+        long totalUsageTime = calculateTotalUsageTime(usageEvents, appUsageInfo, date, hour);
 
-        /*
-         * iterate through the custom collection UsageEvents and re-encapsulate them in
-         * the Map containing UsageEvents.Event's, as well a HashMap of our custom
-         * AppUsageInfo data type.
-         */
-        while (usageEventsCollection.hasNextEvent()) {
-            // get a reference of the current iteration of UsageEvents.Event
-            currentUsageEvent = new UsageEvents.Event();
-            usageEventsCollection.getNextEvent(currentUsageEvent);
-
-            // only put the data in the HashMap if it is a ACTIVITY_RESUMED or ACTIVITY_PAUSED event
-            if (currentUsageEvent.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED
-                    || currentUsageEvent.getEventType() == UsageEvents.Event.ACTIVITY_PAUSED) {
-                String appPackageName = currentUsageEvent.getPackageName();
-
-                if (appUsageInfoMap.get(appPackageName) == null) {
-                    // create new entries for app not previously logged
-                    appUsageInfoMap.put(appPackageName, new AppUsageInfo(appPackageName));
-                    usageEventsMap.put(appPackageName, new ArrayList<UsageEvents.Event>());
-
-                    // add the UsageEvents.Event entry
-                    usageEventsMap.get(appPackageName).add(currentUsageEvent);
-                } else {
-                    // add the UsageEvents.Event entry
-                    usageEventsMap.get(appPackageName).add(currentUsageEvent);
-                }
-            }
-        }
-
-        /*
-         * iterate through each app's events list, and add up the total screen-on time
-         */
-        for (Map.Entry<String, List<UsageEvents.Event>> usageEventMapEntry : usageEventsMap.entrySet()) {
-            List<UsageEvents.Event> appUsageEventsList = usageEventMapEntry.getValue();
-            // number of Events that a Map entry (app) has
-            int totalEvents = usageEventMapEntry.getValue().size();
-
-            /*
-             * in order to calculate the total screen time of an app, we need to have
-             * a ACTIVITY_RESUMED event first, and then a ACTIVITY_PAUSED event next.
-             * With those two events in that order, we can grab the timestamp of each
-             * event and calculate the difference to get the screen time. if there are
-             * 1 or less events, then we can't calculate screen time.
-             * (note that the appUsageEventsList is already sorted chronologically.)
-             */
-            if (totalEvents <= 1) {
-                continue;
-            }
-
-            for (int i = 0; i < totalEvents; i++) {
-                // if the first event is not ACTIVITY_RESUMED, skip to the next iteration
-                if (appUsageEventsList.get(i).getEventType() != UsageEvents.Event.ACTIVITY_RESUMED) {
-                    continue;
-                }
-
-                /*
-                 * check to see if our ACTIVITY_RESUMED event is our last event in the list. If so,
-                 * skip this iteration and end this loop because we do not have a ACTIVITY_PAUSED
-                 * event following if this is the last item in the list.
-                 */
-                if (i == totalEvents - 1) {
-                    continue;
-                }
-
-                UsageEvents.Event resumeEvent = appUsageEventsList.get(i);
-                UsageEvents.Event pauseEvent = appUsageEventsList.get(i + 1);
-                long eventResumedTimeStamp = resumeEvent.getTimeStamp();
-                long eventPausedTimeStamp = pauseEvent.getTimeStamp();
-
-                appUsageInfoMap.get(resumeEvent.getPackageName()).screenOnTime += (eventPausedTimeStamp - eventResumedTimeStamp);
-            }
-
-            /*
-             * correcting for the situation where an activity was resumed before the starting
-             * time range of the method, This method calculates the total screen time of that
-             * session (only counting the time within the method's time range), and adds it
-             * back to the total screen time.
-             */
-            if (appUsageEventsList.get(0).getEventType() == UsageEvents.Event.ACTIVITY_PAUSED) {
-                long resumeTimeStamp = getFirstMilliOfDay(date);
-                long pauseTimeStamp = appUsageEventsList.get(0).getTimeStamp();
-                appUsageInfoMap.get(appUsageEventsList.get(0).getPackageName()).screenOnTime += (pauseTimeStamp - resumeTimeStamp);
-                Log.d("UsageDataManager", "APP'S FIRST RESUME WAS MIDNIGHT " + appUsageEventsList.get(0).getPackageName());
-            }
-        }
-
-        // add up each app's total screen time, for an overall total screen time
-        for (Map.Entry<String, AppUsageInfo> appUsageInfoEntry : appUsageInfoMap.entrySet()) {
-            totalScreenOnTime += appUsageInfoEntry.getValue().screenOnTime;
-            Log.d("UsageDataManager", roundToNearestTenth(convertMillisTo(appUsageInfoEntry.getValue().screenOnTime, Calendar.MINUTE)) + " " + appUsageInfoEntry.getValue().packageName);
-        }
-
-        // round down if the total usage hours is more than a day (1440 hours)
-        if (convertMillisTo(totalScreenOnTime, Calendar.MINUTE) > 1440) {
-            // 86400000 milliseconds == 1 day
-            totalScreenOnTime = 86400000;
-        }
-
-        return roundToNearestTenth(convertMillisTo(totalScreenOnTime, convertToTimeUnit));
+        return roundToNearestTenth(convertMillisTo(totalUsageTime, convertToTimeUnit));
     }
 
     /*
-     * get the screen on time for the 24 hours in a specified date, and encapsulate
-     * that data in a BarData object.
+     * sortUsageEventsCollection: sort a UsageEvents collection type into a pair of HashMaps,
+     * one containing another list of UsageEvents.Event objects, and another containing AppUsageInfo
+     * objects
      */
-    public BarData getBarDataForDay(Date date, Context context) {
+    private static void sortUsageEventsCollection(UsageEvents sourceCollection, HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appUsageInfo) {
+        UsageEvents.Event currentEvent;
+
+        int currentEventType = 0;
+        String currentEventPackage = null;
+
+        while (sourceCollection.hasNextEvent()) {
+            currentEvent = new UsageEvents.Event();
+            sourceCollection.getNextEvent(currentEvent);
+
+            currentEventType = currentEvent.getEventType();
+            currentEventPackage = currentEvent.getPackageName();
+
+            // if this iteration's event is not ACTIVITY_RESUMED or ACTIVITY_PAUSED, skip to then next iteration.
+            if (currentEventType != UsageEvents.Event.ACTIVITY_RESUMED
+                    && currentEventType != UsageEvents.Event.ACTIVITY_PAUSED) {
+                continue;
+            }
+
+            // if there isn't a Map.Entry<> with this app's name (key), then add a new Map.Entry<>
+            if (appUsageInfo.get(currentEventPackage) == null) {
+                appUsageInfo.put(currentEventPackage, new AppUsageInfo(currentEventPackage));
+                usageEvents.put(currentEventPackage, new ArrayList<UsageEvents.Event>());
+
+                usageEvents.get(currentEventPackage).add(currentEvent);
+
+            // if there is a Map.Entry<> with this app's name (key), put the value in the existing Map.Entry<>
+            } else {
+                usageEvents.get(currentEventPackage).add(currentEvent);
+            }
+        }
+    }
+
+    /*
+     * calculateTotalUsageTime: calculate the total usage time in a day using the hashmaps with
+     * the sorted events data
+     */
+    private long calculateTotalUsageTime(HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appUsageInfo, Date date) {
+        List<UsageEvents.Event> appUsageEvents;
+        int appUsageEventsSize;
+
+        UsageEvents.Event currentEvent;
+        int currentEventType;
+        String currentEventPackage;
+
+        long resumedEventTimeStamp;
+        long pausedEventTimeStamp;
+        long sessionUsageTime;
+
+        long totalUsageTime = 0;
+
+        for (Map.Entry<String, List<UsageEvents.Event>> entry : usageEvents.entrySet()) {
+            appUsageEvents = entry.getValue();
+            appUsageEventsSize = appUsageEvents.size();
+
+
+            for (int i = 0; i < appUsageEventsSize; i++) {
+                // check if the events list size is 0
+                if (appUsageEventsSize == 0) {
+                    continue;
+                }
+
+                currentEvent = appUsageEvents.get(i);
+                currentEventType = currentEvent.getEventType();
+                currentEventPackage = currentEvent.getPackageName();
+
+                /*
+                 * SPECIAL CASE:
+                 * when the first event in the list is ACTIVITY_PAUSED, this means that the
+                 * activity started before the time range, and extended into our time range.
+                 */
+                if (i == 0 && currentEventType == UsageEvents.Event.ACTIVITY_PAUSED) {
+                    resumedEventTimeStamp = getFirstMilliOfDay(date);
+                    pausedEventTimeStamp = currentEvent.getTimeStamp();
+
+                /*
+                 * SPECIAL CASE:
+                 * we ignore the last event if it's ACTIVITY_PAUSED, because this will already be
+                 * calculated on the second to last event.
+                 */
+                } else if (i == appUsageEventsSize - 1 && currentEventType == UsageEvents.Event.ACTIVITY_PAUSED) {
+                    continue;
+
+                /*
+                 * SPECIAL CASE:
+                 * when the last event is ACTIVITY_RESUMED, this means that the activity is still
+                 * ongoing. The pausedEventTimeStamp should be the current time now.
+                 */
+                } else if (i == appUsageEventsSize - 1 && currentEventType == UsageEvents.Event.ACTIVITY_RESUMED) {
+                    resumedEventTimeStamp = currentEvent.getTimeStamp();
+                    pausedEventTimeStamp = date.getTime();
+
+                /*
+                 * REGULAR CASE:
+                 * assume that the succeeding event is ACTIVITY_PAUSED. Get the difference
+                 * between the current ACTIVITY_RESUMED event, and the next ACTIVITY_PAUSED event.
+                 */
+                } else if (currentEventType == UsageEvents.Event.ACTIVITY_RESUMED) {
+                    resumedEventTimeStamp = currentEvent.getTimeStamp();
+                    pausedEventTimeStamp = appUsageEvents.get(i + 1).getTimeStamp();
+
+                /*
+                 * DEFAULT CASE:
+                 */
+                } else {
+                    resumedEventTimeStamp = 0;
+                    pausedEventTimeStamp = 0;
+                }
+
+                //
+                sessionUsageTime = pausedEventTimeStamp - resumedEventTimeStamp;
+                totalUsageTime += sessionUsageTime;
+                appUsageInfo.get(currentEventPackage).appUsageTime += sessionUsageTime;
+            }
+        }
+
+        // if the total usage time for this day is greater than 1 day, then round down
+        if (convertMillisTo(totalUsageTime, Calendar.HOUR) > 24) {
+            totalUsageTime = 86400000;
+        }
+
+        return totalUsageTime;
+    }
+
+    /*
+     * calculateTotalUsageTime: calculate the total usage time in an hour using the hashmaps with
+     * the sorted events data
+     */
+    private long calculateTotalUsageTime(HashMap<String, List<UsageEvents.Event>> usageEvents, HashMap<String, AppUsageInfo> appUsageInfo, Date date, int hour) {
+        List<UsageEvents.Event> appUsageEvents;
+        int appUsageEventsSize;
+
+        UsageEvents.Event currentEvent;
+        int currentEventType;
+        String currentEventPackage;
+
+        long resumedEventTimeStamp;
+        long pausedEventTimeStamp;
+        long sessionUsageTime;
+
+        long totalUsageTime = 0;
+
+        for (Map.Entry<String, List<UsageEvents.Event>> entry : usageEvents.entrySet()) {
+            appUsageEvents = entry.getValue();
+            appUsageEventsSize = appUsageEvents.size();
+
+            for (int i = 0; i < appUsageEventsSize; i++) {
+                // check if the events list size is 0
+                if (appUsageEventsSize == 0) {
+                    continue;
+                }
+
+                currentEvent = appUsageEvents.get(i);
+                currentEventType = currentEvent.getEventType();
+                currentEventPackage = currentEvent.getPackageName();
+
+                /*
+                 * SPECIAL CASE:
+                 * when the first event in the list is ACTIVITY_PAUSED, this means that the
+                 * activity started before the time range, and extended into our time range.
+                 */
+                if (i == 0 && currentEventType == UsageEvents.Event.ACTIVITY_PAUSED) {
+                    resumedEventTimeStamp = getFirstMilliOfHour(date, hour);
+                    pausedEventTimeStamp = currentEvent.getTimeStamp();
+
+                /*
+                 * SPECIAL CASE:
+                 * we ignore the last event if it's ACTIVITY_PAUSED, because this will already be
+                 * calculated on the second to last event.
+                 */
+                } else if (i == appUsageEventsSize - 1 && currentEventType == UsageEvents.Event.ACTIVITY_PAUSED) {
+                    continue;
+
+                /*
+                 * SPECIAL CASE:
+                 * when the last event is ACTIVITY_RESUMED, this means that the
+                 * activity started in the time range, and extended outside of our time range.
+                 */
+                } else if (i == appUsageEventsSize - 1 && currentEventType == UsageEvents.Event.ACTIVITY_RESUMED) {
+                    resumedEventTimeStamp = currentEvent.getTimeStamp();
+                    pausedEventTimeStamp = date.getTime();
+
+                /*
+                 * REGULAR CASE:
+                 * assume that the succeeding event is ACTIVITY_PAUSED. Get the difference
+                 * between the current ACTIVITY_RESUMED event, and the next ACTIVITY_PAUSED event.
+                 */
+                } else if (currentEventType == UsageEvents.Event.ACTIVITY_RESUMED){
+                    resumedEventTimeStamp = currentEvent.getTimeStamp();
+                    pausedEventTimeStamp = appUsageEvents.get(i + 1).getTimeStamp();
+
+                /*
+                 * DEFAULT CASE:
+                 */
+                } else {
+                    resumedEventTimeStamp = 0;
+                    pausedEventTimeStamp = 0;
+                }
+
+                //
+                sessionUsageTime = pausedEventTimeStamp - resumedEventTimeStamp;
+                totalUsageTime += sessionUsageTime;
+                appUsageInfo.get(currentEventPackage).appUsageTime += sessionUsageTime;
+            }
+        }
+
+        // if the total usage time for this hour is greater than 1 hour, then round down
+        if (convertMillisTo(totalUsageTime, Calendar.MINUTE) > 60) {
+            totalUsageTime = 3600000;
+        }
+
+        return totalUsageTime;
+    }
+
+    /*
+     * getScreenOnBarData: get the screen on time for the 24 hours in a specified date, and
+     * encapsulate that data in a BarData object.
+     */
+    public BarData getUsageBarData(Date date, Context context) {
         // create an ArrayList of barEntries, and populate positions (hours) 0 - 23 with the screen-on time
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         int hour = 0;
 
         for (int i = 0; i < 24; i++) {
-            BarEntry barEntry;
-            float screenOnTime = getScreenOnTime(date, i, Calendar.HOUR, context);
-
-            // if the screen on time is imprecise and greater than an hour, round down to 1.0 hours of usage
-            if (screenOnTime > 1.0f) {
-                screenOnTime = 1.0f;
-            }
-
-            barEntry = new BarEntry((float) (i), screenOnTime);
+            float screenOnTime = getUsageTime(date, i, Calendar.HOUR, context);
+            BarEntry barEntry = new BarEntry((float) (i), screenOnTime);
             barEntries.add(i, barEntry);
         }
 
         // use barEntries to instantiate barDataSet, and use barDataSet to instantiate barData
         BarDataSet barDataSet = new BarDataSet(barEntries, null);
+
+        // barDataSet configuration
         barDataSet.setDrawValues(false);
         barDataSet.setColor(context.getResources().getColor(R.color.green, context.getTheme()));
+
         return new BarData(barDataSet);
     }
 
@@ -355,7 +359,7 @@ public class UsageDataManager {
     /*
      * getFirstMilliOfDay: calculates the first millisecond of the specified date in Unix time
      */
-    public long getFirstMilliOfDay(Date date) {
+    private long getFirstMilliOfDay(Date date) {
         Calendar calendar = getCalendar();
         calendar.setTimeZone(TimeZone.getDefault());
         calendar.setTime(date);
@@ -367,7 +371,7 @@ public class UsageDataManager {
     /*
      * getLastMilliOfToday: calculates the last millisecond of the specified date in Unix time
      */
-    public long getLastMilliOfDay(Date date) {
+    private long getLastMilliOfDay(Date date) {
         Calendar calendar = getCalendar();
         calendar.setTimeZone(TimeZone.getDefault());
         calendar.setTime(date);
@@ -386,19 +390,8 @@ public class UsageDataManager {
     }
 
     /*
-     * sumScreenOnTime: takes a Map of strings representing an app's package name and
-     * UsageStats objects, and calculates the sum of all the UsageStats' screen-on
-     * times.
+     * roundToNearestTenth: round a float down to its nearest tenth
      */
-    private static long sumScreenOnTime(Map<String, UsageStats> appUsageStats) {
-        // iterate through the key-value pairs, and add up the total usage time
-        long totalScreenOnMillis = 0;
-        for (Map.Entry<String, UsageStats> entry : appUsageStats.entrySet()) {
-            totalScreenOnMillis += entry.getValue().getTotalTimeVisible();
-        }
-        return totalScreenOnMillis;
-    }
-
     private static float roundToNearestTenth(float rawNumber) {
         int scale = (int) Math.pow(10, 1);
         float roundedNumber = (float) Math.round(rawNumber * scale) / scale;

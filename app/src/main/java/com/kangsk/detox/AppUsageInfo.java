@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 public class AppUsageInfo {
     Drawable appIcon;
     String appName, packageName;
-    long screenOnTime;
+    long appUsageTime = 0;
     int launchCount;
 
     AppUsageInfo(String packageName) {

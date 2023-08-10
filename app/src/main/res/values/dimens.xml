@@ -8,5 +8,5 @@
     <dimen name="padding_card_start_end">15dp</dimen>
     <dimen name="padding_card_top_bottom">10dp</dimen>
     <dimen name="font_size_heading_2">26sp</dimen>
-    <dimen name="padding_recycler_top">25dp</dimen>
+    <dimen name="padding_recycler_top">60dp</dimen>
 </resources>

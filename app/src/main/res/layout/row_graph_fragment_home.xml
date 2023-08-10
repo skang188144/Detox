@@ -2,9 +2,11 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/radius_card_corner"
-    android:layout_marginTop="@dimen/margin_card_top">
+    android:layout_marginTop="@dimen/margin_card_top"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,26 +14,41 @@
         android:paddingStart="@dimen/padding_card_start_end"
         android:paddingEnd="@dimen/padding_card_start_end"
         android:paddingTop="@dimen/padding_card_top_bottom"
-        android:paddingBottom="@dimen/padding_card_top_bottom">
+        android:paddingBottom="@dimen/padding_card_top_bottom"
+        android:background="@color/white">
 
         <TextView
-            android:id="@+id/text_screen_hours_today"
+            android:id="@+id/title_usage_hours_today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/basic_sans_thin"
+            android:text="Today's Usage"
+            android:fontFamily="@font/acumin_pro_bold"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/text_usage_hours_today"/>
+
+        <TextView
+            android:id="@+id/text_usage_hours_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/monserrat_extralight"
             android:textSize="@dimen/font_size_heading_2"
-            app:layout_constraintBottom_toTopOf="@+id/barchart_screen_hours_today"
+            app:layout_constraintBottom_toTopOf="@+id/barchart_usage_hours_today"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@id/barchart_screen_hours_today"
+        <com.kangsk.detox.RoundedBarChart
+            android:id="@id/barchart_usage_hours_today"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="250dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_screen_hours_today" />
+            app:layout_constraintTop_toBottomOf="@id/text_usage_hours_today" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
