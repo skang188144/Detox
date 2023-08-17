@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_graph"
+    android:layout_marginTop="@dimen/margin_home_fragment_between_cards">
+
+    <!--FRAGMENT GUIDELINES -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_graph_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_graph_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <!--GRAPH GUIDELINES-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_graph_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_graph_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/text_graph_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideline_graph_start"
+        app:layout_constraintTop_toTopOf="@id/guideline_graph_top"
+        app:layout_constraintBottom_toTopOf="@id/card_view_graph_container"
+        android:layout_marginBottom="@dimen/margin_graph_title_bottom"
+        android:text="@string/text_graph_title"
+        android:textColor="@color/dark_complimentary_color"
+        android:fontFamily="@font/proxima_nova_bold"
+        android:textSize="@dimen/font_size_graph_title"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_graph_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_graph_bottom"
+        app:layout_constraintEnd_toEndOf="@id/guideline_graph_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_graph_start"
+        app:layout_constraintTop_toBottomOf="@id/text_graph_title"
+        android:background="@color/light_complimentary_color"
+        app:cardCornerRadius="@dimen/radius_card_corner"
+        app:strokeWidth="0dp"
+        app:cardElevation="5dp"> <!--TODO: turn this into dimension resource once you figure out if you want 15dp or 5dp-->
+
+        <com.kangsk.detox.utility.RoundedBarChart
+            android:id="@+id/barchart_graph_usage_time_today"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

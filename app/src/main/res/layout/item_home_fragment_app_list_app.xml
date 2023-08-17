@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_app_list"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="@dimen/margin_home_fragment_between_cards"
+    app:cardCornerRadius="@dimen/radius_card_corner"
+    app:strokeWidth="0dp"
+    app:cardElevation="5dp"> <!--TODO: same thing to make this a resource-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_complimentary_color">
+
+        <ImageView
+            android:id="@+id/drawable_app_list_app_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1:1"/>
+
+        <TextView
+            android:id="@+id/text_app_list_app_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/text_app_list_app_usage_time"
+            app:layout_constraintStart_toEndOf="@id/drawable_app_list_app_icon"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/text_app_list_app_usage_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_app_list_app_name"
+            android:textColor="@color/black"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

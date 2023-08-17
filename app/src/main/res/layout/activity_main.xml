@@ -5,30 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/dark_green"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container"
+        android:id="@+id/container_main_activity_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_fragment_top"
-        android:layout_marginStart="@dimen/margin_fragment_start_end"
-        android:layout_marginEnd="@dimen/margin_fragment_start_end"
-        app:layout_constraintBottom_toTopOf="@id/navigation_bottom"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar_main_activity_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation_bottom"
-        android:layout_width="match_parent"
+        android:id="@+id/navigation_bar_main_activity_bottom"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@color/neutral_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/activity_main"></com.google.android.material.bottomnavigation.BottomNavigationView>
-
+        app:menu="@menu/activity_main" />
 </androidx.constraintlayout.widget.ConstraintLayout>

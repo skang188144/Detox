@@ -1,4 +1,4 @@
-package com.kangsk.detox;
+package com.kangsk.detox.utility;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -21,6 +21,7 @@ import com.github.mikephil.charting.renderer.BarChartRenderer;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.kangsk.detox.R;
 
 public class RoundedBarChart extends BarChart {
     public RoundedBarChart(Context context) {

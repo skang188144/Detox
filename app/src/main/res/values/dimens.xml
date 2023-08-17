@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="radius_card_corner">6dp</dimen>
-    <dimen name="margin_card_top">25dp</dimen>
-    <dimen name="margin_fragment_top">25dp</dimen>
-    <dimen name="margin_fragment_start_end">6dp</dimen>
-    <dimen name="font_size_heading_1">40sp</dimen>
-    <dimen name="padding_card_start_end">15dp</dimen>
-    <dimen name="padding_card_top_bottom">10dp</dimen>
-    <dimen name="font_size_heading_2">26sp</dimen>
-    <dimen name="padding_recycler_top">60dp</dimen>
+    <!--
+    DIMENSION NAMING SCHEME:
+    [dimension type]_[parent recyclerview item]_[description]
+
+    ID NAMING SCHEME:
+    [widget type]_[parent recyclerview item]_[description]
+    -->
+
+    <dimen name="radius_card_corner">10dp</dimen>
+
+    <dimen name="margin_home_fragment_between_cards">20dp</dimen>
+    <dimen name="padding_home_fragment_card_start_end">15dp</dimen>
+    <dimen name="padding_home_fragment_card_top_bottom">10dp</dimen>
+
+    <!--HOME FRAGMENT, OVERVIEW ITEM-->
+    <dimen name="padding_overview_greeting_top">60dp</dimen>
+    <dimen name="font_size_overview_greeting">40sp</dimen>
+    <dimen name="height_overview">350dp</dimen>
+    <dimen name="font_size_overview_usage_time_today_title">17sp</dimen>
+    <dimen name="font_size_overview_usage_time_today_value">15sp</dimen>
+
+    <!--HOME FRAGMENT, GRAPH ITEM-->
+    <dimen name="height_graph">250dp</dimen>
+    <dimen name="font_size_graph_title">25sp</dimen>
+    <dimen name="margin_graph_title_bottom">7dp</dimen>
 </resources>
