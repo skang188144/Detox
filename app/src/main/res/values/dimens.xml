@@ -25,4 +25,7 @@
     <dimen name="height_graph">250dp</dimen>
     <dimen name="font_size_graph_title">25sp</dimen>
     <dimen name="margin_graph_title_bottom">7dp</dimen>
+    <dimen name="margin_app_list_title_bottom">7dp</dimen>
+    <dimen name="font_size_app_list_title">25sp</dimen>
+    <dimen name="elevation_card">5dp</dimen>
 </resources>

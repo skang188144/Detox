@@ -60,7 +60,7 @@
         android:background="@color/light_complimentary_color"
         app:cardCornerRadius="@dimen/radius_card_corner"
         app:strokeWidth="0dp"
-        app:cardElevation="5dp"> <!--TODO: turn this into dimension resource once you figure out if you want 15dp or 5dp-->
+        app:cardElevation="@dimen/elevation_card"> <!--TODO: turn this into dimension resource once you figure out if you want 15dp or 5dp-->
 
         <com.kangsk.detox.utility.RoundedBarChart
             android:id="@+id/barchart_graph_usage_time_today"

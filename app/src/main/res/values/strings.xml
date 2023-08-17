@@ -9,4 +9,5 @@
     <string name="text_overview_greeting_evening">Good Evening,</string>
     <string name="text_overview_name">Sanghyeok.</string>
     <string name="text_graph_title">Today\'s Usage</string>
+    <string name="text_app_list_title">Apps</string>
 </resources>
