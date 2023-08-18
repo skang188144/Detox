@@ -9,6 +9,9 @@
         <item name="colorSecondary">@color/dark_complimentary_color</item>
         <item name="colorSecondaryVariant">@color/dark_complimentary_color</item>
         <item name="colorOnSecondary">@color/dark_complimentary_color</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+
         <!-- Status/navigation bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -17,5 +20,16 @@
         <!-- Splash screen background color. -->
         <item name="android:windowSplashScreenBackground">@color/dominant_color</item>
         <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!--Bottom Navigation Bar Widget-->
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <!--Bottom Navigation Bar Theme-->
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorSurface">@color/dark_complimentary_color</item>
+        <item name="colorOnSurfaceVariant">@color/dark_complimentary_color</item>
     </style>
 </resources>

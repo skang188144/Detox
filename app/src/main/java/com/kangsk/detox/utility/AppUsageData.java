@@ -10,4 +10,8 @@ public class AppUsageData {
     public AppUsageData(String packageName) {
         this.packageName = packageName;
     }
+
+    public long getAppUsageTime() {
+        return appUsageTime;
+    }
 }

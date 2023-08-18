@@ -15,6 +15,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.kangsk.detox.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -105,8 +107,13 @@ public class UsageDataManager {
         calculateUsageTimeForDay(usageEventMap, appUsageDataMap, date);
 
         for (Map.Entry<String, AppUsageData> appUsageDataEntry : appUsageDataMap.entrySet()) {
-            appUsageDataList.add(appUsageDataEntry.getValue());
+            if (appUsageDataEntry.getValue().appUsageTime >= 60000) {
+                appUsageDataList.add(appUsageDataEntry.getValue());
+            }
         }
+
+        appUsageDataList.sort(Comparator.comparing(AppUsageData::getAppUsageTime));
+        Collections.reverse(appUsageDataList);
 
         return appUsageDataList;
     }

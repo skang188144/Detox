@@ -2,6 +2,7 @@ package com.kangsk.detox.homefragment.appslist;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final Context mApplicationContext;
     private final UsageDataManager mUsageDataManager;
     private final ArrayList<AppUsageData> mAppUsageDataList;
+    private final long mAppUsageTimeSum;
 
     /*
      * CONSTRUCTOR: responsible for injecting and instantiating fields.
@@ -30,7 +32,8 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public AppListAdapter(UsageDataManager usageDataManager, Context applicationContext) {
         mApplicationContext = applicationContext;
         mUsageDataManager = usageDataManager;
-        mAppUsageDataList = getAppUsageDataList();
+        mAppUsageDataList = getAppUsageDataList();   // convert the HashMap to an ArrayList of AppUsageData objects
+        mAppUsageTimeSum = getAppUsageTimeSum();   // get the sum of usage times for every single app
     }
 
     /*
@@ -40,7 +43,8 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return new AppViewHolder(inflater.inflate(R.layout.item_home_fragment_app_list_app, parent, false), mAppUsageDataList); // return a AppViewHolder instance with an inflated View for a single app/row
+        View itemView = inflater.inflate(R.layout.item_home_fragment_app_list_app, parent, false);
+        return new AppViewHolder(itemView, mAppUsageDataList, mAppUsageTimeSum); // return a AppViewHolder instance with an inflated View for a single app/row
     }
 
     /*
@@ -70,5 +74,19 @@ public class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         calendar.setTimeZone(TimeZone.getDefault());
         Date date = calendar.getTime();
         return mUsageDataManager.getUsageTimePerApp(date);
+    }
+
+    /*
+     * getAppTotalUsageTimeSum: retrieves the sum of usage times of every app from an
+     * instance of UsageDataManager.
+     */
+    private long getAppUsageTimeSum() {
+        long appUsageTime = 0;
+
+        for (AppUsageData appUsageData : mAppUsageDataList) {
+            appUsageTime += appUsageData.appUsageTime;
+        }
+
+        return appUsageTime;
     }
 }

@@ -28,4 +28,7 @@
     <dimen name="margin_app_list_title_bottom">7dp</dimen>
     <dimen name="font_size_app_list_title">25sp</dimen>
     <dimen name="elevation_card">5dp</dimen>
+    <dimen name="height_app_list_app">90dp</dimen>
+    <dimen name="radius_progress_bar_corner">100dp</dimen>
+    <dimen name="padding_progressbar_app_list_app_top">5dp</dimen>
 </resources>

@@ -67,7 +67,9 @@ public class GraphViewHolder extends RecyclerView.ViewHolder {
         mBarChart.setDrawBorders(false);
         mBarChart.setDrawValueAboveBar(false);
         mBarChart.getDescription().setEnabled(false);
-        mBarChart.setBackgroundColor(mBarChart.getResources().getColor(R.color.light_complimentary_color, mApplicationContext.getTheme()));
+        mBarChart.setBackgroundColor(mBarChart.getResources().getColor(R.color.neutral_color, mApplicationContext.getTheme()));
+        mBarChart.setDoubleTapToZoomEnabled(false);
+        mBarChart.setScaleEnabled(false);
 
         // X-AXIS CONFIGURATION
         mBarChart.getXAxis().setTypeface(font);

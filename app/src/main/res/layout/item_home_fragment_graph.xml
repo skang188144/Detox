@@ -57,10 +57,10 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_graph_end"
         app:layout_constraintStart_toStartOf="@id/guideline_graph_start"
         app:layout_constraintTop_toBottomOf="@id/text_graph_title"
-        android:background="@color/light_complimentary_color"
+        android:background="@color/neutral_color"
         app:cardCornerRadius="@dimen/radius_card_corner"
         app:strokeWidth="0dp"
-        app:cardElevation="@dimen/elevation_card"> <!--TODO: turn this into dimension resource once you figure out if you want 15dp or 5dp-->
+        app:cardElevation="@dimen/elevation_card">
 
         <com.kangsk.detox.utility.RoundedBarChart
             android:id="@+id/barchart_graph_usage_time_today"

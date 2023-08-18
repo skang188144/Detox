@@ -1,12 +1,14 @@
 package com.kangsk.detox.homefragment.appslist;
 
-import android.util.Log;
+import static java.lang.Math.round;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.kangsk.detox.R;
 import com.kangsk.detox.utility.AppUsageData;
 
@@ -22,17 +24,23 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
     private final ImageView mAppIcon;
     private final TextView mAppNameText;
     private final TextView mAppUsageTimeText;
+    private final TextView mAppUsageTimePercentageText;
+    private final LinearProgressIndicator mAppUsageTimePercentageBar;
+    private final long mAppUsageTimeSum;
 
     /*
      * CONSTRUCTOR: responsible for injecting and instantiating fields.
      */
-    public AppViewHolder(View itemView, ArrayList<AppUsageData> appUsageDataList) {
+    public AppViewHolder(View itemView, ArrayList<AppUsageData> appUsageDataList, long appTotalUsageTimeSum) {
         super(itemView);
 
         mAppUsageDataList = appUsageDataList;
         mAppIcon = itemView.findViewById(R.id.drawable_app_list_app_icon);
         mAppNameText = itemView.findViewById(R.id.text_app_list_app_name);
         mAppUsageTimeText = itemView.findViewById(R.id.text_app_list_app_usage_time);
+        mAppUsageTimePercentageText = itemView.findViewById(R.id.text_app_list_app_usage_percentage);
+        mAppUsageTimePercentageBar = itemView.findViewById(R.id.progressbar_app_list_app_usage_percentage);
+        mAppUsageTimeSum = appTotalUsageTimeSum;
     }
 
     /*
@@ -45,6 +53,8 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         mAppIcon.setImageDrawable(appUsageData.appIcon);
         mAppNameText.setText(appUsageData.appName);
         setmAppUsageTimeText(appUsageData);
+        setmAppUsageTimePercentageText(appUsageData);
+        setmAppUsageTimePercentageBar(appUsageData);
     }
 
     /*
@@ -61,5 +71,25 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         } else {
             mAppUsageTimeText.setText(minutes + "m");
         }
+    }
+
+    /*
+     * setmAppUsageTimePercentageText: calculates the percentage of total usage
+     * time that this app has used, and set the corresponding TextView
+     */
+    private void setmAppUsageTimePercentageText(AppUsageData appUsageData) {
+        int appTotalUsageTimePercentage = Math.round(((float) (appUsageData.appUsageTime) / mAppUsageTimeSum) * 100);
+        mAppUsageTimePercentageText.setText(appTotalUsageTimePercentage + "%");
+    }
+
+    /*
+     * setmAppUsageTimePercentageBar: calculates the percentage of total usage
+     * time that this app has used, and set the corresponding ProgressBar position
+     */
+    private void setmAppUsageTimePercentageBar(AppUsageData appUsageData) {
+        int appTotalUsageTimePercentage = Math.round(((float) (appUsageData.appUsageTime) / mAppUsageTimeSum) * 100);
+        mAppUsageTimePercentageBar.setMin(0);
+        mAppUsageTimePercentageBar.setMax(100);
+        mAppUsageTimePercentageBar.setProgress(appTotalUsageTimePercentage);
     }
 }
