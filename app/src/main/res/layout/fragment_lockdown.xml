@@ -6,4 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="top"
-    tools:context=".lockdownfragment.LockdownFragment" />
+    android:orientation="vertical"
+    tools:context=".lockdownfragment.LockdownFragment"
+    android:background="@color/neutral_color_off"/>

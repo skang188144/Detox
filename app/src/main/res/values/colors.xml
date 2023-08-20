@@ -7,13 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="neutral_color_off">#F6F6F6</color>
 
     <color name="dominant_color">#002508</color>
     <color name="light_complimentary_color">#C3F1A7</color>
     <color name="dark_complimentary_color">#023A0F</color>
     <color name="neutral_color">#FFFFFF</color>
-    <color name="accent_color">#022045</color>
+    <color name="neutral_color_off">#F6F6F6</color>
+    <color name="current_lockdown_current_lockdown">#72EAEAEA</color>
 
 
     <color name="support_success100">#daebf2</color>

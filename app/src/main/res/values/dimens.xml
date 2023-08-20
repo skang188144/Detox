@@ -31,4 +31,10 @@
     <dimen name="height_app_list_app">90dp</dimen>
     <dimen name="radius_progress_bar_corner">100dp</dimen>
     <dimen name="padding_progressbar_app_list_app_top">5dp</dimen>
+    <dimen name="height_title">200dp</dimen>
+    <dimen name="font_size_title_title">36sp</dimen>
+    <dimen name="font_size_current_lockdown_time_remaining_title">23sp</dimen>
+    <dimen name="font_size_current_lockdown_time_remaining">20sp</dimen>
+    <dimen name="size_current_lockdown_current_lockdown">300dp</dimen>
+    <dimen name="track_thickness_current_lockdown_current_lockdown">15dp</dimen>
 </resources>

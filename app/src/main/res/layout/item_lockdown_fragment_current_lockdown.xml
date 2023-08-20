@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--FRAGMENT GUIDELINES -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_current_lockdown_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_current_lockdown_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <!--CURRENT LOCKDOWN GUIDELINES-->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_current_lockdown_progressbar_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_current_lockdown_progressbar_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_current_lockdown_progressbar_horizontal_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/circular_progressbar_current_lockdown_current_lockdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorSize="@dimen/size_current_lockdown_current_lockdown"
+        app:indicatorColor="@color/dark_complimentary_color"
+        app:trackColor="@color/current_lockdown_current_lockdown"
+        app:trackThickness="@dimen/track_thickness_current_lockdown_current_lockdown"
+        app:layout_constraintTop_toTopOf="@id/guideline_current_lockdown_progressbar_top"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_current_lockdown_progressbar_bottom"
+        app:layout_constraintStart_toStartOf="@id/guideline_current_lockdown_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_current_lockdown_end"
+        android:progress="60"/>
+
+    <TextView
+        android:id="@+id/text_current_lockdown_time_remaining_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/guideline_current_lockdown_progressbar_horizontal_center"
+        app:layout_constraintStart_toStartOf="@id/circular_progressbar_current_lockdown_current_lockdown"
+        app:layout_constraintEnd_toEndOf="@id/circular_progressbar_current_lockdown_current_lockdown"
+        android:fontFamily="@font/proxima_nova_bold"
+        android:textSize="@dimen/font_size_current_lockdown_time_remaining_title"
+        android:text="@string/text_current_lockdown_time_remaining_title"
+        android:textColor="@color/dark_complimentary_color"/>
+
+    <TextView
+        android:id="@+id/text_current_lockdown_time_remaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/guideline_current_lockdown_progressbar_horizontal_center"
+        app:layout_constraintStart_toStartOf="@id/circular_progressbar_current_lockdown_current_lockdown"
+        app:layout_constraintEnd_toEndOf="@id/circular_progressbar_current_lockdown_current_lockdown"
+        android:fontFamily="@font/source_code_pro"
+        android:textSize="@dimen/font_size_current_lockdown_time_remaining"
+        android:textColor="@color/dark_complimentary_color"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

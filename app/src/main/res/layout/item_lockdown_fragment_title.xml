@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_title"
+    android:layout_gravity="start"
+    android:background="@color/dominant_color">
+
+    <!--FRAGMENT GUIDELINES -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_title_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_title_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <!--TITLE GUIDELINES-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_title_title_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_title_title_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <TextView
+        android:id="@+id/text_title_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideline_title_start"
+        app:layout_constraintTop_toTopOf="@id/guideline_title_title_top"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_title_title_bottom"
+        android:fontFamily="@font/proxima_nova_bold"
+        android:textColor="@color/neutral_color"
+        android:textSize="@dimen/font_size_title_title"
+        android:text="@string/text_title_title"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

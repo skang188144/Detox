@@ -1,4 +1,4 @@
-package com.kangsk.detox.homefragment.appslist;
+package com.kangsk.detox.homefragment.applist;
 
 import android.content.Context;
 import android.view.View;

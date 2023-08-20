@@ -10,4 +10,6 @@
     <string name="text_overview_name">Sanghyeok.</string>
     <string name="text_graph_title">Today\'s Usage</string>
     <string name="text_app_list_title">Apps</string>
+    <string name="text_title_title">Lockdowns</string>
+    <string name="text_current_lockdown_time_remaining_title">Time Remaining:</string>
 </resources>

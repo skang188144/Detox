@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kangsk.detox.R;
 import com.kangsk.detox.utility.UsageDataManager;
-import com.kangsk.detox.homefragment.appslist.AppListViewHolder;
+import com.kangsk.detox.homefragment.applist.AppListViewHolder;
 import com.kangsk.detox.homefragment.graph.GraphViewHolder;
 import com.kangsk.detox.homefragment.overview.OverviewViewHolder;
 
@@ -19,7 +19,7 @@ class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     private static final int ITEM_TYPE_OVERVIEW = 10;   // viewType constants used to differentiate each ViewHolder for each RecyclerView position
     private static final int ITEM_TYPE_GRAPH = 11;
-    private static final int ITEM_TYPE_APPS = 12;
+    private static final int ITEM_TYPE_APP_LIST = 12;
 
     /*
      * PRIVATE FIELDS
@@ -28,7 +28,7 @@ class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final Context mApplicationContext;
 
     /*
-     * CONSTRUCTOR: responsible for injecting and instantiating fields.
+     * CONSTRUCTOR: responsible for injecting and instantiating fields
      */
     public HomeFragmentAdapter(Context applicationContext) {
         mApplicationContext = applicationContext;
@@ -49,7 +49,7 @@ class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 return new OverviewViewHolder(inflater.inflate(R.layout.item_home_fragment_overview, parent, false), mUsageDataManager, mApplicationContext);
             case ITEM_TYPE_GRAPH:
                 return new GraphViewHolder(inflater.inflate(R.layout.item_home_fragment_graph, parent, false), mUsageDataManager, mApplicationContext);
-            case ITEM_TYPE_APPS:
+            case ITEM_TYPE_APP_LIST:
                 return new AppListViewHolder(inflater.inflate(R.layout.item_home_fragment_app_list, parent, false), mUsageDataManager, mApplicationContext);
             default:
                 throw new RuntimeException("HomeFragmentAdapter.java encountered an exception while building its ViewHolders. This ViewHolder type does not exist.");
@@ -94,7 +94,7 @@ class HomeFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             case 1:
                 return ITEM_TYPE_GRAPH;
             case 2:
-                return ITEM_TYPE_APPS;
+                return ITEM_TYPE_APP_LIST;
             default:
                 throw new RuntimeException("HomeFragmentAdapter.java encountered an exception while retrieving the itemView type. This ViewHolder type does not exist.");
         }
