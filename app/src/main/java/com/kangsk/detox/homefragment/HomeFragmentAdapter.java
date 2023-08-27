@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kangsk.detox.R;
-import com.kangsk.detox.utility.UsageDataManager;
+import com.kangsk.detox.homefragment.utility.UsageDataManager;
 import com.kangsk.detox.homefragment.applist.AppListViewHolder;
 import com.kangsk.detox.homefragment.graph.GraphViewHolder;
 import com.kangsk.detox.homefragment.overview.OverviewViewHolder;

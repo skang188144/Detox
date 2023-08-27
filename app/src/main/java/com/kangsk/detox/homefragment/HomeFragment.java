@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kangsk.detox.R;
-import com.kangsk.detox.utility.UsageDataManager;
+import com.kangsk.detox.homefragment.utility.UsageDataManager;
 
 public class HomeFragment extends Fragment {
 

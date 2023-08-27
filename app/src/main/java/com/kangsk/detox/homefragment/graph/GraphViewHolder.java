@@ -12,8 +12,8 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.kangsk.detox.R;
-import com.kangsk.detox.utility.RoundedBarChart;
-import com.kangsk.detox.utility.UsageDataManager;
+import com.kangsk.detox.homefragment.utility.RoundedBarChart;
+import com.kangsk.detox.homefragment.utility.UsageDataManager;
 
 import java.util.Calendar;
 import java.util.TimeZone;

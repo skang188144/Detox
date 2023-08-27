@@ -4,12 +4,12 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TitleViewHolder extends RecyclerView.ViewHolder {
+public class LockdownTitleViewHolder extends RecyclerView.ViewHolder {
 
     /*
      * CONSTRUCTOR: responsible for injecting and instantiating fields.
      */
-    public TitleViewHolder(View itemView) {
+    public LockdownTitleViewHolder(View itemView) {
         super(itemView);
     }
 

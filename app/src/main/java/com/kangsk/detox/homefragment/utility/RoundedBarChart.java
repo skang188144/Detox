@@ -1,4 +1,4 @@
-package com.kangsk.detox.utility;
+package com.kangsk.detox.homefragment.utility;
 
 import android.content.Context;
 import android.content.res.TypedArray;

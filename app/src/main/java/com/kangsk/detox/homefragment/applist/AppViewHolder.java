@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.kangsk.detox.R;
-import com.kangsk.detox.utility.AppUsageData;
+import com.kangsk.detox.homefragment.utility.AppUsageData;
 
 import java.time.Duration;
 import java.util.ArrayList;

@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kangsk.detox.utility.AppUsageData;
+import com.kangsk.detox.homefragment.utility.AppUsageData;
 import com.kangsk.detox.R;
-import com.kangsk.detox.utility.UsageDataManager;
+import com.kangsk.detox.homefragment.utility.UsageDataManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;

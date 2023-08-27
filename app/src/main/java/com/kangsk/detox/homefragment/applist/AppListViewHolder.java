@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kangsk.detox.R;
-import com.kangsk.detox.utility.UsageDataManager;
+import com.kangsk.detox.homefragment.utility.UsageDataManager;
 
 public class AppListViewHolder extends RecyclerView.ViewHolder {
 

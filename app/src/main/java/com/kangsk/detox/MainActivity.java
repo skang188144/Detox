@@ -5,16 +5,15 @@ import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowInsets;
-import android.view.WindowInsetsController;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.kangsk.detox.homefragment.HomeFragment;
 import com.kangsk.detox.lockdownfragment.LockdownFragment;
+import com.kangsk.detox.lockdownfragment.utility.MonitorService;
 import com.kangsk.detox.settingsfragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
@@ -54,6 +53,18 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 .addToBackStack(HOME_TAG)
                 .add(R.id.container_main_activity_fragment, HomeFragment.class, null, HOME_TAG)
                 .commit();
+
+        /*
+         * start an unbound TestMonitorService to run in the background and watch for blacklisted
+         * apps being opened during a specific lockdown period.
+         */
+        Intent monitorServiceIntent = new Intent(this, MonitorService.class);
+        startService(monitorServiceIntent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     /*

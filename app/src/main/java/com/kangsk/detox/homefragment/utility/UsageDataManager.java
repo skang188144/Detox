@@ -1,4 +1,4 @@
-package com.kangsk.detox.utility;
+package com.kangsk.detox.homefragment.utility;
 
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageStatsManager;
@@ -143,8 +143,6 @@ public class UsageDataManager {
 
         return new BarData(barDataSet);
     }
-
-/**====================================================================================================================================================================================*/
 
     /*
      * sortUsageEventsCollection: sort a UsageEvents collection type into a pair of HashMaps,
@@ -364,8 +362,6 @@ public class UsageDataManager {
 
         return totalUsageTime;
     }
-
-/**====================================================================================================================================================================================*/
 
     /*
      * getFirstMilliOfHour: calculates the first millisecond of a specific hour
