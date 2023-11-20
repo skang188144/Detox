@@ -1,10 +1,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/skang188144/Detox">
-    <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_no_text_foreground.png" alt="Logo" width="80" height="80">
+    <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_no_text_foreground.png" alt="Logo" width="432" height="432">
   </a>
 
-  <h2 align="center">Detox</h2>
+  <h1 align="center">Detox</h1>
 
   <p align="center">
     An Android application empowering users to regain control of your digital life.
