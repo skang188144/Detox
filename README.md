@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/skang188144/Detox">
-    <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_no_text_foreground.png" alt="Logo" width="432" height="432">
+    <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_no_text_foreground.png" alt="Logo" width="150" height="150">
   </a>
 
   <h1 align="center">Detox</h1>
