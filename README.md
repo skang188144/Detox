@@ -13,7 +13,7 @@
 
 </div>
 
-[![GitHub Contributors](https://img.shields.io/github/contributors/skang188144/Detox.svg?label=Contributors)](https://github.com/skang188144/Detox/graphs/contributors) [![GitHub Forks](https://img.shields.io/github/forks/skang188144/Detox.svg?label=Forks)](https://github.com/skang188144/Detox/network) [![GitHub Stars](https://img.shields.io/github/stars/skang188144/Detox.svg?label=Stars)](https://github.com/skang188144/Detox/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/skang188144/Detox.svg?label=Issues)](https://github.com/skang188144/Detox/issues) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Contributors](https://img.shields.io/github/contributors/skang188144/Detox.svg?label=Contributors)](https://github.com/skang188144/Detox/graphs/contributors) [![GitHub Forks](https://img.shields.io/github/forks/skang188144/Detox.svg?label=Forks)](https://github.com/skang188144/Detox/forks) [![GitHub Stars](https://img.shields.io/github/stars/skang188144/Detox.svg?label=Stars)](https://github.com/skang188144/Detox/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/skang188144/Detox.svg?label=Issues)](https://github.com/skang188144/Detox/issues) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Detox is an Android application, currently in development as of November 2023, with the mission of empowering users to regain control of their digital lives. The app, developed using Java, XML, and the Android SDK, leverages the Android Accessibility API to provide detailed app usage statistics and the capability to enforce non-circumventable device lockdowns.
 
