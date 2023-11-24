@@ -26,16 +26,7 @@ public class CurrentLockdownViewHolder extends RecyclerView.ViewHolder {
 
     public void bindModel() {
         LockdownManager lockdownManager = LockdownManager.getInstance(mApplicationContext);
-        String name = "Test Lockdown";
-        long startTime = System.currentTimeMillis();
-        long endTime = startTime + 6400000;
-        ArrayList<String> blacklistedApps = new ArrayList<>();
-        blacklistedApps.add("notion.id");
-        blacklistedApps.add("com.chess");
-        int pendingRequestCode = 0;
-        Lockdown currentLockdown = new Lockdown(name, startTime, endTime, null, blacklistedApps, pendingRequestCode);
-
-        lockdownManager.addLockdown(currentLockdown);
+        Lockdown currentLockdown = lockdownManager.getCurrentLockdown();
 
         if (currentLockdown == null) {
             timeRemainingText.setText("0h 0m");

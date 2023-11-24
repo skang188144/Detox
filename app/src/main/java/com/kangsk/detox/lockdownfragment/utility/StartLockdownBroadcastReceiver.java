@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -24,6 +25,7 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.d("LockdownManager", "Lockdown Received");
         Bundle bundle = intent.getBundleExtra("LockdownBundle");
         mLockdown = (Lockdown) bundle.get("Lockdown");
         mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -46,7 +48,7 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
     }
 
     private void scheduleNextLockdownStart(Lockdown lockdown, AlarmManager alarmManager, Context context) {
-        if (lockdown == null || lockdown.getRepeatDays().length == 0) {
+        if (lockdown == null || lockdown.getRepeatDays() == null) {
             return;
         }
 

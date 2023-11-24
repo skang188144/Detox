@@ -8,6 +8,8 @@ import android.graphics.PixelFormat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 
@@ -19,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MonitorService extends AccessibilityService {
+public class MonitorService extends AccessibilityService implements View.OnTouchListener {
 
     /*
      * PRIVATE FIELDS
      */
-    private static boolean isLockdownOngoing = false;
+    private static boolean isLockdownOngoing = true;
     private WindowManager mWindowManager;
     private ConstraintLayout mLockdownMessageLayout;
     private WindowManager.LayoutParams mLockdownMessageLayoutParameters;
@@ -35,8 +37,10 @@ public class MonitorService extends AccessibilityService {
 
         // configure AccessibilityService
         AccessibilityServiceInfo accessibilityServiceInfo = new AccessibilityServiceInfo();
-        configureAccessibilityServiceInfo(accessibilityServiceInfo);
+        accessibilityServiceInfo.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED;
+        accessibilityServiceInfo.packageNames = getInstalledPackages();
         setServiceInfo(accessibilityServiceInfo);
+
 
         // create WindowManager and blocked app warning View
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -49,6 +53,7 @@ public class MonitorService extends AccessibilityService {
         // inflate the blocked app warning View
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.lockdown_message, mLockdownMessageLayout);
+        mLockdownMessageLayout.setOnTouchListener(this);
     }
 
     @Override
@@ -56,12 +61,21 @@ public class MonitorService extends AccessibilityService {
         if (isLockdownOngoing) {
             blockBlacklistedApps(event);
         }
-        Log.d("MonitorService", event.getPackageName() + " " + event.toString());
+
     }
 
     @Override
     public void onInterrupt() {
 
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (mLockdownMessageLayout.isShown()) {
+            //hideLockdownMessage();
+            return true;
+        }
+        return false;
     }
 
     public static void startLockdown() {
@@ -75,21 +89,20 @@ public class MonitorService extends AccessibilityService {
     private void blockBlacklistedApps(AccessibilityEvent event) {
         LockdownManager lockdownManager = LockdownManager.getInstance(this);
         Lockdown lockdown = lockdownManager.getCurrentLockdown();
+
         ArrayList<String> blacklistedApps = lockdown.getBlacklistedApps();
 
-        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
-            if (mLockdownMessageLayout.isShown()) {
-                return;
-            }
+        if (mLockdownMessageLayout.isShown()) {
+            return;
+        }
 
-            for (String blacklistedApp : blacklistedApps) {
-                if (event.getPackageName().equals((blacklistedApp))) {
-                    showLockdownMessage();
-                }
-            }
-        } else if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_CLICKED) {
-            if (mLockdownMessageLayout.isShown()) {
-                hideLockdownMessage();
+        Log.d("MonitorService", event.getPackageName().toString());
+
+        for (String blacklistedApp : blacklistedApps) {
+            if (event.getPackageName().equals((blacklistedApp))) {
+                Log.d("MonitorService", "LOCKDOWN MESSAGE SHOWN");
+                showLockdownMessage();
+                return;
             }
         }
     }
@@ -102,23 +115,12 @@ public class MonitorService extends AccessibilityService {
         mWindowManager.removeView(mLockdownMessageLayout);
     }
 
-
-
-
-
-
-    private void configureAccessibilityServiceInfo(AccessibilityServiceInfo accessibilityServiceInfo) {
-        accessibilityServiceInfo.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED | AccessibilityEvent.TYPE_VIEW_CLICKED | AccessibilityEvent.TYPE_VIEW_SELECTED;
-        accessibilityServiceInfo.packageNames = getInstalledPackages();
-    }
-
     private void configureLockdownMessageParameters(WindowManager.LayoutParams lockdownMessageLayoutParameters) {
         lockdownMessageLayoutParameters.type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY;
-        lockdownMessageLayoutParameters.format = PixelFormat.TRANSLUCENT;
+        //lockdownMessageLayoutParameters.format = PixelFormat.TRANSLUCENT;
         lockdownMessageLayoutParameters.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        lockdownMessageLayoutParameters.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lockdownMessageLayoutParameters.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lockdownMessageLayoutParameters.gravity = Gravity.CENTER;
+        lockdownMessageLayoutParameters.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lockdownMessageLayoutParameters.height = WindowManager.LayoutParams.MATCH_PARENT;
     }
 
     private String[] getInstalledPackages() {

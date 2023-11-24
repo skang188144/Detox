@@ -34,6 +34,14 @@
                 <action android:name="android.accessibilityservice.AccessibilityService"/>
             </intent-filter>
         </service>
+        <receiver
+            android:name="com.kangsk.detox.lockdownfragment.utility.StartLockdownBroadcastReceiver"
+            android:exported="true" >
+        </receiver>
+        <receiver
+            android:name="com.kangsk.detox.lockdownfragment.utility.EndLockdownBroadcastReceiver"
+            android:exported="true" >
+        </receiver>
     </application>
 
 </manifest>
