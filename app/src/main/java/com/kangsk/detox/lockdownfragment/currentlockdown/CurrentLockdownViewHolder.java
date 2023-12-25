@@ -11,27 +11,27 @@ import com.kangsk.detox.lockdownfragment.utility.Lockdown;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 
 import java.time.Duration;
-import java.util.ArrayList;
 
 public class CurrentLockdownViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView timeRemainingText;
+    private LockdownManager mLockdownManager;
     private final Context mApplicationContext;
 
-    public CurrentLockdownViewHolder(View itemView, Context applicationContext) {
+    public CurrentLockdownViewHolder(View itemView, LockdownManager lockdownManager, Context applicationContext) {
         super(itemView);
         timeRemainingText = itemView.findViewById(R.id.text_current_lockdown_time_remaining);
+        mLockdownManager = lockdownManager;
         mApplicationContext = applicationContext;
     }
 
     public void bindModel() {
-        LockdownManager lockdownManager = LockdownManager.getInstance(mApplicationContext);
-        Lockdown currentLockdown = lockdownManager.getCurrentLockdown();
+        Lockdown currentLockdown = mLockdownManager.getActiveLockdown();
 
         if (currentLockdown == null) {
             timeRemainingText.setText("0h 0m");
         } else {
-            Duration lockdownDuration = Duration.ofMillis(currentLockdown.getEndTimeInMillis() - currentLockdown.getStartTimeInMillis());
+            Duration lockdownDuration = Duration.ofMillis(currentLockdown.getEndTime() - currentLockdown.getStartTime());
             String timeRemainingString = lockdownDuration.toHoursPart() + "h " + lockdownDuration.toMinutesPart() + "m";
             timeRemainingText.setText(timeRemainingString);
         }

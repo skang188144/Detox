@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,17 +22,20 @@ public class LockdownManager {
     private static AlarmManager mAlarmManager;
     private static ArrayList<Lockdown> mLockdownList;
     private static File mLockdownListFile;
-    private static LockdownManager mInstance = new LockdownManager();
-    private static boolean isInitialized = false;
+    private static LockdownManager mInstance = null;
 
     private LockdownManager() {
     }
 
+
+
+
     public static LockdownManager getInstance(Context applicationContext) {
-        if (isInitialized) {
+        if (mInstance != null) {
             return mInstance;
         }
 
+        mInstance = new LockdownManager();
         mApplicationContext = applicationContext;
         mAlarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
         mLockdownListFile = new File(applicationContext.getFilesDir(), "lockdown_list.detox");
@@ -46,29 +48,41 @@ public class LockdownManager {
             mLockdownList = readLockdownListFromStorage(mLockdownListFile, mApplicationContext);
         }
 
-        isInitialized = true;
-
         return mInstance;
     }
 
     public static void endInstance() {
         writeLockdownListToStorage(mLockdownList, mApplicationContext);
+        mApplicationContext = null;
+        mAlarmManager = null;
+        mLockdownList = null;
+        mLockdownListFile = null;
+        mInstance = null;
     }
+
+
+
+
 
     public ArrayList<Lockdown> getLockdownList() {
         return mLockdownList;
     }
 
-    public Lockdown getCurrentLockdown() {
+    public Lockdown getActiveLockdown() {
         // traverse through mLockdownList and find a lockdown with a time parameter that encompasses the current system time
         for (Lockdown lockdown : mLockdownList) {
-            if (System.currentTimeMillis() >= lockdown.getStartTimeInMillis() && System.currentTimeMillis() <= lockdown.getEndTimeInMillis()) {
+            if (System.currentTimeMillis() >= lockdown.getStartTime() && System.currentTimeMillis() <= lockdown.getEndTime()) {
                 return lockdown;
             }
         }
-        // if no lockdown is ongoing, return null
+
         return null;
     }
+
+
+
+
+
 
     public void addLockdown(Lockdown lockdown) {
         mLockdownList.add(lockdown);
@@ -80,7 +94,7 @@ public class LockdownManager {
         intent.putExtra("LockdownBundle", bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mApplicationContext, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
-        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getStartTimeInMillis(), pendingIntent);
+        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getStartTime(), pendingIntent);
     }
 
     public void removeLockdown(Lockdown lockdown) {

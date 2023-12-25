@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kangsk.detox.R;
 import com.kangsk.detox.lockdownfragment.currentlockdown.CurrentLockdownViewHolder;
 import com.kangsk.detox.lockdownfragment.title.LockdownTitleViewHolder;
+import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 
 public class LockdownFragmentAdapter extends RecyclerView.Adapter {
 
@@ -21,12 +22,14 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
     /*
      * PRIVATE FIELDS
      */
+    private LockdownManager mLockdownManager;
     private final Context mApplicationContext;
 
     /*
      * CONSTRUCTOR: responsible for injecting and instantiating fields
      */
-    public LockdownFragmentAdapter(Context applicationContext) {
+    public LockdownFragmentAdapter(LockdownManager lockdownManager, Context applicationContext) {
+        mLockdownManager = lockdownManager;
         mApplicationContext = applicationContext;
     }
 
@@ -41,9 +44,9 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
         // create a different type of ViewHolder object based on this RecyclerView position's item viewType.
         switch (viewType) {
             case ITEM_TYPE_TITLE:
-                return new LockdownTitleViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_title, parent, false));
+                return new LockdownTitleViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_title, parent, false), mLockdownManager, mApplicationContext);
             case ITEM_TYPE_CURRENT_LOCKDOWN:
-                return new CurrentLockdownViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_current_lockdown, parent, false), mApplicationContext);
+                return new CurrentLockdownViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_current_lockdown, parent, false), mLockdownManager, mApplicationContext);
             default:
                 throw new RuntimeException("LockdownFragmentAdapter.java encountered an exception while building its ViewHolders. This ViewHolder type does not exist.");
         }

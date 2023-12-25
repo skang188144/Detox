@@ -16,6 +16,6 @@ public class EndLockdownBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getBundleExtra("LockdownBundle");
         mLockdown = (Lockdown) bundle.get("Lockdown");
-        MonitorService.endLockdown();
+//        MonitorService.endLockdown();
     }
 }

@@ -30,7 +30,10 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
         mLockdown = (Lockdown) bundle.get("Lockdown");
         mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        MonitorService.startLockdown();
+
+        Intent monitorServiceIntent = new Intent(context.getApplicationContext(), MonitorService.class);
+        context.getApplicationContext().startService(monitorServiceIntent);
+//        MonitorService.startLockdown();
 
         scheduleCurrentLockdownEnd(mLockdown, mAlarmManager, context);
         scheduleNextLockdownStart(mLockdown, mAlarmManager, context);
@@ -44,7 +47,7 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
         intent.putExtra("LockdownBundle", bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getEndTimeInMillis(), pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getEndTime(), pendingIntent);
     }
 
     private void scheduleNextLockdownStart(Lockdown lockdown, AlarmManager alarmManager, Context context) {
@@ -59,13 +62,13 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
         intent.putExtra("LockdownBundle", bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, updateLockdownStartEndTime(lockdown).getStartTimeInMillis(), pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, updateLockdownStartEndTime(lockdown).getStartTime(), pendingIntent);
     }
 
     private Lockdown updateLockdownStartEndTime(Lockdown lockdown) {
         // grab a Calendar instance and set its time to the original start time
         Calendar startTime = Calendar.getInstance();
-        startTime.setTimeInMillis(lockdown.getStartTimeInMillis());
+        startTime.setTimeInMillis(lockdown.getStartTime());
 
         // grab a Calendar instance and set its time to the first repeatDay time
         Calendar newStartTime = Calendar.getInstance();
@@ -95,10 +98,10 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
          * difference to the original end time to find the newEndTime.
          */
         long difference = newStartTime.getTimeInMillis() - startTime.getTimeInMillis();
-        long newEndTimeInMillis = lockdown.getEndTimeInMillis() + difference;
+        long newEndTimeInMillis = lockdown.getEndTime() + difference;
 
-        lockdown.setStartTimeInMillis(newStartTime.getTimeInMillis());
-        lockdown.setEndTimeInMillis(newEndTimeInMillis);
+//        lockdown.setStartTime(newStartTime.getTimeInMillis());
+//        lockdown.setEndTime(newEndTimeInMillis);
 
         return lockdown;
     }

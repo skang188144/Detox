@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kangsk.detox.R;
+import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 import com.kangsk.detox.lockdownfragment.utility.MonitorService;
 
 public class LockdownFragment extends Fragment {
@@ -22,6 +23,7 @@ public class LockdownFragment extends Fragment {
      */
     private RecyclerView mLockdownFragmentRecyclerView;
     private LockdownFragmentAdapter mLockdownFragmentAdapter;
+    private LockdownManager mLockdownManager;
     private Context mApplicationContext;
 
     /*
@@ -31,8 +33,9 @@ public class LockdownFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mLockdownManager = LockdownManager.getInstance(mApplicationContext);
         mApplicationContext = getActivity().getApplicationContext();
-        mLockdownFragmentAdapter = new LockdownFragmentAdapter(mApplicationContext);
+        mLockdownFragmentAdapter = new LockdownFragmentAdapter(mLockdownManager, mApplicationContext);
 
         Intent monitorServiceIntent = new Intent(mApplicationContext, MonitorService.class);
         getActivity().startService(monitorServiceIntent);
