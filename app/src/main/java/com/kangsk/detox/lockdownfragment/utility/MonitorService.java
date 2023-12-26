@@ -4,14 +4,26 @@ import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.PixelFormat;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.transition.TransitionManager;
 
+import com.google.android.material.transition.MaterialElevationScale;
+import com.google.android.material.transition.MaterialFade;
+import com.google.android.material.transition.platform.MaterialArcMotion;
 import com.kangsk.detox.R;
 
 import java.util.List;
@@ -44,16 +56,18 @@ public class MonitorService extends AccessibilityService implements View.OnTouch
         // configure the blocked app warning View
         mLockdownMessageLayoutParameters = new WindowManager.LayoutParams();
         mLockdownMessageLayoutParameters.type = WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY;
-        //mLockdownMessageLayoutParameters.format = PixelFormat.TRANSLUCENT;
+        mLockdownMessageLayoutParameters.format = PixelFormat.TRANSPARENT;
         mLockdownMessageLayoutParameters.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         mLockdownMessageLayoutParameters.width = WindowManager.LayoutParams.MATCH_PARENT;
         mLockdownMessageLayoutParameters.height = WindowManager.LayoutParams.MATCH_PARENT;
-
+        mLockdownMessageLayoutParameters.dimAmount = 0.7f;
+        mLockdownMessageLayoutParameters.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 
         // inflate the blocked app warning View
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.lockdown_message, mLockdownMessageLayout);
         mLockdownMessageLayout.setOnTouchListener(this);
+
     }
 
     @Override
@@ -66,6 +80,8 @@ public class MonitorService extends AccessibilityService implements View.OnTouch
 
         if (isAppBlacklisted(packageName)) {
             blockBlacklistedApp(packageName);
+
+
         }
     }
 
@@ -76,8 +92,8 @@ public class MonitorService extends AccessibilityService implements View.OnTouch
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (mLockdownMessageLayout.isShown()) {
-            //hideLockdownMessage();
+        if (mLockdownMessageLayout.findViewById(R.id.card_view_lockdown_message).getVisibility() == View.VISIBLE) {
+            hideLockdownMessage();
             return true;
         }
         return false;
@@ -100,7 +116,23 @@ public class MonitorService extends AccessibilityService implements View.OnTouch
     }
 
     private void showLockdownMessage() {
+        mLockdownMessageLayout.findViewById(R.id.card_view_lockdown_message).setVisibility(View.GONE);
         mWindowManager.addView(mLockdownMessageLayout, mLockdownMessageLayoutParameters);
+
+        Runnable transition = new Runnable() {
+            @Override
+            public void run() {
+                MaterialFade materialFade = new MaterialFade();
+                materialFade.setDuration(150);
+
+                MaterialElevationScale materialElevationScale = new MaterialElevationScale(false);
+                materialElevationScale.setDuration(100);
+                TransitionManager.beginDelayedTransition(mLockdownMessageLayout, materialElevationScale);
+                mLockdownMessageLayout.findViewById(R.id.card_view_lockdown_message).setVisibility(View.VISIBLE);
+            }
+        };
+        Handler handler = new Handler(Looper.myLooper());
+        handler.postDelayed(transition, 100);
     }
 
     private void hideLockdownMessage() {

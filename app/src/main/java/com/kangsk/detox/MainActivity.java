@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
      * PRIVATE FIELDS
      */
     private BottomNavigationView mBottomNavigationView;
-    private LockdownManager mLockdownManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 .add(R.id.container_main_activity_fragment, HomeFragment.class, null, HOME_TAG)
                 .commit();
 
-        mLockdownManager = LockdownManager.getInstance(this.getApplicationContext());
+        LockdownManager.getInstance(this.getApplicationContext());
     }
 
     @Override
