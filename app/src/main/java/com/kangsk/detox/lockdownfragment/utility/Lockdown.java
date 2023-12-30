@@ -1,19 +1,22 @@
 package com.kangsk.detox.lockdownfragment.utility;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Lockdown implements Serializable {
 
     private String name;
-    private long startTime;
-    private long endTime;
+    private boolean enabled;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private int[] repeatDays;
     private ArrayList<String> blacklistedApps;
     private int pendingIntentRequestCode;
 
-    public Lockdown(String name, long startTime, long endTime, int[] repeatDays, ArrayList<String> blacklistedApps, int pendingIntentRequestCode) {
+    public Lockdown(String name, boolean enabled, LocalTime startTime, LocalTime endTime, int[] repeatDays, ArrayList<String> blacklistedApps, int pendingIntentRequestCode) {
         this.name = name;
+        this.enabled = enabled;
         this.startTime = startTime;
         this.endTime = endTime;
         this.repeatDays = repeatDays;
@@ -25,11 +28,15 @@ public class Lockdown implements Serializable {
         return name;
     }
 
-    public long getStartTime() {
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public long getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 

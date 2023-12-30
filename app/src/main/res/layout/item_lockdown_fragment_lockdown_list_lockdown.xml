@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--FRAGMENT GUIDELINES-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_lockdown_list_lockdown_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.01" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_lockdown_list_lockdown_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.99" />
+
+    <!--APP LIST APP GUIDELINES-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_lockdown_list_lockdown_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_lockdown_list_lockdown_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/item_lockdown_list"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_lockdown_list_lockdown_top"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_lockdown_list_lockdown_bottom"
+        app:layout_constraintStart_toStartOf="@id/guideline_lockdown_list_lockdown_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_list_lockdown_end"
+        app:cardCornerRadius="@dimen/radius_card_corner"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="3dp"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/neutral_color"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_lockdown_list_lockdown_time_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_lockdown_list_lockdown_switch_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_lockdown_list_lockdown_horizontal_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.5"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_lockdown_list_lockdown_repeat_day_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.57"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_lockdown_list_lockdown_switch_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.58"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/guideline_lockdown_list_lockdown_time_start"
+                app:layout_constraintBottom_toBottomOf="@id/guideline_lockdown_list_lockdown_horizontal_center"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_time"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/proxima_nova_regular"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_start_time_ampm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/text_lockdown_list_lockdown_start_time"
+                app:layout_constraintBottom_toBottomOf="@id/guideline_lockdown_list_lockdown_horizontal_center"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_time_ampm"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/guideline_lockdown_list_lockdown_time_start"
+                app:layout_constraintTop_toTopOf="@id/guideline_lockdown_list_lockdown_horizontal_center"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_time"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/proxima_nova_regular"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_end_time_ampm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/text_lockdown_list_lockdown_end_time"
+                app:layout_constraintBottom_toBottomOf="@id/text_lockdown_list_lockdown_end_time"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_time_ampm"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/text_lockdown_list_lockdown_start_time_ampm"
+                app:layout_constraintEnd_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_sunday"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="@dimen/margin_lockdown_list_lockdown_name_start"
+                android:layout_marginEnd="@dimen/margin_lockdown_list_lockdown_name_end"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_name"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/proxima_nova_regular"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_repeat_day_center"
+                app:layout_constraintEnd_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_monday"
+                android:layout_marginEnd="@dimen/margin_lockdown_list_lockdown_repeat_day"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_repeat_day"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"
+                android:text="S"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_sunday_dot"
+                android:layout_width="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                android:layout_height="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                app:layout_constraintBottom_toTopOf="@id/text_lockdown_list_lockdown_repeat_day_sunday"
+                app:layout_constraintStart_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_sunday"
+                app:layout_constraintEnd_toEndOf="@id/text_lockdown_list_lockdown_repeat_day_sunday"
+                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_repeat_day_center"
+                app:layout_constraintEnd_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_tuesday"
+                android:layout_marginEnd="@dimen/margin_lockdown_list_lockdown_repeat_day"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_repeat_day"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"
+                android:text="M"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_monday_dot"
+                android:layout_width="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                android:layout_height="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                app:layout_constraintBottom_toTopOf="@id/text_lockdown_list_lockdown_repeat_day_monday"
+                app:layout_constraintStart_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_monday"
+                app:layout_constraintEnd_toEndOf="@id/text_lockdown_list_lockdown_repeat_day_monday"
+                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_repeat_day_center"
+                app:layout_constraintEnd_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_wednesday"
+                android:layout_marginEnd="@dimen/margin_lockdown_list_lockdown_repeat_day"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_repeat_day"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"
+                android:text="T"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_tuesday_dot"
+                android:layout_width="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                android:layout_height="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                app:layout_constraintBottom_toTopOf="@id/text_lockdown_list_lockdown_repeat_day_tuesday"
+                app:layout_constraintStart_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_tuesday"
+                app:layout_constraintEnd_toEndOf="@id/text_lockdown_list_lockdown_repeat_day_tuesday"
+                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_repeat_day_center"
+                app:layout_constraintEnd_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_thursday"
+                android:layout_marginEnd="@dimen/margin_lockdown_list_lockdown_repeat_day"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_repeat_day"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"
+                android:text="W"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_wednesday_dot"
+                android:layout_width="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                android:layout_height="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                app:layout_constraintBottom_toTopOf="@id/text_lockdown_list_lockdown_repeat_day_wednesday"
+                app:layout_constraintStart_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_wednesday"
+                app:layout_constraintEnd_toEndOf="@id/text_lockdown_list_lockdown_repeat_day_wednesday"
+                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_repeat_day_center"
+                app:layout_constraintEnd_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_friday"
+                android:layout_marginEnd="@dimen/margin_lockdown_list_lockdown_repeat_day"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_repeat_day"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"
+                android:text="T"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_thursday_dot"
+                android:layout_width="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                android:layout_height="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                app:layout_constraintBottom_toTopOf="@id/text_lockdown_list_lockdown_repeat_day_thursday"
+                app:layout_constraintStart_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_thursday"
+                app:layout_constraintEnd_toEndOf="@id/text_lockdown_list_lockdown_repeat_day_thursday"
+                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_repeat_day_center"
+                app:layout_constraintEnd_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_saturday"
+                android:layout_marginEnd="@dimen/margin_lockdown_list_lockdown_repeat_day"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_repeat_day"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"
+                android:text="F"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_friday_dot"
+                android:layout_width="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                android:layout_height="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                app:layout_constraintBottom_toTopOf="@id/text_lockdown_list_lockdown_repeat_day_friday"
+                app:layout_constraintStart_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_friday"
+                app:layout_constraintEnd_toEndOf="@id/text_lockdown_list_lockdown_repeat_day_friday"
+                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_repeat_day_center"
+                app:layout_constraintEnd_toStartOf="@id/switch_lockdown_list_lockdown"
+                android:layout_marginEnd="5dp"
+                android:textSize="@dimen/font_size_lockdown_list_lockdown_repeat_day"
+                android:textColor="@color/dark_complimentary_color"
+                android:fontFamily="@font/source_code_pro"
+                android:text="S"/>
+
+            <TextView
+                android:id="@+id/text_lockdown_list_lockdown_repeat_day_saturday_dot"
+                android:layout_width="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                android:layout_height="@dimen/diameter_lockdown_list_lockdown_repeat_day_dot"
+                app:layout_constraintBottom_toTopOf="@id/text_lockdown_list_lockdown_repeat_day_saturday"
+                app:layout_constraintStart_toStartOf="@id/text_lockdown_list_lockdown_repeat_day_saturday"
+                app:layout_constraintEnd_toEndOf="@id/text_lockdown_list_lockdown_repeat_day_saturday"
+                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:visibility="gone"/>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_lockdown_list_lockdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_list_lockdown_switch_center"
+                app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_list_lockdown_switch_end"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,6 +37,7 @@ public class MonitorService extends AccessibilityService implements View.OnTouch
     private WindowManager mWindowManager;
     private ConstraintLayout mLockdownMessageLayout;
     private WindowManager.LayoutParams mLockdownMessageLayoutParameters;
+    private LockdownManager lockdownManager = LockdownManager.getInstance(this);
 
     @Override
     public void onServiceConnected() {

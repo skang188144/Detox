@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kangsk.detox.R;
 import com.kangsk.detox.lockdownfragment.currentlockdown.CurrentLockdownViewHolder;
+import com.kangsk.detox.lockdownfragment.lockdownlist.LockdownListViewHolder;
 import com.kangsk.detox.lockdownfragment.title.LockdownTitleViewHolder;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 
@@ -18,6 +19,7 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
      */
     private static final int ITEM_TYPE_TITLE = 13;
     private static final int ITEM_TYPE_CURRENT_LOCKDOWN = 14;
+    private static final int ITEM_TYPE_LOCKDOWN_LIST = 15;
 
     /*
      * PRIVATE FIELDS
@@ -47,6 +49,8 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
                 return new LockdownTitleViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_title, parent, false), mLockdownManager, mApplicationContext);
             case ITEM_TYPE_CURRENT_LOCKDOWN:
                 return new CurrentLockdownViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_current_lockdown, parent, false), mLockdownManager, mApplicationContext);
+            case ITEM_TYPE_LOCKDOWN_LIST:
+                return new LockdownListViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_list, parent, false), mLockdownManager, mApplicationContext);
             default:
                 throw new RuntimeException("LockdownFragmentAdapter.java encountered an exception while building its ViewHolders. This ViewHolder type does not exist.");
         }
@@ -63,6 +67,8 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
             ((LockdownTitleViewHolder) holder).bindModel();
         } else if (holder instanceof CurrentLockdownViewHolder) {
             ((CurrentLockdownViewHolder) holder).bindModel();
+        } else if (holder instanceof LockdownListViewHolder) {
+            ((LockdownListViewHolder) holder).bindModel();
         }
     }
 
@@ -72,7 +78,7 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
      */
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 
     /*
@@ -86,6 +92,8 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
                 return ITEM_TYPE_TITLE;
             case 1:
                 return ITEM_TYPE_CURRENT_LOCKDOWN;
+            case 2:
+                return ITEM_TYPE_LOCKDOWN_LIST;
             default:
                 throw new RuntimeException("HomeFragmentAdapter.java encountered an exception while retrieving the itemView type. This ViewHolder type does not exist.");
         }

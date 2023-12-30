@@ -51,11 +51,11 @@
         app:indicatorColor="@color/dark_complimentary_color"
         app:trackColor="@color/current_lockdown_current_lockdown"
         app:trackThickness="@dimen/track_thickness_current_lockdown_current_lockdown"
+        app:trackCornerRadius="@dimen/corner_radius_current_lockdown_current_lockdown"
         app:layout_constraintTop_toTopOf="@id/guideline_current_lockdown_progressbar_top"
         app:layout_constraintBottom_toBottomOf="@id/guideline_current_lockdown_progressbar_bottom"
         app:layout_constraintStart_toStartOf="@id/guideline_current_lockdown_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_current_lockdown_end"
-        android:progress="60"/>
+        app:layout_constraintEnd_toEndOf="@id/guideline_current_lockdown_end"/>
 
     <TextView
         android:id="@+id/text_current_lockdown_time_remaining_title"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toTopOf="@id/guideline_current_lockdown_progressbar_horizontal_center"
         app:layout_constraintStart_toStartOf="@id/circular_progressbar_current_lockdown_current_lockdown"
         app:layout_constraintEnd_toEndOf="@id/circular_progressbar_current_lockdown_current_lockdown"
-        android:fontFamily="@font/source_code_pro"
+        android:fontFamily="@font/proxima_nova_regular_medium"
         android:textSize="@dimen/font_size_current_lockdown_time_remaining"
         android:textColor="@color/dark_complimentary_color"/>
 

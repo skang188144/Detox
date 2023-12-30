@@ -12,7 +12,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class LockdownManager {
     /*
@@ -26,9 +30,6 @@ public class LockdownManager {
 
     private LockdownManager() {
     }
-
-
-
 
     public static LockdownManager getInstance(Context applicationContext) {
         if (mInstance != null) {
@@ -60,29 +61,22 @@ public class LockdownManager {
         mInstance = null;
     }
 
-
-
-
-
     public ArrayList<Lockdown> getLockdownList() {
         return mLockdownList;
     }
 
     public Lockdown getActiveLockdown() {
+        LocalTime currentTime = LocalTime.now();
+
         // traverse through mLockdownList and find a lockdown with a time parameter that encompasses the current system time
         for (Lockdown lockdown : mLockdownList) {
-            if (System.currentTimeMillis() >= lockdown.getStartTime() && System.currentTimeMillis() <= lockdown.getEndTime()) {
+            if (currentTime.isAfter(lockdown.getStartTime()) && currentTime.isBefore(lockdown.getEndTime())) {
                 return lockdown;
             }
         }
 
         return null;
     }
-
-
-
-
-
 
     public void addLockdown(Lockdown lockdown) {
         mLockdownList.add(lockdown);
@@ -94,7 +88,7 @@ public class LockdownManager {
         intent.putExtra("LockdownBundle", bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(mApplicationContext, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
-        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getStartTime(), pendingIntent);
+        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getStartTime().toEpochSecond(LocalDate.now(), ZoneOffset.UTC), pendingIntent);
     }
 
     public void removeLockdown(Lockdown lockdown) {

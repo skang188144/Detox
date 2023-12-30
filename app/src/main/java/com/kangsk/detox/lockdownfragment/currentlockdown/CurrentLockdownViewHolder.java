@@ -1,7 +1,6 @@
 package com.kangsk.detox.lockdownfragment.currentlockdown;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,48 +11,69 @@ import com.kangsk.detox.R;
 import com.kangsk.detox.lockdownfragment.utility.Lockdown;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 
-import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CurrentLockdownViewHolder extends RecyclerView.ViewHolder {
 
-    private final TextView timeRemainingText;
-    private final CircularProgressIndicator circularProgressIndicator;
+    /*
+     * PRIVATE FIELDS
+     */
+    private final TextView mTimeRemainingText;
+    private final CircularProgressIndicator mCircularProgressIndicator;
     private LockdownManager mLockdownManager;
     private final Context mApplicationContext;
 
+    /*
+     * CONSTRUCTOR: responsible for injecting and instantiating fields.
+     */
     public CurrentLockdownViewHolder(View itemView, LockdownManager lockdownManager, Context applicationContext) {
         super(itemView);
-        timeRemainingText = itemView.findViewById(R.id.text_current_lockdown_time_remaining);
-        circularProgressIndicator = itemView.findViewById(R.id.circular_progressbar_current_lockdown_current_lockdown);
+        mTimeRemainingText = itemView.findViewById(R.id.text_current_lockdown_time_remaining);
+        mCircularProgressIndicator = itemView.findViewById(R.id.circular_progressbar_current_lockdown_current_lockdown);
+
         mLockdownManager = lockdownManager;
         mApplicationContext = applicationContext;
-
-        int[] repeatDays = new int[1];
-        repeatDays[0] = Calendar.MONDAY;
-
-        ArrayList<String> blacklistedApps = new ArrayList<>();
-        blacklistedApps.add("com.chess");
-
-        Lockdown lockdown = new Lockdown("Test", System.currentTimeMillis(), System.currentTimeMillis() + 9999999, repeatDays, blacklistedApps, 1123123);
-        mLockdownManager.addLockdown(lockdown);
     }
 
+    /*
+     * bindModel: method responsible for retrieving the necessary data and supplying it
+     * to the appropriate Views.
+     */
     public void bindModel() {
-        Lockdown currentLockdown = mLockdownManager.getActiveLockdown();
+        Lockdown activeLockdown = mLockdownManager.getActiveLockdown();
 
-        if (currentLockdown == null) {
+        setTimeRemainingText(mTimeRemainingText, activeLockdown);
+    }
+
+    private void setTimeRemainingText(TextView timeRemainingText, Lockdown lockdown) {
+        if (lockdown == null) {
             timeRemainingText.setText("N/A");
+            return;
         }
 
-        Duration lockdownDuration = Duration.ofMillis(currentLockdown.getEndTime() - currentLockdown.getStartTime());
-        Duration timeRemainingDuration = Duration.ofMillis(currentLockdown.getEndTime() - System.currentTimeMillis());
-        String timeRemainingString = timeRemainingDuration.toHoursPart() + "h " + timeRemainingDuration.toMinutesPart() + "m";
-        float progress = (float) timeRemainingDuration.toMillis() / (float) lockdownDuration.toMillis() * 100f;
+        LocalTime currentTime = LocalTime.now();
+        LocalTime endTime = lockdown.getEndTime();
+
+        long remainingHours = currentTime.until(endTime, ChronoUnit.HOURS);
+        long remainingMinutes = currentTime.until(endTime, ChronoUnit.MINUTES) % 60;
+
+        String hourLabelString;
+        String timeRemainingString = "";
+
+        if (remainingHours > 1) {
+            hourLabelString = "hrs.";
+        } else {
+            hourLabelString = "hr.";
+        }
+
+        if (remainingHours > 0) {
+            timeRemainingString += (remainingHours + " " + hourLabelString);
+        }
+        timeRemainingString += (" " + remainingMinutes + " min.");
 
         timeRemainingText.setText(timeRemainingString);
-        circularProgressIndicator.setProgress((int) progress);
-
     }
 }

@@ -47,7 +47,7 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
         intent.putExtra("LockdownBundle", bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getEndTime(), pendingIntent);
+        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getEndTime(), pendingIntent);
     }
 
     private void scheduleNextLockdownStart(Lockdown lockdown, AlarmManager alarmManager, Context context) {
@@ -62,13 +62,13 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
         intent.putExtra("LockdownBundle", bundle);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, updateLockdownStartEndTime(lockdown).getStartTime(), pendingIntent);
+        //alarmManager.setExact(AlarmManager.RTC_WAKEUP, updateLockdownStartEndTime(lockdown).getStartHour(), pendingIntent);
     }
 
     private Lockdown updateLockdownStartEndTime(Lockdown lockdown) {
         // grab a Calendar instance and set its time to the original start time
         Calendar startTime = Calendar.getInstance();
-        startTime.setTimeInMillis(lockdown.getStartTime());
+        //startTime.setTimeInMillis(lockdown.getStartHour());
 
         // grab a Calendar instance and set its time to the first repeatDay time
         Calendar newStartTime = Calendar.getInstance();
@@ -98,7 +98,7 @@ public class StartLockdownBroadcastReceiver extends BroadcastReceiver {
          * difference to the original end time to find the newEndTime.
          */
         long difference = newStartTime.getTimeInMillis() - startTime.getTimeInMillis();
-        long newEndTimeInMillis = lockdown.getEndTime() + difference;
+        //long newEndTimeInMillis = lockdown.getEndTime() + difference;
 
 //        lockdown.setStartTime(newStartTime.getTimeInMillis());
 //        lockdown.setEndTime(newEndTimeInMillis);
