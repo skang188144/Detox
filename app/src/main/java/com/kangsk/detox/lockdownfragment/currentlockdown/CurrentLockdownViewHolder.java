@@ -13,8 +13,6 @@ import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Calendar;
 
 public class CurrentLockdownViewHolder extends RecyclerView.ViewHolder {
 
@@ -46,6 +44,7 @@ public class CurrentLockdownViewHolder extends RecyclerView.ViewHolder {
         Lockdown activeLockdown = mLockdownManager.getActiveLockdown();
 
         setTimeRemainingText(mTimeRemainingText, activeLockdown);
+        setCircularProgressIndicatorProgress(mCircularProgressIndicator, activeLockdown);
     }
 
     private void setTimeRemainingText(TextView timeRemainingText, Lockdown lockdown) {
@@ -54,26 +53,23 @@ public class CurrentLockdownViewHolder extends RecyclerView.ViewHolder {
             return;
         }
 
+        timeRemainingText.setText(lockdown.getTimeRemainingString());
+    }
+
+    private void setCircularProgressIndicatorProgress(CircularProgressIndicator circularProgressIndicator, Lockdown lockdown) {
+        if (lockdown == null) {
+            circularProgressIndicator.setProgress(100);
+            return;
+        }
+
         LocalTime currentTime = LocalTime.now();
+        LocalTime startTime = lockdown.getStartTime();
         LocalTime endTime = lockdown.getEndTime();
 
-        long remainingHours = currentTime.until(endTime, ChronoUnit.HOURS);
-        long remainingMinutes = currentTime.until(endTime, ChronoUnit.MINUTES) % 60;
+        long lockdownDuration = startTime.until(endTime, ChronoUnit.SECONDS);
+        long remainingTime = currentTime.until(endTime, ChronoUnit.SECONDS);
+        int progress = (int) ((float) remainingTime / lockdownDuration * 100);
 
-        String hourLabelString;
-        String timeRemainingString = "";
-
-        if (remainingHours > 1) {
-            hourLabelString = "hrs.";
-        } else {
-            hourLabelString = "hr.";
-        }
-
-        if (remainingHours > 0) {
-            timeRemainingString += (remainingHours + " " + hourLabelString);
-        }
-        timeRemainingString += (" " + remainingMinutes + " min.");
-
-        timeRemainingText.setText(timeRemainingString);
+        circularProgressIndicator.setProgress(progress);
     }
 }

@@ -1,11 +1,14 @@
 package com.kangsk.detox.lockdownfragment.lockdownlist;
 
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.kangsk.detox.R;
 import com.kangsk.detox.lockdownfragment.utility.Lockdown;
@@ -15,12 +18,15 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.Calendar;
 
-public class LockdownViewHolder extends RecyclerView.ViewHolder {
+public class LockdownViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     /*
      * PRIVATE FIELDS
      */
     private final LockdownManager mLockdownManager;
+    private Lockdown mCurrentLockdown;
+
+    private final MaterialCardView mLockdownListItemMaterialCardView;
 
     private final TextView mLockdownStartTimeText;
     private final TextView mLockdownStartTimeAMPMText;
@@ -55,6 +61,9 @@ public class LockdownViewHolder extends RecyclerView.ViewHolder {
 
         mLockdownManager = lockdownManager;
 
+        mLockdownListItemMaterialCardView = itemView.findViewById(R.id.item_lockdown_list);
+        mLockdownListItemMaterialCardView.setOnClickListener(this);
+
         mLockdownStartTimeText = itemView.findViewById(R.id.text_lockdown_list_lockdown_start_time);
         mLockdownEndTimeText = itemView.findViewById(R.id.text_lockdown_list_lockdown_end_time);
         mLockdownStartTimeAMPMText = itemView.findViewById(R.id.text_lockdown_list_lockdown_start_time_ampm);
@@ -79,6 +88,7 @@ public class LockdownViewHolder extends RecyclerView.ViewHolder {
         mLockdownRepeatDaySaturdayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_saturday_dot);
 
         mLockdownEnabledSwitch = itemView.findViewById(R.id.switch_lockdown_list_lockdown);
+        mLockdownEnabledSwitch.setOnCheckedChangeListener(this);
     }
 
     /*
@@ -86,11 +96,11 @@ public class LockdownViewHolder extends RecyclerView.ViewHolder {
      * to the appropriate Views.
      */
     public void bindModel(int position) {
-        Lockdown currentLockdown = mLockdownManager.getLockdownList().get(position);
+        mCurrentLockdown = mLockdownManager.getLockdownList().get(position);
 
-        setLockdownStartTimeText(mLockdownStartTimeText, mLockdownStartTimeAMPMText, currentLockdown);
-        setLockdownEndTimeText(mLockdownEndTimeText, mLockdownEndTimeAMPMText, currentLockdown);
-        setLockdownNameText(mLockdownNameText, currentLockdown);
+        setLockdownStartTimeText(mLockdownStartTimeText, mLockdownStartTimeAMPMText, mCurrentLockdown);
+        setLockdownEndTimeText(mLockdownEndTimeText, mLockdownEndTimeAMPMText, mCurrentLockdown);
+        setLockdownNameText(mLockdownNameText, mCurrentLockdown);
         setRepeatDays(mLockdownRepeatDaySundayText, mLockdownRepeatDaySundayIndicator,
                 mLockdownRepeatDayMondayText, mLockdownRepeatDayMondayIndicator,
                 mLockdownRepeatDayTuesdayText, mLockdownRepeatDayTuesdayIndicator,
@@ -98,8 +108,21 @@ public class LockdownViewHolder extends RecyclerView.ViewHolder {
                 mLockdownRepeatDayThursdayText, mLockdownRepeatDayThursdayIndicator,
                 mLockdownRepeatDayFridayText, mLockdownRepeatDayFridayIndicator,
                 mLockdownRepeatDaySaturdayText, mLockdownRepeatDaySaturdayIndicator,
-                currentLockdown);
-        setSwitchEnabled(mLockdownEnabledSwitch, currentLockdown);
+                mCurrentLockdown);
+        setSwitchEnabled(mLockdownEnabledSwitch, mCurrentLockdown);
+    }
+
+    @Override
+    public void onClick(View view) {
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            mCurrentLockdown.setEnabled(true);
+        } else {
+            mCurrentLockdown.setEnabled(false);
+        }
     }
 
     private void setLockdownStartTimeText(TextView lockdownStartTimeText, TextView lockdownStartTimeAMPMText, Lockdown lockdown) {

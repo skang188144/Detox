@@ -33,6 +33,14 @@
         android:fontFamily="@font/proxima_nova_bold"
         android:textSize="@dimen/font_size_lockdown_list_title"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_lockdown_list_title"
+        app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_list_end"
+        style="?attr/materialIconButtonStyle"
+        app:icon="@drawable/ic_add"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_lockdown_fragment_lockdown_list"
         android:layout_width="0dp"

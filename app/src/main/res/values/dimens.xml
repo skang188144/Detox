@@ -32,10 +32,10 @@
     <dimen name="radius_progress_bar_corner">100dp</dimen>
     <dimen name="padding_progressbar_app_list_app_top">5dp</dimen>
     <dimen name="height_title">200dp</dimen>
-    <dimen name="font_size_current_lockdown_time_remaining_title">23sp</dimen>
+    <dimen name="font_size_current_lockdown_time_remaining_title">27sp</dimen>
     <dimen name="font_size_current_lockdown_time_remaining">20sp</dimen>
     <dimen name="size_current_lockdown_current_lockdown">300dp</dimen>
-    <dimen name="track_thickness_current_lockdown_current_lockdown">15dp</dimen>
+    <dimen name="track_thickness_current_lockdown_current_lockdown">17dp</dimen>
     <dimen name="margin_lockdown_list_title_bottom">7dp</dimen>
     <dimen name="font_size_lockdown_list_title">25sp</dimen>
     <dimen name="font_size_lockdown_list_lockdown_time">25sp</dimen>
@@ -46,5 +46,5 @@
     <dimen name="margin_lockdown_list_lockdown_name_start">20dp</dimen>
     <dimen name="margin_lockdown_list_lockdown_name_end">10dp</dimen>
     <dimen name="font_size_lockdown_list_lockdown_name">15sp</dimen>
-    <dimen name="corner_radius_current_lockdown_current_lockdown">6dp</dimen>
+    <dimen name="corner_radius_current_lockdown_current_lockdown">8dp</dimen>
 </resources>

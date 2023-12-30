@@ -13,8 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kangsk.detox.R;
+import com.kangsk.detox.lockdownfragment.utility.Lockdown;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 import com.kangsk.detox.lockdownfragment.utility.MonitorService;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class LockdownFragment extends Fragment {
 
@@ -39,6 +44,15 @@ public class LockdownFragment extends Fragment {
 
         Intent monitorServiceIntent = new Intent(mApplicationContext, MonitorService.class);
         getActivity().startService(monitorServiceIntent);
+
+
+        /*
+         * TEST ONLY
+         */
+        ArrayList<String> blacklistedApps = new ArrayList<>();
+        blacklistedApps.add("com.chess");
+        Lockdown lockdown = new Lockdown("My Coolest Lockdown", true, LocalTime.now(), LocalTime.parse("05:30:00"), new int[]{Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY}, blacklistedApps);
+        mLockdownManager.addLockdown(lockdown);
     }
 
     /*

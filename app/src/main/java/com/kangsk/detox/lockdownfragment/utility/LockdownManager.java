@@ -38,7 +38,6 @@ public class LockdownManager {
 
         mInstance = new LockdownManager();
         mApplicationContext = applicationContext;
-        mAlarmManager = (AlarmManager) applicationContext.getSystemService(Context.ALARM_SERVICE);
         mLockdownListFile = new File(applicationContext.getFilesDir(), "lockdown_list.detox");
 
         // if the lockdown list file does not exist in the device's file system, create a new lockdown list
@@ -70,6 +69,10 @@ public class LockdownManager {
 
         // traverse through mLockdownList and find a lockdown with a time parameter that encompasses the current system time
         for (Lockdown lockdown : mLockdownList) {
+            if (!lockdown.getEnabled()) {
+                continue;
+            }
+
             if (currentTime.isAfter(lockdown.getStartTime()) && currentTime.isBefore(lockdown.getEndTime())) {
                 return lockdown;
             }
@@ -80,28 +83,10 @@ public class LockdownManager {
 
     public void addLockdown(Lockdown lockdown) {
         mLockdownList.add(lockdown);
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Lockdown", lockdown);
-
-        Intent intent = new Intent(mApplicationContext, StartLockdownBroadcastReceiver.class);
-        intent.putExtra("LockdownBundle", bundle);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mApplicationContext, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
-
-        mAlarmManager.setExact(AlarmManager.RTC_WAKEUP, lockdown.getStartTime().toEpochSecond(LocalDate.now(), ZoneOffset.UTC), pendingIntent);
     }
 
     public void removeLockdown(Lockdown lockdown) {
         mLockdownList.remove(lockdown);
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Lockdown", lockdown);
-
-        Intent intent = new Intent(mApplicationContext, StartLockdownBroadcastReceiver.class);
-        intent.putExtra("LockdownBundle", bundle);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(mApplicationContext, lockdown.getPendingIntentRequestCode(), intent, PendingIntent.FLAG_IMMUTABLE);
-
-        mAlarmManager.cancel(pendingIntent);
     }
 
     /*
