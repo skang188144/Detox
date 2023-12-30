@@ -52,13 +52,18 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 .addToBackStack(HOME_TAG)
                 .add(R.id.container_main_activity_fragment, HomeFragment.class, null, HOME_TAG)
                 .commit();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         LockdownManager.getInstance(this.getApplicationContext());
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
+        LockdownManager.endInstance();
     }
 
     /*
