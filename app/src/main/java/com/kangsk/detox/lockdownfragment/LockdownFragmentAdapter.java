@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kangsk.detox.R;
@@ -24,14 +25,16 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
     /*
      * PRIVATE FIELDS
      */
-    private LockdownManager mLockdownManager;
+    private final LockdownManager mLockdownManager;
+    private final FragmentManager mFragmentManager;
     private final Context mApplicationContext;
 
     /*
      * CONSTRUCTOR: responsible for injecting and instantiating fields
      */
-    public LockdownFragmentAdapter(LockdownManager lockdownManager, Context applicationContext) {
+    public LockdownFragmentAdapter(LockdownManager lockdownManager, FragmentManager fragmentManager, Context applicationContext) {
         mLockdownManager = lockdownManager;
+        mFragmentManager = fragmentManager;
         mApplicationContext = applicationContext;
     }
 
@@ -50,7 +53,7 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
             case ITEM_TYPE_CURRENT_LOCKDOWN:
                 return new CurrentLockdownViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_current_lockdown, parent, false), mLockdownManager, mApplicationContext);
             case ITEM_TYPE_LOCKDOWN_LIST:
-                return new LockdownListViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_list, parent, false), mLockdownManager, mApplicationContext);
+                return new LockdownListViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_list, parent, false), mLockdownManager, mFragmentManager, mApplicationContext);
             default:
                 throw new RuntimeException("LockdownFragmentAdapter.java encountered an exception while building its ViewHolders. This ViewHolder type does not exist.");
         }
@@ -97,5 +100,10 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
             default:
                 throw new RuntimeException("HomeFragmentAdapter.java encountered an exception while retrieving the itemView type. This ViewHolder type does not exist.");
         }
+    }
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder viewHolder) {
+
     }
 }

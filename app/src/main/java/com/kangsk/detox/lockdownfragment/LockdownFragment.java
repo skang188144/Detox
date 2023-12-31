@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ public class LockdownFragment extends Fragment {
     private RecyclerView mLockdownFragmentRecyclerView;
     private LockdownFragmentAdapter mLockdownFragmentAdapter;
     private LockdownManager mLockdownManager;
+    private FragmentManager mFragmentManager;
     private Context mApplicationContext;
 
     /*
@@ -38,20 +41,20 @@ public class LockdownFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mLockdownManager = LockdownManager.getInstance(mApplicationContext);
         mApplicationContext = getActivity().getApplicationContext();
-        mLockdownFragmentAdapter = new LockdownFragmentAdapter(mLockdownManager, mApplicationContext);
+        mLockdownManager = LockdownManager.getInstance(mApplicationContext);
+        mFragmentManager = getActivity().getSupportFragmentManager();
+        mLockdownFragmentAdapter = new LockdownFragmentAdapter(mLockdownManager, mFragmentManager, mApplicationContext);
 
         Intent monitorServiceIntent = new Intent(mApplicationContext, MonitorService.class);
         getActivity().startService(monitorServiceIntent);
-
 
         /*
          * TEST ONLY
          */
         ArrayList<String> blacklistedApps = new ArrayList<>();
         blacklistedApps.add("com.chess");
-        Lockdown lockdown = new Lockdown("My Coolest Lockdown", true, LocalTime.now(), LocalTime.parse("05:30:00"), new int[]{Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY}, blacklistedApps);
+        Lockdown lockdown = new Lockdown("My Coolest Lockdown", true, LocalTime.now(), LocalTime.parse("20:30:00"), new int[]{Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY}, blacklistedApps);
         mLockdownManager.addLockdown(lockdown);
     }
 

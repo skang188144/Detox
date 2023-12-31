@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.kangsk.detox.homefragment.HomeFragment;
 import com.kangsk.detox.lockdownfragment.LockdownFragment;
+import com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.LockdownEditFragment;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 import com.kangsk.detox.settingsfragment.SettingsFragment;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     /*
      * PRIVATE FIELDS
      */
+    private FragmentManager mFragmentManager;
     private BottomNavigationView mBottomNavigationView;
 
     @Override
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // remove top action bar by making the decorview stretch through the entire system window, ignoring system widgets
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
+        // fragment manager
+        mFragmentManager = getSupportFragmentManager();
+
         // bottom navigation bar
         mBottomNavigationView = findViewById(R.id.navigation_bar_main_activity_bottom);
         mBottomNavigationView.setOnItemSelectedListener(this);
@@ -46,12 +51,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
          * at the creation of the activity, the user should land on the home fragment. The following
          * code creates the home fragment, attaches it to this activity, and adds it to the BackStack.
          */
-        getSupportFragmentManager()
-                .beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(HOME_TAG)
-                .add(R.id.container_main_activity_fragment, HomeFragment.class, null, HOME_TAG)
-                .commit();
+        createFragment(HomeFragment.class, HOME_TAG, true, mFragmentManager);
+        createFragment(LockdownFragment.class, LOCKDOWN_TAG, false, mFragmentManager);
+        createFragment(SettingsFragment.class, SETTINGS_TAG, false, mFragmentManager);
+        createFragment(LockdownEditFragment.class, "LOCKDOWNCREATIONDIALOGFRAGMENT", false, mFragmentManager);
     }
 
     @Override
@@ -73,49 +76,20 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
      */
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         int menuItemId = menuItem.getItemId();
+        Fragment visibleFragment = getVisibleFragment(mFragmentManager);
 
         // home item selected
-        if (menuItemId == R.id.menu_home) {
-
-            // home fragment has already been created but is not visible
-            if (getSupportFragmentManager().findFragmentByTag(HOME_TAG) != null) {
-                replaceCurrentFragment(HOME_TAG, fragmentManager);
-
-            // home fragment has not been created
-            } else {
-                createFragment(HomeFragment.class, HOME_TAG, fragmentManager);
-            }
-
+        if (menuItemId == R.id.menu_home && !visibleFragment.getTag().equals(HOME_TAG)) {
+            switchVisibleFragment(HOME_TAG, mFragmentManager);
             return true;
-
         // lockdown item selected
-        } else if (menuItemId == R.id.menu_lockdown) {
-
-            // lockdown fragment has already been created but is not visible
-            if (getSupportFragmentManager().findFragmentByTag(LOCKDOWN_TAG) != null) {
-                replaceCurrentFragment(LOCKDOWN_TAG, fragmentManager);
-
-            // lockdown fragment has not been created
-            } else {
-                createFragment(LockdownFragment.class, LOCKDOWN_TAG, fragmentManager);
-            }
-
+        } else if (menuItemId == R.id.menu_lockdown && !visibleFragment.getTag().equals(LOCKDOWN_TAG)) {
+            switchVisibleFragment(LOCKDOWN_TAG, mFragmentManager);
             return true;
-
         // settings item selected
-        } else if (menuItemId == R.id.menu_settings) {
-
-            // settings fragment has already been created but is not visible
-            if (getSupportFragmentManager().findFragmentByTag(SETTINGS_TAG) != null) {
-                replaceCurrentFragment(SETTINGS_TAG, fragmentManager);
-
-            // settings fragment has not been created
-            } else {
-                createFragment(SettingsFragment.class, SETTINGS_TAG, fragmentManager);
-            }
-
+        } else if (menuItemId == R.id.menu_settings && !visibleFragment.getTag().equals(SETTINGS_TAG)) {
+            switchVisibleFragment(SETTINGS_TAG, mFragmentManager);
             return true;
         }
 
@@ -124,61 +98,43 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
     /*
      * createFragment: creates the specified Fragment subclass, adds an identifier
-     * tag to the fragment, and displays it.
+     * tag to the fragment, and displays/hides it.
      */
-    private void createFragment(Class<? extends Fragment> newFragment, String newFragmentTag, FragmentManager fragmentManager) {
-        String currentFragmentTag = getCurrentFragmentTag(fragmentManager);
-
-        // hide the currently visible fragment
+    private void createFragment(Class<? extends Fragment> newFragmentClass, String newFragmentTag, boolean visible, FragmentManager fragmentManager) {
+        // create new fragment
         fragmentManager
                 .beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(null)
-                .hide(fragmentManager.findFragmentByTag(currentFragmentTag))
+                .add(R.id.container_main_activity_fragment, newFragmentClass, null, newFragmentTag)
                 .commit();
+        fragmentManager.executePendingTransactions();
 
-        // create and display the new fragment
-        fragmentManager
-                .beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(newFragmentTag)
-                .add(R.id.container_main_activity_fragment, newFragment, null, newFragmentTag)
-                .commit();
+        // hide new fragment
+        if (!visible) {
+            fragmentManager
+                    .beginTransaction()
+                    .hide(fragmentManager.findFragmentByTag(newFragmentTag))
+                    .commit();
+            fragmentManager.executePendingTransactions();
+        }
     }
 
-    /*
-     * replaceCurrentFragment: replace the current fragment with the fragment
-     * with the tag replacementFragmentTag. This method only works if the
-     * replacement fragment has already been created with the identifying
-     * tag.
-     */
-    private void replaceCurrentFragment(String replacementFragmentTag, FragmentManager fragmentManager) {
-        String currentFragmentTag = getCurrentFragmentTag(fragmentManager);
-
-        // hide the currently visible fragment
+    private void switchVisibleFragment(String replacementFragmentTag, FragmentManager fragmentManager) {
+        // hide the currently visible fragment and show the replacement fragment
         fragmentManager
                 .beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(null)
-                .hide(fragmentManager.findFragmentByTag(currentFragmentTag))
-                .commit();
-
-        // find the background fragment with the replacement fragment tag, and display it
-        fragmentManager
-                .beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(replacementFragmentTag)
+                .hide(getVisibleFragment(fragmentManager))
                 .show(fragmentManager.findFragmentByTag(replacementFragmentTag))
+                .addToBackStack(null)
                 .commit();
+        fragmentManager.executePendingTransactions();
     }
 
-    /*
-     * getCurrentFragmentTag: get the currently visible fragment
-     */
-    private String getCurrentFragmentTag(FragmentManager fragmentManager) {
-        int currentBackStackEntry = fragmentManager.getBackStackEntryCount() - 1;
-        String currentFragmentTag = fragmentManager.getBackStackEntryAt(currentBackStackEntry).getName();
-
-        return currentFragmentTag;
+    private Fragment getVisibleFragment(FragmentManager fragmentManager) {
+        for (Fragment fragment : fragmentManager.getFragments()) {
+            if (fragment.isVisible()) {
+                return fragment;
+            }
+        }
+        return null;
     }
 }
