@@ -98,12 +98,7 @@ public class LockdownFragmentAdapter extends RecyclerView.Adapter {
             case 2:
                 return ITEM_TYPE_LOCKDOWN_LIST;
             default:
-                throw new RuntimeException("HomeFragmentAdapter.java encountered an exception while retrieving the itemView type. This ViewHolder type does not exist.");
+                throw new RuntimeException("LockdownFragmentAdapter.java encountered an exception while retrieving the itemView type. This ViewHolder type does not exist.");
         }
-    }
-
-    @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder viewHolder) {
-
     }
 }

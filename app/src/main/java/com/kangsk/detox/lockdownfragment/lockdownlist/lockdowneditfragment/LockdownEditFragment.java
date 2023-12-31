@@ -1,16 +1,39 @@
 package com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.kangsk.detox.R;
+import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 
-public class LockdownEditFragment extends Fragment implements View.OnClickListener {
+public class LockdownEditFragment extends DialogFragment implements View.OnClickListener {
+
+    private LockdownManager mLockdownManager;
+    private Context mApplicationContext;
+
+    private RecyclerView mLockdownEditOptionsRecyclerView;
+    private LockdownEditOptionsAdapter mLockdownEditOptionsAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mApplicationContext = getActivity().getApplicationContext();
+        mLockdownManager = LockdownManager.getInstance(mApplicationContext);
+        mLockdownEditOptionsAdapter = new LockdownEditOptionsAdapter(mLockdownManager, mApplicationContext);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -20,12 +43,33 @@ public class LockdownEditFragment extends Fragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        MaterialButton button = view.findViewById(R.id.test_button);
-        button.setOnClickListener(this);
+
+        mLockdownEditOptionsRecyclerView = view.findViewById(R.id.recycler_view_lockdown_edit_options);
+        mLockdownEditOptionsRecyclerView.setLayoutManager(new LinearLayoutManager(mApplicationContext));
+        mLockdownEditOptionsRecyclerView.setAdapter(mLockdownEditOptionsAdapter);
     }
 
     @Override
     public void onClick(View view) {
+        dismiss();
+    }
+
+    @Override
+    public void dismiss() {
         getParentFragmentManager().popBackStack();
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        return dialog;
+    }
+
+
+
 }
