@@ -47,4 +47,5 @@
     <dimen name="margin_lockdown_list_lockdown_name_end">10dp</dimen>
     <dimen name="font_size_lockdown_list_lockdown_name">15sp</dimen>
     <dimen name="corner_radius_current_lockdown_current_lockdown">8dp</dimen>
+    <dimen name="font_size_lockdown_edit_options_repeat_days">15sp</dimen>
 </resources>

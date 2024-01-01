@@ -45,18 +45,41 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_lockdown_edit"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline_lockdown_edit_card_top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:cardCornerRadius="20dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_lockdown_edit_options"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"/>
+            android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_lockdown_edit_recycler_view_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_lockdown_edit_recycler_view_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_lockdown_edit_options"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="@id/guideline_lockdown_edit_recycler_view_start"
+                app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_edit_recycler_view_end"
+                android:orientation="vertical"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
