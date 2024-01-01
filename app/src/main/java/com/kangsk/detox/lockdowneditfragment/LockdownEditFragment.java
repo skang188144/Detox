@@ -1,21 +1,16 @@
-package com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment;
+package com.kangsk.detox.lockdowneditfragment;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
 import com.kangsk.detox.R;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 

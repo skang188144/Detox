@@ -1,4 +1,4 @@
-package com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment;
+package com.kangsk.detox.lockdowneditfragment;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kangsk.detox.R;
-import com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_blacklisted_apps.LockdownBlacklistedAppsEditOptionViewHolder;
-import com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_name.LockdownNameEditOptionViewHolder;
-import com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_repeat_days.LockdownRepeatDaysEditOptionViewHolder;
-import com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_tamper.LockdownTamperEditOptionViewHolder;
+import com.kangsk.detox.lockdowneditfragment.option_blacklisted_apps.LockdownBlacklistedAppsEditOptionViewHolder;
+import com.kangsk.detox.lockdowneditfragment.option_name.LockdownNameEditOptionViewHolder;
+import com.kangsk.detox.lockdowneditfragment.option_repeat_days.LockdownRepeatDaysEditOptionViewHolder;
+import com.kangsk.detox.lockdowneditfragment.option_tamper.LockdownTamperEditOptionViewHolder;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 
 public class LockdownEditOptionsAdapter extends RecyclerView.Adapter {

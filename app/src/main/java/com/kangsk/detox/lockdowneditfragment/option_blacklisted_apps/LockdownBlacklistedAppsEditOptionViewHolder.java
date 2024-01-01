@@ -1,4 +1,4 @@
-package com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_blacklisted_apps;
+package com.kangsk.detox.lockdowneditfragment.option_blacklisted_apps;
 
 import android.util.Log;
 import android.view.View;

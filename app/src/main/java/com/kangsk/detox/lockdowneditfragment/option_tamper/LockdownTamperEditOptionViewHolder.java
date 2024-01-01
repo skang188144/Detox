@@ -1,4 +1,4 @@
-package com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_tamper;
+package com.kangsk.detox.lockdowneditfragment.option_tamper;
 
 import android.view.View;
 

@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.kangsk.detox.homefragment.HomeFragment;
 import com.kangsk.detox.lockdownfragment.LockdownFragment;
-import com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.LockdownEditFragment;
+import com.kangsk.detox.lockdowneditfragment.LockdownEditFragment;
 import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
 import com.kangsk.detox.settingsfragment.SettingsFragment;
 

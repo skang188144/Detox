@@ -1,4 +1,4 @@
-package com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_repeat_days;
+package com.kangsk.detox.lockdowneditfragment.option_repeat_days;
 
 import android.view.View;
 

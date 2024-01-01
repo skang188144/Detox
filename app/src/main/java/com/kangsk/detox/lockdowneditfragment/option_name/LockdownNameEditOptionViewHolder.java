@@ -1,4 +1,4 @@
-package com.kangsk.detox.lockdownfragment.lockdownlist.lockdowneditfragment.option_name;
+package com.kangsk.detox.lockdowneditfragment.option_name;
 
 import android.view.View;
 
