@@ -51,15 +51,15 @@ public class LockdownEditorAdapter extends RecyclerView.Adapter {
         // create a different type of ViewHolder object based on this RecyclerView position's item viewType.
         switch (viewType) {
             case ITEM_TYPE_REPEAT_DAYS_OPTION:
-                return new RepeatDaysOptionViewHolder(inflater.inflate(R.layout.item_lockdown_edit_options_repeat_days_option, parent, false));
+                return new RepeatDaysOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_repeat_days, parent, false));
             case ITEM_TYPE_NAME_OPTION:
-                return new NameOptionViewHolder(inflater.inflate(R.layout.item_lockdown_edit_options_name_option, parent, false));
+                return new NameOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_name, parent, false));
             case ITEM_TYPE_BLACKLISTED_APPS_OPTION:
-                return new BlacklistedAppsOptionViewHolder(inflater.inflate(R.layout.item_lockdown_edit_options_blacklisted_apps_option, parent, false));
+                return new BlacklistedAppsOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_blacklisted_apps, parent, false));
             case ITEM_TYPE_TAMPER_OPTION:
-                return new TamperOptionViewHolder(inflater.inflate(R.layout.item_lockdown_edit_options_tamper_option, parent, false));
+                return new TamperOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_tamper, parent, false));
             case ITEM_TYPE_PREVENT_CHANGES_OPTION:
-                return new PreventChangesOptionViewHolder(inflater.inflate(R.layout.item_lockdown_edit_options_tamper_option, parent, false));
+                return new PreventChangesOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_tamper, parent, false));
                 // TODO: create XML layout resource for PreventChangesOptionViewHolder
             default:
                 throw new RuntimeException("LockdownEditorAdapter.java encountered an exception while building its ViewHolders. This ViewHolder type does not exist.");

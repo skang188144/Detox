@@ -35,8 +35,8 @@ public class OverviewViewHolder extends RecyclerView.ViewHolder {
 
         mUsageDataManager = usageDataManager;
         mApplicationContext = applicationContext;
-        mGreetingText = itemView.findViewById(R.id.text_overview_greeting);
-        mUsageTimeForTodayText = itemView.findViewById(R.id.text_overview_usage_time_today_value);
+        mGreetingText = itemView.findViewById(R.id.text_overview_item_greeting);
+        mUsageTimeForTodayText = itemView.findViewById(R.id.text_overview_item_usage_time);
     }
 
     /*

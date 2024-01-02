@@ -42,7 +42,7 @@ public class LockdownEditorFragment extends DialogFragment implements View.OnCli
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_lockdown_edit, container, false);
+        return inflater.inflate(R.layout.fragment_lockdown_editor, container, false);
     }
 
 
@@ -54,7 +54,7 @@ public class LockdownEditorFragment extends DialogFragment implements View.OnCli
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mLockdownEditorRecyclerView = view.findViewById(R.id.recycler_view_lockdown_edit_options);
+        mLockdownEditorRecyclerView = view.findViewById(R.id.recycler_lockdown_editor_fragment);
         mLockdownEditorRecyclerView.setLayoutManager(new LinearLayoutManager(mApplicationContext));
         mLockdownEditorRecyclerView.setAdapter(mLockdownEditorAdapter);
     }

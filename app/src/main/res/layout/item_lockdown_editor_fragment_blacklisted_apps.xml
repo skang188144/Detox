@@ -20,18 +20,18 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_lockdown_edit_options_blacklisted_apps_option_horizontal_center"
+            android:id="@+id/guideline_blacklisted_apps_item_horizontal_center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5"/>
 
         <TextView
-            android:id="@+id/text_lockdown_edit_options_blacklisted_apps_option_title"
+            android:id="@+id/text_blacklisted_apps_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/guideline_lockdown_edit_options_blacklisted_apps_option_horizontal_center"
+            app:layout_constraintBottom_toTopOf="@id/guideline_blacklisted_apps_item_horizontal_center"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/proxima_nova_regular_medium"
@@ -40,11 +40,11 @@
             />
 
         <TextView
-            android:id="@+id/text_lockdown_edit_options_blacklisted_apps_option_lockdowns"
+            android:id="@+id/text_blacklisted_apps_item_lockdowns"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_lockdown_edit_options_blacklisted_apps_option_horizontal_center"
+            app:layout_constraintTop_toBottomOf="@id/guideline_blacklisted_apps_item_horizontal_center"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="Chess, Notion, Subway Surfers, ..."
             android:textSize="12dp"

@@ -1,4 +1,4 @@
-package com.kangsk.detox.lockdown.currentlockdown;
+package com.kangsk.detox.lockdown.activelockdown;
 
 import android.view.View;
 import android.widget.TextView;
@@ -31,8 +31,8 @@ public class ActiveLockdownViewHolder extends RecyclerView.ViewHolder {
 
         mLockdownManager = lockdownManager;
 
-        mLockdownTimeRemainingText = itemView.findViewById(R.id.text_current_lockdown_time_remaining);
-        mLockdownTimeRemainingIndicator = itemView.findViewById(R.id.circular_progressbar_current_lockdown_current_lockdown);
+        mLockdownTimeRemainingText = itemView.findViewById(R.id.text_active_lockdown_item_time_remaining);
+        mLockdownTimeRemainingIndicator = itemView.findViewById(R.id.progress_indicator_active_lockdown_item);
     }
 
     /*

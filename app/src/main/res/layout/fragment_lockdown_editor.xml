@@ -7,49 +7,49 @@
     android:background="@color/neutral_color_off">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_lockdown_edit_top"
+        android:id="@+id/guideline_lockdown_editor_fragment_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_lockdown_edit_timerangepicker_bottom"
+        android:id="@+id/guideline_lockdown_editor_fragment_time_picker_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_lockdown_edit_card_top"
+        android:id="@+id/guideline_lockdown_editor_fragment_card_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55"/>
 
     <nl.joery.timerangepicker.TimeRangePicker
-        android:id="@+id/timerangepicker_lockdown_edit"
+        android:id="@+id/time_picker_lockdown_editor_fragment"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline_lockdown_edit_top"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_lockdown_edit_timerangepicker_bottom"
+        app:layout_constraintTop_toTopOf="@id/guideline_lockdown_editor_fragment_top"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_lockdown_editor_fragment_time_picker_bottom"
         app:trp_thumbIconStart="@drawable/ic_play_24"
         app:trp_thumbIconEnd="@drawable/ic_stop_24"
         app:trp_thumbIconSize="20dp"
         app:trp_thumbSize="28dp"
         app:trp_sliderWidth="28dp"
         app:trp_startTime="12:00"
-        app:trp_endTime="6:00"/>
+        app:trp_endTime="3:00"/>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view_lockdown_edit"
+        android:id="@+id/card_lockdown_editor_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline_lockdown_edit_card_top"
+        app:layout_constraintTop_toTopOf="@id/guideline_lockdown_editor_fragment_card_top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:cardCornerRadius="20dp">
 
@@ -58,25 +58,25 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_lockdown_edit_recycler_view_start"
+                android:id="@+id/guideline_lockdown_editor_fragment_recycler_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.05"/>
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_lockdown_edit_recycler_view_end"
+                android:id="@+id/guideline_lockdown_editor_fragment_recycler_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.95"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_lockdown_edit_options"
+                android:id="@+id/recycler_lockdown_editor_fragment"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="@id/guideline_lockdown_edit_recycler_view_start"
-                app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_edit_recycler_view_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_lockdown_editor_fragment_recycler_start"
+                app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_editor_fragment_recycler_end"
                 android:orientation="vertical"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,11 +35,11 @@ public class AppViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         mAppUsageDataList = appUsageDataList;
-        mAppIcon = itemView.findViewById(R.id.drawable_app_list_app_icon);
-        mAppNameText = itemView.findViewById(R.id.text_app_list_app_name);
-        mAppUsageTimeText = itemView.findViewById(R.id.text_app_list_app_usage_time);
-        mAppUsageTimePercentageText = itemView.findViewById(R.id.text_app_list_app_usage_percentage);
-        mAppUsageTimePercentageBar = itemView.findViewById(R.id.progressbar_app_list_app_usage_percentage);
+        mAppIcon = itemView.findViewById(R.id.image_app_item_icon);
+        mAppNameText = itemView.findViewById(R.id.text_app_item_name);
+        mAppUsageTimeText = itemView.findViewById(R.id.text_app_item_usage_time);
+        mAppUsageTimePercentageText = itemView.findViewById(R.id.text_app_item_usage_percentage);
+        mAppUsageTimePercentageBar = itemView.findViewById(R.id.progress_indicator_app_item_usage_percentage);
         mAppUsageTimeSum = appTotalUsageTimeSum;
     }
 

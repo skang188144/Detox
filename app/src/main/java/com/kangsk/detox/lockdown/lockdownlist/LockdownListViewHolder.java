@@ -35,13 +35,13 @@ public class LockdownListViewHolder extends RecyclerView.ViewHolder implements V
         mLockdownManager = lockdownManager;
         mFragmentManager = fragmentManager;
 
-        mLockdownListRecyclerView = itemView.findViewById(R.id.recycler_view_lockdown_fragment_lockdown_list);
+        mLockdownListRecyclerView = itemView.findViewById(R.id.recycler_lockdown_list_item);
         mLockdownListRecyclerViewAdapter = new LockdownListAdapter(mLockdownManager);
 
         mLockdownListRecyclerView.setLayoutManager(new LinearLayoutManager(mApplicationContext));
         mLockdownListRecyclerView.setAdapter(mLockdownListRecyclerViewAdapter);
 
-        mLockdownEditorButton = itemView.findViewById(R.id.button_lockdown_creation);
+        mLockdownEditorButton = itemView.findViewById(R.id.button_lockdown_list_item_add);
         mLockdownEditorButton.setOnClickListener(this);
     }
 

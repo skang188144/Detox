@@ -73,7 +73,7 @@ public class LockdownFragment extends Fragment {
      */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mLockdownFragmentRecyclerView = view.findViewById(R.id.recycler_view_lockdown);
+        mLockdownFragmentRecyclerView = view.findViewById(R.id.recycler_lockdown_fragment);
         mLockdownFragmentRecyclerView.setLayoutManager(new LinearLayoutManager(mApplicationContext));
         mLockdownFragmentRecyclerView.setAdapter(mLockdownAdapter);
     }

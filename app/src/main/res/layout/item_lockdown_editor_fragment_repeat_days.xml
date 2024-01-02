@@ -5,12 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/text_lockdown_edit_repeat_days_title"
+        android:id="@+id/text_repeat_days_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_lockdown_edit_repeat_days_sunday"
+        app:layout_constraintBottom_toTopOf="@id/button_repeat_days_item_sunday"
         android:layout_marginTop="20dp"
         android:text="Repeat"
         android:fontFamily="@font/proxima_nova_regular"
@@ -18,12 +18,12 @@
         android:textSize="16sp"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_lockdown_edit_repeat_days_sunday"
+        android:id="@+id/button_repeat_days_item_sunday"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_lockdown_edit_repeat_days_monday"
-        app:layout_constraintTop_toBottomOf="@id/text_lockdown_edit_repeat_days_title"
+        app:layout_constraintEnd_toStartOf="@id/button_repeat_days_item_monday"
+        app:layout_constraintTop_toBottomOf="@id/text_repeat_days_item_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
@@ -38,12 +38,12 @@
         android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_lockdown_edit_repeat_days_monday"
+        android:id="@+id/button_repeat_days_item_monday"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:layout_constraintStart_toEndOf="@id/button_lockdown_edit_repeat_days_sunday"
-        app:layout_constraintEnd_toStartOf="@id/button_lockdown_edit_repeat_days_tuesday"
-        app:layout_constraintTop_toBottomOf="@id/text_lockdown_edit_repeat_days_title"
+        app:layout_constraintStart_toEndOf="@id/button_repeat_days_item_sunday"
+        app:layout_constraintEnd_toStartOf="@id/button_repeat_days_item_tuesday"
+        app:layout_constraintTop_toBottomOf="@id/text_repeat_days_item_title"
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
         android:minWidth="0dp"
@@ -56,12 +56,12 @@
         android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_lockdown_edit_repeat_days_tuesday"
+        android:id="@+id/button_repeat_days_item_tuesday"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:layout_constraintStart_toEndOf="@id/button_lockdown_edit_repeat_days_monday"
-        app:layout_constraintEnd_toStartOf="@id/button_lockdown_edit_repeat_days_wednesday"
-        app:layout_constraintTop_toBottomOf="@id/text_lockdown_edit_repeat_days_title"
+        app:layout_constraintStart_toEndOf="@id/button_repeat_days_item_monday"
+        app:layout_constraintEnd_toStartOf="@id/button_repeat_days_item_wednesday"
+        app:layout_constraintTop_toBottomOf="@id/text_repeat_days_item_title"
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
         android:minWidth="0dp"
@@ -74,12 +74,12 @@
         android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_lockdown_edit_repeat_days_wednesday"
+        android:id="@+id/button_repeat_days_item_wednesday"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:layout_constraintStart_toEndOf="@id/button_lockdown_edit_repeat_days_tuesday"
-        app:layout_constraintEnd_toStartOf="@id/button_lockdown_edit_repeat_days_thursday"
-        app:layout_constraintTop_toBottomOf="@id/text_lockdown_edit_repeat_days_title"
+        app:layout_constraintStart_toEndOf="@id/button_repeat_days_item_tuesday"
+        app:layout_constraintEnd_toStartOf="@id/button_repeat_days_item_thursday"
+        app:layout_constraintTop_toBottomOf="@id/text_repeat_days_item_title"
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
         android:minWidth="0dp"
@@ -92,12 +92,12 @@
         android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_lockdown_edit_repeat_days_thursday"
+        android:id="@+id/button_repeat_days_item_thursday"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:layout_constraintStart_toEndOf="@id/button_lockdown_edit_repeat_days_wednesday"
-        app:layout_constraintEnd_toStartOf="@id/button_lockdown_edit_repeat_days_friday"
-        app:layout_constraintTop_toBottomOf="@id/text_lockdown_edit_repeat_days_title"
+        app:layout_constraintStart_toEndOf="@id/button_repeat_days_item_wednesday"
+        app:layout_constraintEnd_toStartOf="@id/button_repeat_days_item_friday"
+        app:layout_constraintTop_toBottomOf="@id/text_repeat_days_item_title"
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
         android:minWidth="0dp"
@@ -110,12 +110,12 @@
         android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_lockdown_edit_repeat_days_friday"
+        android:id="@+id/button_repeat_days_item_friday"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:layout_constraintStart_toEndOf="@id/button_lockdown_edit_repeat_days_thursday"
-        app:layout_constraintEnd_toStartOf="@id/button_lockdown_edit_repeat_days_saturday"
-        app:layout_constraintTop_toBottomOf="@id/text_lockdown_edit_repeat_days_title"
+        app:layout_constraintStart_toEndOf="@id/button_repeat_days_item_thursday"
+        app:layout_constraintEnd_toStartOf="@id/button_repeat_days_item_saturday"
+        app:layout_constraintTop_toBottomOf="@id/text_repeat_days_item_title"
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
         android:minWidth="0dp"
@@ -128,12 +128,12 @@
         android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_lockdown_edit_repeat_days_saturday"
+        android:id="@+id/button_repeat_days_item_saturday"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:layout_constraintStart_toEndOf="@id/button_lockdown_edit_repeat_days_friday"
+        app:layout_constraintStart_toEndOf="@id/button_repeat_days_item_friday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_lockdown_edit_repeat_days_title"
+        app:layout_constraintTop_toBottomOf="@id/text_repeat_days_item_title"
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
         android:minWidth="0dp"

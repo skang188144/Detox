@@ -29,7 +29,7 @@ public class AppListViewHolder extends RecyclerView.ViewHolder {
         mApplicationContext = applicationContext;
         mAppListAdapter = new AppListAdapter(mUsageDataManager, mApplicationContext);
 
-        mAppListRecyclerView = itemView.findViewById(R.id.recycler_view_home_fragment_app_list); // inject the nested RecyclerView, and set its LayoutManager and Adapter.
+        mAppListRecyclerView = itemView.findViewById(R.id.recycler_app_list_item); // inject the nested RecyclerView, and set its LayoutManager and Adapter.
         mAppListRecyclerView.setLayoutManager(new LinearLayoutManager(mApplicationContext));
         mAppListRecyclerView.setAdapter(mAppListAdapter);
     }

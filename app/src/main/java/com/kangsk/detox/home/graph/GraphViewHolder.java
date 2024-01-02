@@ -35,7 +35,7 @@ public class GraphViewHolder extends RecyclerView.ViewHolder {
 
         mUsageDataManager = usageDataManager;
         mApplicationContext = applicationContext;
-        mBarChart = itemView.findViewById(R.id.barchart_graph_usage_time_today);
+        mBarChart = itemView.findViewById(R.id.barchart_graph_item);
     }
 
     /*

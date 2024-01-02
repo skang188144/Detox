@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
         mFragmentManager = getSupportFragmentManager();
-        mBottomNavigationView = findViewById(R.id.navigation_bar_main_activity_bottom);
+        mBottomNavigationView = findViewById(R.id.bottom_navigation_main_activity);
         mBottomNavigationView.setOnItemSelectedListener(this);
 
         /*
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // create new fragment
         fragmentManager
                 .beginTransaction()
-                .add(R.id.container_main_activity_fragment, newFragmentClass, null, newFragmentTag)
+                .add(R.id.fragment_container_main_activity, newFragmentClass, null, newFragmentTag)
                 .commit();
         fragmentManager.executePendingTransactions();
 

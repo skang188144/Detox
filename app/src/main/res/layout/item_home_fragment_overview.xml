@@ -9,14 +9,14 @@
 
     <!--FRAGMENT GUIDELINES -->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_overview_start"
+        android:id="@+id/guideline_overview_item_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_overview_end"
+        android:id="@+id/guideline_overview_item_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -24,47 +24,47 @@
 
     <!--OVERVIEW GUIDELINES-->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_overview_greeting_top"
+        android:id="@+id/guideline_overview_item_greeting_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.26" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_overview_greeting_bottom"
+        android:id="@+id/guideline_overview_item_greeting_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.61" />
 
     <TextView
-        android:id="@+id/text_overview_greeting"
+        android:id="@+id/text_overview_item_greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guideline_overview_start"
-        app:layout_constraintTop_toTopOf="@id/guideline_overview_greeting_top"
+        app:layout_constraintStart_toStartOf="@id/guideline_overview_item_start"
+        app:layout_constraintTop_toTopOf="@id/guideline_overview_item_greeting_top"
         android:fontFamily="@font/proxima_nova_bold"
         android:textColor="@color/neutral_color"
         android:textSize="@dimen/font_size_overview_greeting"/>
 
     <TextView
-        android:id="@+id/text_overview_name"
+        android:id="@+id/text_overview_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guideline_overview_start"
-        app:layout_constraintTop_toBottomOf="@id/text_overview_greeting"
+        app:layout_constraintStart_toStartOf="@id/guideline_overview_item_start"
+        app:layout_constraintTop_toBottomOf="@id/text_overview_item_greeting"
         android:fontFamily="@font/proxima_nova_bold"
         android:textColor="@color/neutral_color"
         android:textSize="@dimen/font_size_overview_greeting"
         android:text="@string/text_overview_name"/>
 
     <TextView
-        android:id="@+id/text_overview_usage_time_today_title"
+        android:id="@+id/text_overview_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/text_overview_usage_time_today_value"
-        app:layout_constraintStart_toStartOf="@id/guideline_overview_start"
-        app:layout_constraintTop_toBottomOf="@id/text_overview_name"
+        app:layout_constraintBottom_toTopOf="@id/text_overview_item_usage_time"
+        app:layout_constraintStart_toStartOf="@id/guideline_overview_item_start"
+        app:layout_constraintTop_toBottomOf="@id/text_overview_item_name"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/basic_sans_thin"
         android:text="@string/text_usage_time_today_title"
@@ -72,17 +72,17 @@
         android:textSize="@dimen/font_size_overview_usage_time_today_title"/>
 
     <TextView
-        android:id="@+id/text_overview_usage_time_today_value"
+        android:id="@+id/text_overview_item_usage_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/guideline_overview_start"
-        app:layout_constraintTop_toBottomOf="@id/text_overview_usage_time_today_title"
+        app:layout_constraintStart_toStartOf="@id/guideline_overview_item_start"
+        app:layout_constraintTop_toBottomOf="@id/text_overview_item_title"
         android:fontFamily="@font/basic_sans_thin"
         android:textColor="@color/neutral_color"
         android:textSize="@dimen/font_size_overview_usage_time_today_title"/>
 
     <ImageView
-        android:id="@+id/drawable_overview_tree_branch"
+        android:id="@+id/image_overview_item_tree"
         android:layout_width="196dp"
         android:layout_height="140dp"
         android:src="@drawable/drawable_overview_tree_branch"

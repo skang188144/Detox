@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kangsk.detox.R;
-import com.kangsk.detox.lockdown.currentlockdown.ActiveLockdownViewHolder;
+import com.kangsk.detox.lockdown.activelockdown.ActiveLockdownViewHolder;
 import com.kangsk.detox.lockdown.lockdownlist.LockdownListViewHolder;
 import com.kangsk.detox.lockdown.title.LockdownTitleViewHolder;
 import com.kangsk.detox.utility.LockdownManager;
@@ -50,9 +50,9 @@ public class LockdownAdapter extends RecyclerView.Adapter {
         // create a different type of ViewHolder object based on this RecyclerView position's item viewType.
         switch (viewType) {
             case ITEM_TYPE_TITLE:
-                return new LockdownTitleViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_title, parent, false));
+                return new LockdownTitleViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_title, parent, false));
             case ITEM_TYPE_CURRENT_LOCKDOWN:
-                return new ActiveLockdownViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_current_lockdown, parent, false), mLockdownManager);
+                return new ActiveLockdownViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_active_lockdown, parent, false), mLockdownManager);
             case ITEM_TYPE_LOCKDOWN_LIST:
                 return new LockdownListViewHolder(inflater.inflate(R.layout.item_lockdown_fragment_lockdown_list, parent, false), mApplicationContext, mFragmentManager, mLockdownManager);
             default:

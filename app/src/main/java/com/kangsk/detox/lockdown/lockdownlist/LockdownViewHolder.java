@@ -65,33 +65,33 @@ public class LockdownViewHolder extends RecyclerView.ViewHolder implements Compo
 
         mLockdownManager = lockdownManager;
 
-        mContainerCard = itemView.findViewById(R.id.item_lockdown_list);
+        mContainerCard = itemView.findViewById(R.id.card_lockdown_item);
         mContainerCard.setOnClickListener(this);
 
-        mLockdownStartTimeText = itemView.findViewById(R.id.text_lockdown_list_lockdown_start_time);
-        mLockdownEndTimeText = itemView.findViewById(R.id.text_lockdown_list_lockdown_end_time);
-        mLockdownStartAMPMText = itemView.findViewById(R.id.text_lockdown_list_lockdown_start_time_ampm);
-        mLockdownEndAMPMText = itemView.findViewById(R.id.text_lockdown_list_lockdown_end_time_ampm);
+        mLockdownStartTimeText = itemView.findViewById(R.id.text_lockdown_item_start_time);
+        mLockdownEndTimeText = itemView.findViewById(R.id.text_lockdown_item_end_time);
+        mLockdownStartAMPMText = itemView.findViewById(R.id.text_lockdown_item_start_ampm);
+        mLockdownEndAMPMText = itemView.findViewById(R.id.text_lockdown_item_end_ampm);
 
-        mLockdownNameText = itemView.findViewById(R.id.text_lockdown_list_lockdown_name);
+        mLockdownNameText = itemView.findViewById(R.id.text_lockdown_item_name);
 
-        mLockdownRepeatSundayText = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_sunday);
-        mLockdownRepeatMondayText = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_monday);
-        mLockdownRepeatTuesdayText = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_tuesday);
-        mLockdownRepeatWednesdayText = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_wednesday);
-        mLockdownRepeatThursdayText = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_thursday);
-        mLockdownRepeatFridayText = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_friday);
-        mLockdownRepeatSaturdayText = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_saturday);
+        mLockdownRepeatSundayText = itemView.findViewById(R.id.text_lockdown_item_repeat_day_sunday);
+        mLockdownRepeatMondayText = itemView.findViewById(R.id.text_lockdown_item_repeat_day_monday);
+        mLockdownRepeatTuesdayText = itemView.findViewById(R.id.text_lockdown_item_repeat_day_tuesday);
+        mLockdownRepeatWednesdayText = itemView.findViewById(R.id.text_lockdown_item_repeat_day_wednesday);
+        mLockdownRepeatThursdayText = itemView.findViewById(R.id.text_lockdown_item_repeat_day_thursday);
+        mLockdownRepeatFridayText = itemView.findViewById(R.id.text_lockdown_item_repeat_day_friday);
+        mLockdownRepeatSaturdayText = itemView.findViewById(R.id.text_lockdown_item_repeat_day_saturday);
 
-        mLockdownRepeatSundayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_sunday_dot);
-        mLockdownRepeatMondayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_monday_dot);
-        mLockdownRepeatTuesdayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_tuesday_dot);
-        mLockdownRepeatWednesdayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_wednesday_dot);
-        mLockdownRepeatThursdayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_thursday_dot);
-        mLockdownRepeatFridayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_friday_dot);
-        mLockdownRepeatSaturdayIndicator = itemView.findViewById(R.id.text_lockdown_list_lockdown_repeat_day_saturday_dot);
+        mLockdownRepeatSundayIndicator = itemView.findViewById(R.id.indicator_lockdown_item_repeat_day_sunday);
+        mLockdownRepeatMondayIndicator = itemView.findViewById(R.id.indicator_lockdown_item_repeat_day_monday);
+        mLockdownRepeatTuesdayIndicator = itemView.findViewById(R.id.indicator_lockdown_item_repeat_day_tuesday);
+        mLockdownRepeatWednesdayIndicator = itemView.findViewById(R.id.indicator_lockdown_item_repeat_day_wednesday);
+        mLockdownRepeatThursdayIndicator = itemView.findViewById(R.id.indicator_lockdown_item_repeat_day_thursday);
+        mLockdownRepeatFridayIndicator = itemView.findViewById(R.id.indicator_lockdown_item_repeat_day_friday);
+        mLockdownRepeatSaturdayIndicator = itemView.findViewById(R.id.indicator_lockdown_item_repeat_day_saturday);
 
-        mLockdownToggleSwitch = itemView.findViewById(R.id.switch_lockdown_list_lockdown);
+        mLockdownToggleSwitch = itemView.findViewById(R.id.switch_lockdown_item);
         mLockdownToggleSwitch.setOnCheckedChangeListener(this);
     }
 

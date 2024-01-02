@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,14 +7,14 @@
 
     <!--FRAGMENT GUIDELINES-->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_app_list_app_start"
+        android:id="@+id/guideline_app_item_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_app_list_app_end"
+        android:id="@+id/guideline_app_item_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -23,27 +22,27 @@
 
     <!--APP LIST APP GUIDELINES-->
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_app_list_app_top"
+        android:id="@+id/guideline_app_item_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_app_list_app_bottom"
+        android:id="@+id/guideline_app_item_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/item_app_list"
+        android:id="@+id/card_app_item"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="@id/guideline_app_list_app_top"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_app_list_app_bottom"
-        app:layout_constraintStart_toStartOf="@id/guideline_app_list_app_start"
-        app:layout_constraintEnd_toEndOf="@id/guideline_app_list_app_end"
+        app:layout_constraintTop_toTopOf="@id/guideline_app_item_top"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_app_item_bottom"
+        app:layout_constraintStart_toStartOf="@id/guideline_app_item_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_app_item_end"
         app:cardCornerRadius="@dimen/radius_card_corner"
         app:cardUseCompatPadding="true"
         app:cardElevation="3dp"
@@ -55,97 +54,97 @@
             android:background="@color/neutral_color">
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_app_list_app_icon_start"
+                android:id="@+id/guideline_app_item_icon_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.05"/>
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_app_list_app_icon_end"
+                android:id="@+id/guideline_app_item_icon_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.2"/>
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_app_list_app_name_start"
+                android:id="@+id/guideline_app_item_name_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.25"/>
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_app_list_app_usage_time_start"
+                android:id="@+id/guideline_app_item_usage_time_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.80"/>
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_app_list_app_horizontal_center"
+                android:id="@+id/guideline_app_item_horizontal_center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.5"/>
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_app_list_app_name_bottom"
+                android:id="@+id/guideline_app_item_name_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.57"/>
 
             <ImageView
-                android:id="@+id/drawable_app_list_app_icon"
+                android:id="@+id/image_app_item_icon"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guideline_app_list_app_icon_start"
-                app:layout_constraintEnd_toEndOf="@id/guideline_app_list_app_icon_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_app_item_icon_start"
+                app:layout_constraintEnd_toEndOf="@id/guideline_app_item_icon_end"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintDimensionRatio="1:1"/>
 
             <TextView
-                android:id="@+id/text_app_list_app_name"
+                android:id="@+id/text_app_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/guideline_app_list_app_name_bottom"
-                app:layout_constraintStart_toStartOf="@id/guideline_app_list_app_name_start"
+                app:layout_constraintBottom_toTopOf="@id/guideline_app_item_name_bottom"
+                app:layout_constraintStart_toStartOf="@id/guideline_app_item_name_start"
                 android:textSize="15sp"
                 android:textColor="@color/dominant_color"
                 android:fontFamily="@font/proxima_nova_regular_medium"/>
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:id="@+id/progressbar_app_list_app_usage_percentage"
+                android:id="@+id/progress_indicator_app_item_usage_percentage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/guideline_app_list_app_name_bottom"
-                app:layout_constraintStart_toStartOf="@id/guideline_app_list_app_name_start"
-                app:layout_constraintEnd_toEndOf="@id/guideline_app_list_app_usage_time_start"
+                app:layout_constraintTop_toBottomOf="@id/guideline_app_item_name_bottom"
+                app:layout_constraintStart_toStartOf="@id/guideline_app_item_name_start"
+                app:layout_constraintEnd_toEndOf="@id/guideline_app_item_usage_time_start"
                 android:paddingTop="@dimen/padding_progressbar_app_list_app_top"
                 app:trackCornerRadius="@dimen/radius_progress_bar_corner"
                 app:indicatorColor="@color/dark_complimentary_color"
                 app:trackColor="@color/neutral_color_off"/>
 
             <TextView
-                android:id="@+id/text_app_list_app_usage_time"
+                android:id="@+id/text_app_item_usage_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/guideline_app_list_app_horizontal_center"
+                app:layout_constraintBottom_toBottomOf="@id/guideline_app_item_horizontal_center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guideline_app_list_app_usage_time_start"
+                app:layout_constraintStart_toStartOf="@id/guideline_app_item_usage_time_start"
                 android:textSize="13sp"
                 android:textColor="@color/dominant_color"
                 android:fontFamily="@font/source_code_pro"/>
 
             <TextView
-                android:id="@+id/text_app_list_app_usage_percentage"
+                android:id="@+id/text_app_item_usage_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/guideline_app_list_app_horizontal_center"
+                app:layout_constraintTop_toTopOf="@id/guideline_app_item_horizontal_center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guideline_app_list_app_usage_time_start"
+                app:layout_constraintStart_toStartOf="@id/guideline_app_item_usage_time_start"
                 android:textSize="13sp"
                 android:textColor="@color/dominant_color"
                 android:fontFamily="@font/source_code_pro"/>

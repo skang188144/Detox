@@ -43,7 +43,7 @@ public class AppListAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.item_home_fragment_app_list_app, parent, false);
+        View itemView = inflater.inflate(R.layout.item_home_fragment_app, parent, false);
         return new AppViewHolder(itemView, mAppUsageDataList, mAppUsageTimeSum); // return a AppViewHolder instance with an inflated View for a single app/row
     }
 

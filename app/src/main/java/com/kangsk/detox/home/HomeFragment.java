@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mHomeFragmentRecyclerView = view.findViewById(R.id.recycler_view_home_fragment);
+        mHomeFragmentRecyclerView = view.findViewById(R.id.recycler_home_fragment);
         mHomeFragmentRecyclerView.setLayoutManager(new LinearLayoutManager(mApplicationContext));
         mHomeFragmentRecyclerView.setAdapter(mHomeFragmentAdapter);
     }
