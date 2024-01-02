@@ -1,30 +1,31 @@
 package com.kangsk.detox;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.kangsk.detox.homefragment.HomeFragment;
-import com.kangsk.detox.lockdownfragment.LockdownFragment;
-import com.kangsk.detox.lockdowneditfragment.LockdownEditFragment;
-import com.kangsk.detox.lockdownfragment.utility.LockdownManager;
-import com.kangsk.detox.settingsfragment.SettingsFragment;
+import com.kangsk.detox.home.HomeFragment;
+import com.kangsk.detox.lockdown.LockdownFragment;
+import com.kangsk.detox.lockdown.lockdowneditor.LockdownEditorFragment;
+import com.kangsk.detox.settings.SettingsFragment;
+import com.kangsk.detox.utility.LockdownManager;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
     /*
      * CONSTANTS
      */
-    // these tags represent each fragment, used to track if a fragment has already been created and is in the backstack.
-    private static final String HOME_TAG = String.valueOf(R.id.menu_home);
-    private static final String LOCKDOWN_TAG = String.valueOf(R.id.menu_lockdown);
-    private static final String SETTINGS_TAG = String.valueOf(R.id.menu_settings);
+    // FRAGMENT TAGS
+    public static final String HOME_TAG = "HOME_TAG";
+    public static final String LOCKDOWN_TAG = "LOCKDOWN_TAG";
+    public static final String LOCKDOWN_EDITOR_TAG = "EDIT_LOCKDOWN_TAG";
+    public static final String SETTINGS_TAG = "SETTINGS_TAG";
 
     /*
      * PRIVATE FIELDS
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     private FragmentManager mFragmentManager;
     private BottomNavigationView mBottomNavigationView;
 
+    /*
+     * onCreate: called when the activity is created, responsible for instantiating fields.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // remove top action bar by making the decorview stretch through the entire system window, ignoring system widgets
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
-        // fragment manager
         mFragmentManager = getSupportFragmentManager();
-
-        // bottom navigation bar
         mBottomNavigationView = findViewById(R.id.navigation_bar_main_activity_bottom);
         mBottomNavigationView.setOnItemSelectedListener(this);
 
@@ -54,18 +55,30 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         createFragment(HomeFragment.class, HOME_TAG, true, mFragmentManager);
         createFragment(LockdownFragment.class, LOCKDOWN_TAG, false, mFragmentManager);
         createFragment(SettingsFragment.class, SETTINGS_TAG, false, mFragmentManager);
-        createFragment(LockdownEditFragment.class, "LOCKDOWNCREATIONDIALOGFRAGMENT", false, mFragmentManager);
+        createFragment(LockdownEditorFragment.class, LOCKDOWN_EDITOR_TAG, false, mFragmentManager);
     }
 
+    /*
+     * onStart: called after onCreate(). This method is guaranteed to be called even when the user navigates
+     * out of the activity, and then returns to it.
+     */
     @Override
     protected void onStart() {
         super.onStart();
+
+        // when onStart() is called in the early stages of the activity lifecycle, LockdownManager should be instantiated
         LockdownManager.getInstance(this.getApplicationContext());
     }
 
+    /*
+     * onStart: called before onDestroy(). This method has a high chance of being called, even when
+     * the app process is forcibly killed.
+     */
     @Override
     protected void onStop() {
         super.onStop();
+
+        // when onStop() is called in the last stages of the activity lifecycle, LockdownManager should write everything to storage and be destroyed
         LockdownManager.endInstance();
     }
 
@@ -98,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
     /*
      * createFragment: creates the specified Fragment subclass, adds an identifier
-     * tag to the fragment, and displays/hides it.
+     * tag to the fragment, and hides it.
      */
     private void createFragment(Class<? extends Fragment> newFragmentClass, String newFragmentTag, boolean visible, FragmentManager fragmentManager) {
         // create new fragment
@@ -108,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
                 .commit();
         fragmentManager.executePendingTransactions();
 
-        // hide new fragment
+        // if the variable 'visible' is set to false, hide the new fragment upon creation
         if (!visible) {
             fragmentManager
                     .beginTransaction()
@@ -118,6 +131,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         }
     }
 
+    /*
+     * switchVisibleFragment: grabs the currently visible fragment, hides it, and displays
+     * the requested replacement fragment.
+     */
     private void switchVisibleFragment(String replacementFragmentTag, FragmentManager fragmentManager) {
         // hide the currently visible fragment and show the replacement fragment
         fragmentManager
@@ -129,6 +146,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         fragmentManager.executePendingTransactions();
     }
 
+    /*
+     * getVisibleFragment: grabs the currently visible fragment.
+     */
     private Fragment getVisibleFragment(FragmentManager fragmentManager) {
         for (Fragment fragment : fragmentManager.getFragments()) {
             if (fragment.isVisible()) {

@@ -62,7 +62,7 @@
         app:strokeWidth="0dp"
         app:cardElevation="@dimen/elevation_card">
 
-        <com.kangsk.detox.homefragment.utility.RoundedBarChart
+        <com.kangsk.detox.utility.RoundedBarChart
             android:id="@+id/barchart_graph_usage_time_today"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

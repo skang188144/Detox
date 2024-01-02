@@ -7,5 +7,5 @@
     android:layout_height="match_parent"
     android:layout_gravity="top"
     android:orientation="vertical"
-    tools:context=".lockdownfragment.LockdownFragment"
+    tools:context=".lockdown.LockdownFragment"
     android:background="@color/neutral_color_off"/>
