@@ -15,7 +15,7 @@ public class BlacklistedAppsOptionViewHolder extends RecyclerView.ViewHolder imp
     public BlacklistedAppsOptionViewHolder(View itemView) {
         super(itemView);
 
-        itemView.findViewById(R.id.card_view_lockdown_edit_options_blacklisted_apps_option).setOnClickListener(this);
+        itemView.findViewById(R.id.card_blacklisted_apps_item).setOnClickListener(this);
     }
 
     /*

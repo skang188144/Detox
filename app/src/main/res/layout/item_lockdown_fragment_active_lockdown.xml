@@ -44,11 +44,11 @@
         android:id="@+id/progress_indicator_active_lockdown_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:indicatorSize="@dimen/size_current_lockdown_current_lockdown"
+        app:indicatorSize="@dimen/indicator_size_active_lockdown_item_progress"
         app:indicatorColor="@color/dark_complimentary_color"
-        app:trackColor="@color/current_lockdown_current_lockdown"
-        app:trackThickness="@dimen/track_thickness_current_lockdown_current_lockdown"
-        app:trackCornerRadius="@dimen/corner_radius_current_lockdown_current_lockdown"
+        app:trackColor="@color/color_active_lockdown_item_track"
+        app:trackThickness="@dimen/width_active_lockdown_item_track"
+        app:trackCornerRadius="@dimen/radius_active_lockdown_item_card_corner"
         app:layout_constraintTop_toTopOf="@id/guideline_active_lockdown_item_progress_indicator_top"
         app:layout_constraintBottom_toBottomOf="@id/guideline_active_lockdown_item_progress_indicator_bottom"
         app:layout_constraintStart_toStartOf="@id/guideline_active_lockdown_item_start"
@@ -62,8 +62,8 @@
         app:layout_constraintStart_toStartOf="@id/progress_indicator_active_lockdown_item"
         app:layout_constraintEnd_toEndOf="@id/progress_indicator_active_lockdown_item"
         android:fontFamily="@font/proxima_nova_bold"
-        android:textSize="@dimen/font_size_current_lockdown_time_remaining_title"
-        android:text="@string/text_current_lockdown_time_remaining_title"
+        android:textSize="@dimen/font_size_active_lockdown_item_title"
+        android:text="@string/text_active_lockdown_item_title"
         android:textColor="@color/dark_complimentary_color"/>
 
     <TextView
@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="@id/progress_indicator_active_lockdown_item"
         app:layout_constraintEnd_toEndOf="@id/progress_indicator_active_lockdown_item"
         android:fontFamily="@font/proxima_nova_regular_medium"
-        android:textSize="@dimen/font_size_current_lockdown_time_remaining"
+        android:textSize="@dimen/font_size_active_lockdown_item_time_remaining"
         android:textColor="@color/dark_complimentary_color"/>
 
 

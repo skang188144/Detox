@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline_title_item_title_bottom"
         android:fontFamily="@font/proxima_nova_bold"
         android:textColor="@color/neutral_color"
-        android:textSize="@dimen/font_size_overview_greeting"
-        android:text="@string/text_title_title"/>
+        android:textSize="@dimen/font_size_title_item_title"
+        android:text="@string/text_title_item_title"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
-    android:id="@+id/card_view_lockdown_edit_options_blacklisted_apps_option"
+    android:id="@+id/card_blacklisted_apps_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="75dp"
+    android:layout_height="@dimen/height_blacklisted_apps_item_card"
     android:layout_width="match_parent"
     android:clickable="true"
     app:strokeWidth="0dp"
@@ -33,11 +33,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/guideline_blacklisted_apps_item_horizontal_center"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_blacklisted_apps_item_title_bottom"
             android:fontFamily="@font/proxima_nova_regular_medium"
-            android:text="Blocked apps"
-            android:textSize="20dp"
-            />
+            android:text="@string/text_blacklisted_apps_item_title"
+            android:textSize="@dimen/font_size_blacklisted_apps_item_title" />
 
         <TextView
             android:id="@+id/text_blacklisted_apps_item_lockdowns"
@@ -47,9 +46,9 @@
             app:layout_constraintTop_toBottomOf="@id/guideline_blacklisted_apps_item_horizontal_center"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="Chess, Notion, Subway Surfers, ..."
-            android:textSize="12dp"
+            android:textSize="@dimen/font_size_blacklisted_apps_item_lockdowns_text"
             android:textColor="#777777"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="@dimen/margin_blacklisted_apps_item_lockdowns_text_bottom"/>
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"

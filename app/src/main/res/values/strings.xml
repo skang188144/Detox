@@ -5,12 +5,16 @@
     <string name="text_bottom_navigation_bar_settings">Settings</string>
     <string name="text_overview_greeting_morning">Good Morning,</string>
     <string name="text_overview_greeting_afternoon">Good Afternoon,</string>
-    <string name="text_usage_time_today_title">Screen-On Time:</string>
+    <string name="text_overview_item_usage_time_title">Screen-On Time:</string>
     <string name="text_overview_greeting_evening">Good Evening,</string>
-    <string name="text_overview_name">Sanghyeok.</string>
-    <string name="text_graph_title">Today\'s Usage</string>
-    <string name="text_app_list_title">Apps</string>
-    <string name="text_title_title">Lockdowns</string>
-    <string name="text_current_lockdown_time_remaining_title">Time Remaining</string>
-    <string name="text_lockdown_list_title">Lockdowns</string>
+    <string name="text_overview_item_user_name">Sanghyeok.</string>
+    <string name="text_graph_item_title">Today\'s Usage</string>
+    <string name="text_app_list_item_title">Apps</string>
+    <string name="text_title_item_title">Lockdowns</string>
+    <string name="text_active_lockdown_item_title">Time Remaining</string>
+    <string name="text_lockdown_list_item_title">Lockdowns</string>
+    <string name="text_blacklisted_apps_item_title">Blocked apps</string>
+    <string name="hint_name_item_edit_text">Name</string>
+    <string name="text_repeat_days_item_title">Repeat</string>
+    <string name="text_tamper_item_title">Prevent Tampering</string>
 </resources>

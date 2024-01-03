@@ -26,11 +26,11 @@
         app:layout_constraintStart_toStartOf="@id/guideline_lockdown_list_item_start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/recycler_lockdown_list_item"
-        android:layout_marginBottom="@dimen/margin_lockdown_list_title_bottom"
-        android:text="@string/text_lockdown_list_title"
+        android:layout_marginBottom="@dimen/margin_lockdown_list_item_title_bottom"
+        android:text="@string/text_lockdown_list_item_title"
         android:textColor="@color/dark_complimentary_color"
         android:fontFamily="@font/proxima_nova_bold"
-        android:textSize="@dimen/font_size_lockdown_list_title"/>
+        android:textSize="@dimen/font_size_lockdown_list_item_title"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_lockdown_list_item_add"

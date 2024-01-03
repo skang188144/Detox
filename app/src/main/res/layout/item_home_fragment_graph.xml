@@ -3,10 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_graph"
-    android:layout_marginTop="@dimen/margin_home_fragment_between_cards">
+    android:layout_height="@dimen/height_graph_item"
+    android:layout_marginTop="@dimen/margin_graph_item_top">
 
-    <!--FRAGMENT GUIDELINES -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_graph_item_start"
         android:layout_width="wrap_content"
@@ -21,7 +20,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
-    <!--GRAPH GUIDELINES-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_graph_item_top"
         android:layout_width="wrap_content"
@@ -43,11 +41,11 @@
         app:layout_constraintStart_toStartOf="@id/guideline_graph_item_start"
         app:layout_constraintTop_toTopOf="@id/guideline_graph_item_top"
         app:layout_constraintBottom_toTopOf="@id/card_graph_item"
-        android:layout_marginBottom="@dimen/margin_graph_title_bottom"
-        android:text="@string/text_graph_title"
+        android:layout_marginBottom="@dimen/margin_graph_item_title_bottom"
+        android:text="@string/text_graph_item_title"
         android:textColor="@color/dark_complimentary_color"
         android:fontFamily="@font/proxima_nova_bold"
-        android:textSize="@dimen/font_size_graph_title"/>
+        android:textSize="@dimen/font_size_graph_item_title"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_graph_item"
@@ -58,9 +56,9 @@
         app:layout_constraintStart_toStartOf="@id/guideline_graph_item_start"
         app:layout_constraintTop_toBottomOf="@id/text_graph_item_title"
         android:background="@color/neutral_color"
-        app:cardCornerRadius="@dimen/radius_card_corner"
+        app:cardCornerRadius="@dimen/radius_graph_item_card_corner"
         app:strokeWidth="0dp"
-        app:cardElevation="@dimen/elevation_card">
+        app:cardElevation="@dimen/elevation_graph_item_card">
 
         <com.kangsk.detox.utility.RoundedBarChart
             android:id="@+id/barchart_graph_item"
@@ -70,7 +68,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </com.google.android.material.card.MaterialCardView>
 

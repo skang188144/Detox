@@ -11,11 +11,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/button_repeat_days_item_sunday"
-        android:layout_marginTop="20dp"
-        android:text="Repeat"
+        android:layout_marginTop="@dimen/margin_repeat_days_item_title_top"
+        android:text="@string/text_repeat_days_item_title"
         android:fontFamily="@font/proxima_nova_regular"
         android:textColor="@color/black"
-        android:textSize="16sp"/>
+        android:textSize="@dimen/font_size_repeat_days_item_title"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_repeat_days_item_sunday"
@@ -28,14 +28,14 @@
         app:layout_constraintDimensionRatio="1:1"
         android:minHeight="0dp"
         android:minWidth="0dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/margin_repeat_days_item_sunday_bottom"
         android:padding="0dp"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
         style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:fontFamily="@font/source_code_pro"
         android:text="S"
-        android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
+        android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_repeat_days_item_monday"
@@ -53,7 +53,7 @@
         style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:fontFamily="@font/source_code_pro"
         android:text="M"
-        android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
+        android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_repeat_days_item_tuesday"
@@ -71,7 +71,7 @@
         style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:fontFamily="@font/source_code_pro"
         android:text="T"
-        android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
+        android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_repeat_days_item_wednesday"
@@ -89,7 +89,7 @@
         style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:fontFamily="@font/source_code_pro"
         android:text="W"
-        android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
+        android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_repeat_days_item_thursday"
@@ -107,7 +107,7 @@
         style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:fontFamily="@font/source_code_pro"
         android:text="T"
-        android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
+        android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_repeat_days_item_friday"
@@ -125,7 +125,7 @@
         style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:fontFamily="@font/source_code_pro"
         android:text="F"
-        android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
+        android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_repeat_days_item_saturday"
@@ -143,7 +143,6 @@
         style="@style/Widget.Material3.Button.IconButton.Outlined"
         android:fontFamily="@font/source_code_pro"
         android:text="S"
-        android:textSize="@dimen/font_size_lockdown_edit_options_repeat_days"/>
-
+        android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

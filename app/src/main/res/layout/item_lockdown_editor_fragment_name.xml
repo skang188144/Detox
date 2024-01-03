@@ -6,14 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_width="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="20dp"
-        android:hint="Name"
+        android:layout_marginBottom="@dimen/margin_name_item_edit_text_bottom"
+        android:hint="@string/hint_name_item_edit_text"
         android:fontFamily="@font/proxima_nova_regular"
         android:textColorHint="@color/black"/>
 

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_overview"
+    android:layout_height="@dimen/height_overview_item"
     android:layout_gravity="start"
     android:background="@color/dominant_color">
 
@@ -45,46 +45,46 @@
         app:layout_constraintTop_toTopOf="@id/guideline_overview_item_greeting_top"
         android:fontFamily="@font/proxima_nova_bold"
         android:textColor="@color/neutral_color"
-        android:textSize="@dimen/font_size_overview_greeting"/>
+        android:textSize="@dimen/font_size_overview_item_greeting"/>
 
     <TextView
-        android:id="@+id/text_overview_item_name"
+        android:id="@+id/text_overview_item_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guideline_overview_item_start"
         app:layout_constraintTop_toBottomOf="@id/text_overview_item_greeting"
         android:fontFamily="@font/proxima_nova_bold"
         android:textColor="@color/neutral_color"
-        android:textSize="@dimen/font_size_overview_greeting"
-        android:text="@string/text_overview_name"/>
+        android:textSize="@dimen/font_size_overview_item_greeting"
+        android:text="@string/text_overview_item_user_name"/>
 
     <TextView
-        android:id="@+id/text_overview_item_title"
+        android:id="@+id/text_overview_item_usage_time_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/text_overview_item_usage_time"
         app:layout_constraintStart_toStartOf="@id/guideline_overview_item_start"
-        app:layout_constraintTop_toBottomOf="@id/text_overview_item_name"
+        app:layout_constraintTop_toBottomOf="@id/text_overview_item_user_name"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/basic_sans_thin"
-        android:text="@string/text_usage_time_today_title"
+        android:text="@string/text_overview_item_usage_time_title"
         android:textColor="@color/neutral_color"
-        android:textSize="@dimen/font_size_overview_usage_time_today_title"/>
+        android:textSize="@dimen/font_size_overview_item_usage_time_title"/>
 
     <TextView
         android:id="@+id/text_overview_item_usage_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guideline_overview_item_start"
-        app:layout_constraintTop_toBottomOf="@id/text_overview_item_title"
+        app:layout_constraintTop_toBottomOf="@id/text_overview_item_usage_time_title"
         android:fontFamily="@font/basic_sans_thin"
         android:textColor="@color/neutral_color"
-        android:textSize="@dimen/font_size_overview_usage_time_today_title"/>
+        android:textSize="@dimen/font_size_overview_item_usage_time_title"/>
 
     <ImageView
         android:id="@+id/image_overview_item_tree"
-        android:layout_width="196dp"
-        android:layout_height="140dp"
+        android:layout_height="@dimen/height_overview_item_tree_image"
+        android:layout_width="0dp"
         android:src="@drawable/drawable_overview_tree_branch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="817:578"

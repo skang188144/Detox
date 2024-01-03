@@ -37,9 +37,9 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline_lockdown_editor_fragment_time_picker_bottom"
         app:trp_thumbIconStart="@drawable/ic_play_24"
         app:trp_thumbIconEnd="@drawable/ic_stop_24"
-        app:trp_thumbIconSize="20dp"
-        app:trp_thumbSize="28dp"
-        app:trp_sliderWidth="28dp"
+        app:trp_thumbIconSize="@dimen/icon_size_lockdown_editor_fragment_time_picker_thumb"
+        app:trp_thumbSize="@dimen/thumb_size_lockdown_editor_fragment_time_picker"
+        app:trp_sliderWidth="@dimen/width_lockdown_editor_fragment_time_picker"
         app:trp_startTime="12:00"
         app:trp_endTime="3:00"/>
 
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline_lockdown_editor_fragment_card_top"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="@dimen/radius_lockdown_editor_fragment_card_corner">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
