@@ -78,4 +78,5 @@
     <dimen name="elevation_lockdown_item_card">3dp</dimen>
     <dimen name="font_size_title_item_title">40sp</dimen>
     <dimen name="height_main_activity_bottom_navigation">60dp</dimen>
+    <dimen name="padding_repeat_days_item_sunday_button">4dp</dimen>
 </resources>

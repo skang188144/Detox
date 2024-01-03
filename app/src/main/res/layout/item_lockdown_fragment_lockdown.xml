@@ -302,7 +302,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBaseline_toTopOf="@id/guideline_lockdown_item_switch_horizontal_center"
-                app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_item_time_end"/>
+                app:layout_constraintEnd_toEndOf="@id/guideline_lockdown_item_time_end"
+                style="@style/Widget.App.Switch"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

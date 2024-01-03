@@ -1,28 +1,44 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.Detox" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Primary brand color. -->
+        <!-- Primary brand color -->
         <item name="colorPrimary">@color/dominant_color</item>
         <item name="colorPrimaryVariant">@color/light_complimentary_color</item>
         <item name="colorOnPrimary">@color/light_complimentary_color</item>
-        <!-- Secondary brand color. -->
+        <!-- Secondary brand color -->
         <item name="colorSecondary">@color/dominant_color</item>
         <item name="colorSecondaryVariant">@color/light_complimentary_color</item>
         <item name="colorOnSecondary">@color/light_complimentary_color</item>
-
-        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <!-- Button style -->
+        <item name="materialButtonOutlinedStyle">@style/Widget.App.Button</item>
+        <!-- Alert dialog style -->
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
-
-        <!-- Status bar color. -->
+        <!-- Switch style -->
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+        <!-- Bottom navigation style -->
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <!-- Status bar color -->
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <!-- Splash screen icon.. -->
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- Splash screen icon -->
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
-        <!-- Splash screen background color. -->
+        <!-- Splash screen background color -->
         <item name="android:windowSplashScreenBackground">@color/dominant_color</item>
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <!--Bottom Navigation Bar Widget-->
+    <!-- Button style -->
+    <style name="Widget.App.Button" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="rippleColor">@android:color/transparent</item>
+        <item name="backgroundTint">@color/selector_button_background_color</item>
+    </style>
+
+    <!-- Switch style -->
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="trackTint">@color/selector_switch_track_color</item>
+        <item name="thumbTint">@color/selector_switch_thumb_color</item>
+    </style>
+
+    <!--Bottom navigation bar style -->
     <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="itemRippleColor">@color/light_complimentary_color</item>
         <item name="itemActiveIndicatorStyle">@android:color/transparent</item>
@@ -31,8 +47,8 @@
         <item name="labelVisibilityMode">unlabeled</item>
     </style>
 
+    <!-- Active indicator style (for bottom navigation bar) -->
     <style name="Theme.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/light_complimentary_color</item>
     </style>
-
 </resources>
