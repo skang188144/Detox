@@ -14,29 +14,4 @@
     <color name="neutral_color">#FFFFFF</color>
     <color name="neutral_color_off">#F6F6F6</color>
     <color name="color_active_lockdown_item_track">#72EAEAEA</color>
-
-
-    <color name="support_success100">#daebf2</color>
-    <color name="support_success300">#88B7CC</color>
-    <color name="support_success500">#487d94</color>
-    <color name="support_success700">#1A4C63</color>
-    <color name="support_success900">#062f40</color>
-
-    <color name="support_neutral100">#dadae6</color>
-    <color name="support_neutral300">#9C9FA6</color>
-    <color name="support_neutral500">#5F6268</color>
-    <color name="support_neutral700">#474A50</color>
-    <color name="support_neutral900">#2D2F35</color>
-
-    <color name="support_warning100">#FBD4AD</color>
-    <color name="support_warning300">#D5A370</color>
-    <color name="support_warning500">#ad7944</color>
-    <color name="support_warning700">#784B1C</color>
-    <color name="support_warning900">#402306</color>
-
-    <color name="support_danger100">#FBD3D3</color>
-    <color name="support_danger300">#CD7D80</color>
-    <color name="support_danger500">#94484b</color>
-    <color name="support_danger700">#60191C</color>
-    <color name="support_danger900">#3d0305</color>
 </resources>

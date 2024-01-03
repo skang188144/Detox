@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint_layout_main_activity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,9 +22,9 @@
         android:id="@+id/bottom_navigation_main_activity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/neutral_color"
+        android:minHeight="@dimen/height_main_activity_bottom_navigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/activity_main" />
+        app:menu="@menu/activity_main"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,5 +76,6 @@
     <dimen name="font_size_tamper_item_title">20sp</dimen>
     <dimen name="radius_lockdown_item_card_corner">10dp</dimen>
     <dimen name="elevation_lockdown_item_card">3dp</dimen>
-    <dimen name="font_size_title_item_title" />
+    <dimen name="font_size_title_item_title">40sp</dimen>
+    <dimen name="height_main_activity_bottom_navigation">60dp</dimen>
 </resources>

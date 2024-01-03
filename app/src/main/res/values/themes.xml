@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Detox" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
@@ -11,14 +11,10 @@
         <item name="colorOnSecondary">@color/light_complimentary_color</item>
 
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
-
-
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
 
-
-        <!-- Status/navigation bar color. -->
+        <!-- Status bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
         <!-- Splash screen icon.. -->
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
         <!-- Splash screen background color. -->
@@ -28,12 +24,15 @@
 
     <!--Bottom Navigation Bar Widget-->
     <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+        <item name="itemRippleColor">@color/light_complimentary_color</item>
+        <item name="itemActiveIndicatorStyle">@android:color/transparent</item>
+        <item name="backgroundTint">@color/neutral_color</item>
+        <item name="itemIconTint">@color/dark_complimentary_color</item>
+        <item name="labelVisibilityMode">unlabeled</item>
     </style>
 
-    <!--Bottom Navigation Bar Theme-->
-    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
-        <item name="colorSurface">@color/dark_complimentary_color</item>
-        <item name="colorOnSurfaceVariant">@color/dark_complimentary_color</item>
+    <style name="Theme.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/light_complimentary_color</item>
     </style>
+
 </resources>

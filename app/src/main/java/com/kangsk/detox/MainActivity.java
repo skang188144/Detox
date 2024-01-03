@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         // remove top action bar by making the decorview stretch through the entire system window, ignoring system widgets
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
+        // set the bottom system bar color to the neutral color
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.neutral_color, getTheme()));
+
         mFragmentManager = getSupportFragmentManager();
         mBottomNavigationView = findViewById(R.id.bottom_navigation_main_activity);
         mBottomNavigationView.setOnItemSelectedListener(this);

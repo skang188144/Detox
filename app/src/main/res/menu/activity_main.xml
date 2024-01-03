@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:title="@string/text_bottom_navigation_bar_home"
+    <item
         android:id="@+id/menu_home"
-        android:icon="@drawable/ic_menu_home_24"/>
-    <item android:title="@string/text_bottom_navigation_bar_lockdown"
+        android:icon="@drawable/menu_selector_home"
+        android:title="" />
+    <item
         android:id="@+id/menu_lockdown"
-        android:icon="@drawable/ic_menu_lock_24"/>
-    <item android:title="@string/text_bottom_navigation_bar_settings"
+        android:icon="@drawable/menu_selector_lockdown"
+        android:title="" />
+    <item
         android:id="@+id/menu_settings"
-        android:icon="@drawable/ic_menu_settings_24"/>
+        android:icon="@drawable/ic_menu_settings_24"
+        android:title="" />
 </menu>
