@@ -62,8 +62,8 @@ public class MonitorService extends AccessibilityService {
 
         AlertDialog alertDialog = new MaterialAlertDialogBuilder(new ContextThemeWrapper(this, R.style.Theme_Detox))
                 .setTitle("Lockdown")
-                .setMessage(lockdown.getName() + " has blocked access to this app. It will expire in " + lockdown.getTimeRemainingString())
-                .setIcon(R.mipmap.ic_launcher_no_text_foreground)
+                .setMessage(lockdown.getName() + " has blocked access to this app. The lockdown will expire in " + lockdown.getTimeRemainingString())
+                .setIcon(R.drawable.ic_app_icon)
                 .setPositiveButton("Dismiss", (dialog, which) -> {})
                 .create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);

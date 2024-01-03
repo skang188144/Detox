@@ -85,7 +85,7 @@
         android:id="@+id/image_overview_item_tree"
         android:layout_height="@dimen/height_overview_item_tree_image"
         android:layout_width="0dp"
-        android:src="@drawable/drawable_overview_tree_branch"
+        android:src="@drawable/overview_tree_branch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="817:578"
         app:layout_constraintEnd_toEndOf="parent" />

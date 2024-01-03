@@ -162,7 +162,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_lockdown_item_repeat_day_sunday"
                 app:layout_constraintStart_toStartOf="@id/text_lockdown_item_repeat_day_sunday"
                 app:layout_constraintEnd_toEndOf="@id/text_lockdown_item_repeat_day_sunday"
-                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:background="@drawable/repeat_day_indicator_dot"
                 android:visibility="gone"/>
 
             <TextView
@@ -184,7 +184,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_lockdown_item_repeat_day_monday"
                 app:layout_constraintStart_toStartOf="@id/text_lockdown_item_repeat_day_monday"
                 app:layout_constraintEnd_toEndOf="@id/text_lockdown_item_repeat_day_monday"
-                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:background="@drawable/repeat_day_indicator_dot"
                 android:visibility="gone"/>
 
             <TextView
@@ -206,7 +206,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_lockdown_item_repeat_day_tuesday"
                 app:layout_constraintStart_toStartOf="@id/text_lockdown_item_repeat_day_tuesday"
                 app:layout_constraintEnd_toEndOf="@id/text_lockdown_item_repeat_day_tuesday"
-                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:background="@drawable/repeat_day_indicator_dot"
                 android:visibility="gone"/>
 
             <TextView
@@ -228,7 +228,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_lockdown_item_repeat_day_wednesday"
                 app:layout_constraintStart_toStartOf="@id/text_lockdown_item_repeat_day_wednesday"
                 app:layout_constraintEnd_toEndOf="@id/text_lockdown_item_repeat_day_wednesday"
-                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:background="@drawable/repeat_day_indicator_dot"
                 android:visibility="gone"/>
 
             <TextView
@@ -250,7 +250,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_lockdown_item_repeat_day_thursday"
                 app:layout_constraintStart_toStartOf="@id/text_lockdown_item_repeat_day_thursday"
                 app:layout_constraintEnd_toEndOf="@id/text_lockdown_item_repeat_day_thursday"
-                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:background="@drawable/repeat_day_indicator_dot"
                 android:visibility="gone"/>
 
             <TextView
@@ -272,7 +272,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_lockdown_item_repeat_day_friday"
                 app:layout_constraintStart_toStartOf="@id/text_lockdown_item_repeat_day_friday"
                 app:layout_constraintEnd_toEndOf="@id/text_lockdown_item_repeat_day_friday"
-                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:background="@drawable/repeat_day_indicator_dot"
                 android:visibility="gone"/>
 
             <TextView
@@ -294,7 +294,7 @@
                 app:layout_constraintBottom_toTopOf="@id/text_lockdown_item_repeat_day_saturday"
                 app:layout_constraintStart_toStartOf="@id/text_lockdown_item_repeat_day_saturday"
                 app:layout_constraintEnd_toEndOf="@id/text_lockdown_item_repeat_day_saturday"
-                android:background="@drawable/drawable_lockdown_list_lockdown_repeat_day_dot"
+                android:background="@drawable/repeat_day_indicator_dot"
                 android:visibility="gone"/>
 
             <com.google.android.material.materialswitch.MaterialSwitch

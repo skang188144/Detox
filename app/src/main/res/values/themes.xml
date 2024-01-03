@@ -12,7 +12,7 @@
         <!-- Button style -->
         <item name="materialButtonOutlinedStyle">@style/Widget.App.Button</item>
         <!-- Alert dialog style -->
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
         <!-- Switch style -->
         <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
         <!-- Bottom navigation style -->
@@ -24,6 +24,13 @@
         <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>
         <!-- Splash screen background color -->
         <item name="android:windowSplashScreenBackground">@color/dominant_color</item>
+    </style>
+
+    <!-- Alert dialog style -->
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="colorSurface">@color/neutral_color</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorOnSurfaceVariant">@color/black</item>
     </style>
 
     <!-- Button style -->
