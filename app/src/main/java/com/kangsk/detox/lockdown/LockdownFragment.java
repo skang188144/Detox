@@ -54,7 +54,7 @@ public class LockdownFragment extends Fragment {
              */
             ArrayList<String> blacklistedApps = new ArrayList<>();
             blacklistedApps.add("com.chess");
-            Lockdown lockdown = new Lockdown("My Coolest Lockdown", true, LocalTime.now(), LocalTime.parse("20:30:00"), new int[]{Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY}, blacklistedApps);
+            Lockdown lockdown = new Lockdown("My Coolest Lockdown", true, LocalTime.now(), LocalTime.parse("23:59:00"), new int[]{Calendar.MONDAY, Calendar.TUESDAY, Calendar.THURSDAY}, blacklistedApps);
             mLockdownManager.addLockdown(lockdown);
     }
 

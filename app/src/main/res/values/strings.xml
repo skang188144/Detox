@@ -17,4 +17,7 @@
     <string name="hint_name_item_edit_text">Name</string>
     <string name="text_repeat_days_item_title">Repeat</string>
     <string name="text_tamper_item_title">Prevent Tampering</string>
+    <string name="text_lockdown_editor_fragment_cancel_button">Cancel</string>
+    <string name="text_lockdown_editor_fragment_save_button">Save</string>
+    <string name="text_prevent_changes_item_title">Prevent changes before lockdowns</string>
 </resources>

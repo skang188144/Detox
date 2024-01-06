@@ -59,8 +59,7 @@ public class LockdownEditorAdapter extends RecyclerView.Adapter {
             case ITEM_TYPE_TAMPER_OPTION:
                 return new TamperOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_tamper, parent, false));
             case ITEM_TYPE_PREVENT_CHANGES_OPTION:
-                return new PreventChangesOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_tamper, parent, false));
-                // TODO: create XML layout resource for PreventChangesOptionViewHolder
+                return new PreventChangesOptionViewHolder(inflater.inflate(R.layout.item_lockdown_editor_fragment_prevent_changes, parent, false));
             default:
                 throw new RuntimeException("LockdownEditorAdapter.java encountered an exception while building its ViewHolders. This ViewHolder type does not exist.");
         }

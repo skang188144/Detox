@@ -10,10 +10,11 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.kangsk.detox.R;
 import com.kangsk.detox.utility.LockdownManager;
 
-public class LockdownEditorFragment extends DialogFragment implements View.OnClickListener {
+public class LockdownEditorFragment extends DialogFragment {
 
     /*
      * PRIVATE FIELDS
@@ -23,6 +24,8 @@ public class LockdownEditorFragment extends DialogFragment implements View.OnCli
 
     private RecyclerView mLockdownEditorRecyclerView;
     private LockdownEditorAdapter mLockdownEditorAdapter;
+    private MaterialButton mSave;
+    private MaterialButton mCancel;
 
     /*
      * onCreate: called when the Fragment is created, responsible for instantiating fields.
@@ -57,14 +60,27 @@ public class LockdownEditorFragment extends DialogFragment implements View.OnCli
         mLockdownEditorRecyclerView = view.findViewById(R.id.recycler_lockdown_editor_fragment);
         mLockdownEditorRecyclerView.setLayoutManager(new LinearLayoutManager(mApplicationContext));
         mLockdownEditorRecyclerView.setAdapter(mLockdownEditorAdapter);
-    }
 
-    /*
-     * onClick: listener called when the '' button is clicked.
-     */
-    @Override
-    public void onClick(View view) {
-        dismiss();
+        mSave = view.findViewById(R.id.button_lockdown_editor_fragment_save);
+        mCancel = view.findViewById(R.id.button_lockdown_editor_fragment_cancel);
+        mSave.setOnClickListener(new View.OnClickListener() {
+            /*
+             * onClick: listener called when the 'Save' button is clicked.
+             */
+            @Override
+            public void onClick(View button) {
+                dismiss();
+            }
+        });
+        mCancel.setOnClickListener(new View.OnClickListener() {
+            /*
+             * onClick: listener called when the 'Cancel' button is clicked.
+             */
+            @Override
+            public void onClick(View button) {
+                dismiss();
+            }
+        });
     }
 
     /*

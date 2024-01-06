@@ -9,8 +9,9 @@
         <item name="colorSecondary">@color/dominant_color</item>
         <item name="colorSecondaryVariant">@color/light_complimentary_color</item>
         <item name="colorOnSecondary">@color/light_complimentary_color</item>
-        <!-- Button style -->
-        <item name="materialButtonOutlinedStyle">@style/Widget.App.Button</item>
+        <!-- Button styles -->
+        <item name="materialButtonOutlinedStyle">@style/Widget.App.OutlinedButton</item>
+        <item name="materialButtonStyle">@style/Widget.App.Button</item>
         <!-- Alert dialog style -->
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
         <!-- Switch style -->
@@ -33,10 +34,16 @@
         <item name="colorOnSurfaceVariant">@color/black</item>
     </style>
 
-    <!-- Button style -->
-    <style name="Widget.App.Button" parent="Widget.Material3.Button.OutlinedButton">
+    <!-- Button styles -->
+    <style name="Widget.App.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
         <item name="rippleColor">@android:color/transparent</item>
         <item name="backgroundTint">@color/selector_button_background_color</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="colorOutline">@android:color/transparent</item>
+        <item name="rippleColor">@color/color_lockdown_editor_button_ripple</item>
     </style>
 
     <!-- Switch style -->

@@ -14,4 +14,6 @@
     <color name="neutral_color">#FFFFFF</color>
     <color name="neutral_color_off">#F6F6F6</color>
     <color name="color_active_lockdown_item_track">#72EAEAEA</color>
+    <color name="color_lockdown_editor_button_ripple">#D6D6D6</color>
+    <color name="color_lockdown_editor_button_text">#616161</color>
 </resources>

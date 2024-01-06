@@ -35,7 +35,7 @@
         android:padding="@dimen/padding_repeat_days_item_sunday_button"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
-        style="@style/Widget.App.Button"
+        style="@style/Widget.App.OutlinedButton"
         android:fontFamily="@font/source_code_pro"
         android:text="S"
         android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
@@ -57,7 +57,7 @@
         android:padding="@dimen/padding_repeat_days_item_sunday_button"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
-        style="@style/Widget.App.Button"
+        style="@style/Widget.App.OutlinedButton"
         android:fontFamily="@font/source_code_pro"
         android:text="M"
         android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
@@ -79,7 +79,7 @@
         android:padding="@dimen/padding_repeat_days_item_sunday_button"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
-        style="@style/Widget.App.Button"
+        style="@style/Widget.App.OutlinedButton"
         android:fontFamily="@font/source_code_pro"
         android:text="T"
         android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
@@ -101,7 +101,7 @@
         android:padding="@dimen/padding_repeat_days_item_sunday_button"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
-        style="@style/Widget.App.Button"
+        style="@style/Widget.App.OutlinedButton"
         android:fontFamily="@font/source_code_pro"
         android:text="W"
         android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
@@ -123,7 +123,7 @@
         android:padding="@dimen/padding_repeat_days_item_sunday_button"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
-        style="@style/Widget.App.Button"
+        style="@style/Widget.App.OutlinedButton"
         android:fontFamily="@font/source_code_pro"
         android:text="T"
         android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
@@ -145,7 +145,7 @@
         android:padding="@dimen/padding_repeat_days_item_sunday_button"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
-        style="@style/Widget.App.Button"
+        style="@style/Widget.App.OutlinedButton"
         android:fontFamily="@font/source_code_pro"
         android:text="F"
         android:textSize="@dimen/font_size_repeat_days_item_sunday"/>
@@ -167,7 +167,7 @@
         android:padding="@dimen/padding_repeat_days_item_sunday_button"
         android:checkable="true"
         app:toggleCheckedStateOnClick="true"
-        style="@style/Widget.App.Button"
+        style="@style/Widget.App.OutlinedButton"
         android:fontFamily="@font/source_code_pro"
         android:text="S"
         android:textSize="@dimen/font_size_repeat_days_item_sunday"/>

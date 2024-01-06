@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline_lockdown_editor_fragment_card_top"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_lockdown_editor_fragment_cancel"
         app:cardCornerRadius="@dimen/radius_lockdown_editor_fragment_card_corner">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,5 +82,30 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_lockdown_editor_fragment_cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_lockdown_editor_fragment_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/text_lockdown_editor_fragment_cancel_button"
+        android:textSize="@dimen/font_size_lockdown_editor_fragment_button_text"
+        android:textColor="@color/color_lockdown_editor_button_text"
+        android:fontFamily="@font/proxima_nova_regular"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_lockdown_editor_fragment_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/button_lockdown_editor_fragment_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:textSize="@dimen/font_size_lockdown_editor_fragment_button_text"
+        android:textColor="@color/color_lockdown_editor_button_text"
+        android:text="@string/text_lockdown_editor_fragment_save_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
