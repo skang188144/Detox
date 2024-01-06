@@ -17,6 +17,11 @@
 
 Detox is an Android application, currently in development as of November 2023, with the mission of empowering users to regain control of their digital lives. The app, developed using Java, XML, and the Android SDK, leverages the Android Accessibility API to provide detailed app usage statistics and the capability to enforce non-circumventable device lockdowns.
 
+## Demo
+<div align="center">
+    <img src="demo/Home.png" width="135" height="285"> <img src="demo/Lockdowns.png" width="135" height="285"> <img src="demo/Edit.png" width="135" height="285"> <img src="demo/Blocked.png" width="135" height="285">
+</div>
+
 ## Key Features
 
 - **Usage Statistics:** Gain detailed statistics on your app usage patterns.
